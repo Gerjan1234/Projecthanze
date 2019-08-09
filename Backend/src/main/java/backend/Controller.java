@@ -1,18 +1,32 @@
 package backend;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+
+/**
+ * class Controller
+ * @author (Gerjan)
+ * @version (09-08-2019)
+ * class voor de post en getters
+ */
 
 @RestController
 public class Controller {
 
 
 
-        // YOUR CODE HERE :-)
+    /**
+     * Methode voor een post
+     *  * @author (Gerjan)
+     *  * @version (09-08-2019)
+     */
         @CrossOrigin(origins = "*")
         @PostMapping("/") //site invullen
         public ResponseEntity post(@RequestBody Pojo newData) {  //naam invullen voor een post
@@ -31,6 +45,11 @@ public class Controller {
 
         }
 
+    /**
+     * Methode voor een get
+     *  * @author (Gerjan)
+     *  * @version (09-08-2019)
+     */
         @GetMapping("/") //site invullen
         public ResponseEntity get(@RequestParam(name="") int aantal) {  //naam invullen voor get
             //requestparameter als test gevuld met aantal van type int
@@ -48,6 +67,19 @@ public class Controller {
             }
 
         }
+
+    /**
+     * Methode voor een de file uploader
+     *  * @author (Gerjan)
+     *  * @version (09-08-2019)
+     */
+    @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+
+    public String FileUpload(@RequestParam("file") MultipartFile file) {
+        Filereader object = new Filereader();
+        object.FileUpload(file);
+        return null;
+    }
 
 
 }

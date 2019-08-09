@@ -4,7 +4,12 @@ package backend;
 import java.sql.*;
 import java.util.ArrayList;
 
-
+/**
+ * class Database
+ * @author (Gerjan)
+ * @version (09-08-2019)
+ * class voor de database selects en put
+ */
 public class Database {
 
     private static Connection conn = null;
@@ -15,6 +20,11 @@ public class Database {
         return conn;
     }
 
+    /**
+     * Methode voor een insert naar database
+     *  * @author (Gerjan)
+     *  * @version (09-08-2019)
+     */
 
     protected static int putdata(Pojo putData) throws SQLException {
         String sql = "insert into tabel values (?,?,?);";  //tabel vul hier naam van tabel in
@@ -29,6 +39,12 @@ public class Database {
         }
         return rv;
     }
+
+    /**
+     * Methode voor een select van database
+     *  * @author (Gerjan)
+     *  * @version (09-08-2019)
+     */
 
     protected static ArrayList getdata(int limit) throws SQLException {
         ArrayList<Pojo> results = new ArrayList<>();
