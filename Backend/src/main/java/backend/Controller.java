@@ -73,6 +73,7 @@ public class Controller {
      *  * @author (Gerjan)
      *  * @version (09-08-2019)
      */
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 
     public String FileUpload(@RequestParam("file") MultipartFile file) {
