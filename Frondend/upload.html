@@ -1,21 +1,44 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8">
+        <title>File Uploader</title>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<style>
-<title>Upload</title>
-	html, body {
+<link rel="stylesheet" type="text/css" href="css.css">
 
-  }
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+<script src="upload.js"></script>
 
+<div class="container">
+  <div class="row justify-content-md-center">
+  </div>
+  <div class="row">
+      <div class="col">
+        <i>Klik hier voor de file upload</i><br/>
+      </div>
+  </div>
+</div>
 
-</style>
+<div class="container">
+    <div class="row justify-content-md-center">
+    </div>
+  <div class="row">
+    <div class="col">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <button class="btn btn-outline-secondary" type="button" onclick="uploadFormData()" id="inputGroupFileAddon01">Upload</button>
+        </div>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile01"aria-describedby="inputGroupFileAddon01">
+              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
-</head>
-
-<body>
-
-<p>file uploader</p>
 </body>
 </html>
