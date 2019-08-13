@@ -1,5 +1,7 @@
-hier de SQL scipts voor het laden van de database
+hier de SQL scipts voor het maken van de database "pensioenaanspraken"
 
-user toevoegen 
+user toevoegen aan je local database
 naam: hanze 
 wachtwoord: hanze
+
+
