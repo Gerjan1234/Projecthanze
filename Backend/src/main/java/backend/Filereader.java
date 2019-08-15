@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
+//import java.util.Scanner;
 
 /**
  * class Filereader
@@ -22,7 +22,7 @@ import java.util.Scanner;
 
 public class Filereader {
 
-    private int keuze_scheidingsteken;
+   // private int keuze_scheidingsteken;
     private ArrayList<String> repodata;
     private ArrayList<String> databaseregelsinhoud;
     private ArrayList<String> databaseregels;
@@ -43,8 +43,6 @@ public class Filereader {
         karakers.put(4,":");
         karakers.put(5,";");
         karakers.put(6," ");
-
-
     }
 
     /**
@@ -52,9 +50,10 @@ public class Filereader {
      */
 
     public void CheckfileAllLinesandTabs() {
-        Path fileLocation = Paths.get("/home/gerjan/Downloads/", "test.txt"); //test locatie
+        Path fileLocation = Paths.get("/var/tmp/", "upload.txt"); //test locatie
         // voor file moet uit
         //frontend komen
+        System.out.println("file wordt gecontroleerd");
         Charset charset = Charset.forName("ISO-8859-1");
         try {
             List<String> lines = Files.readAllLines(fileLocation, charset);
@@ -68,12 +67,9 @@ public class Filereader {
                 }
                 databaseregels.add(line);
             }
-
         } catch(IOException e){
             System.out.println(e);
         }
-
-
     }
 
 
@@ -90,7 +86,7 @@ public class Filereader {
             System.out.println(databaseregelsinhoud.get(i));
         }
     }
-
+/*
     public void keuze_scheidingsteken() {
         for (int j = 1; j < karakers.size(); j++) {
             System.out.println(j + ": " + karakers.get(j));
@@ -128,18 +124,18 @@ public class Filereader {
         } catch (Exception e) {
             System.out.println(e);
         }
-
-
     }
-
-    public String FileUpload(MultipartFile file) {
+*/
+    public String FileUpload(MultipartFile file, int scheidingsteken) {
         try {
-            File convertFile = new File("/var/tmp/" + file.getOriginalFilename());  //var/temp werkt op linux
+          ///  File convertFile = new File("/var/tmp/" + file.getOriginalFilename());  //var/temp werkt op linux
+            karakter_scheidingsteken = karakers.get(scheidingsteken);
+            File convertFile = new File("/var/tmp/" + "upload.txt");
             convertFile.createNewFile();
             FileOutputStream fout = new FileOutputStream(convertFile);
             fout.write(file.getBytes());
             fout.close();
-
+            CheckfileAllLinesandTabs();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -148,9 +144,7 @@ public class Filereader {
 
     public static void Filereader() { // main voor het testen //main(String[] args) { //
         Filereader f = new Filereader();
-        f.keuze_scheidingsteken();
+       // f.keuze_scheidingsteken();
     }
-
-
 }
 

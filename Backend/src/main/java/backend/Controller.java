@@ -72,15 +72,15 @@ public class Controller {
      * Methode voor een de file uploader
      *  * @author (Gerjan)
      *  * @version (09-08-2019)
+     *  file en scheidingsteken in een post.
      */
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 
-    public String FileUpload(@RequestParam("file") MultipartFile file) {
+    public String FileUpload(@RequestParam("file") MultipartFile file, @RequestParam(name="Scheidingsteken") int scheidingsteken) {
+        System.out.println(scheidingsteken);
         Filereader object = new Filereader();
-        object.FileUpload(file);
+        object.FileUpload(file, scheidingsteken);
         return null;
     }
-
-
-}
+    }
