@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Application {
-    static String HOST_NAME = "jdbc:mysql://localhost:3306/hoeheetdetabel?serverTimezone=EST";//hoe heet de tabel
+    static String HOST_NAME = "jdbc:mysql://localhost:3306/pensioenaanspraken?serverTimezone=SYSTEM";//hoe heet de tabel
     static String USER_NAME = "hanze";
     static String PASSWORD = "hanze";
 
