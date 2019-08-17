@@ -14,14 +14,18 @@ function uploadFormData(){
          if(ele[i].checked)
             gekozenvalue = ele[i].value
 }
-  var oMyForm = new FormData();
-  oMyForm.append("file", inputGroupFile01.files[0]);
-  console.log("werkt dit" + document.getElementById("inputGroupFile01").value)
-var tekst = document.getElementById("inputGroupFile01").value
-  var tst2 = tekst.substring(1, tekst.indexOf('\\'));
-  console.log(tst2)
+var oMyForm = new FormData();
+oMyForm.append("file", inputGroupFile01.files[0]);
+//haal document naam op:
+var tekst = document.getElementById("inputGroupFile01").value //get file path
+var pos1 = tekst.indexOf("\\");          	// zoek eerste /
+var pos2 = tekst.indexOf("\\", pos1 + 1); // zoek 2e /
+var len = tekst.length; //pak lengte string
+var last = tekst.substring(pos2 +1, len) //haal de tekst na de 2e / op.
+console.log(last); //
+
   $.ajax({
-    url: 'http://localhost:8080/upload?Scheidingsteken=' + gekozenvalue,
+    url: 'http://localhost:8080/upload?Scheidingsteken=' + gekozenvalue + "&filename=" + last,
     data: oMyForm,
     dataType: 'text',
     processData: false,
