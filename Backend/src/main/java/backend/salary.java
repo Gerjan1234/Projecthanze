@@ -8,10 +8,10 @@ import java.math.BigDecimal;
  Table: salary
  Columns:
  socialsecurity_id double
- salary double
- parttime_factor varchar(255)
- max_pension_salary double
- Franchise double
+ salary decimal(10,2)
+ parttime_factor decimal(10,5)
+ max_pension_salary decimal(10,2)
+ Franchise decimal(10,2)
  @author (Teo)
  @version (15-08-2019)
  */
@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 public class salary {
         public double socialsecurity_id;
         public BigDecimal salary;
-        parttime_factor varchar(255) // dit nog wijzigen in double ook in mysql script en model
+        public BigDecimal parttime_factor ;
         public BigDecimal max_pension_salary;
         public double Franchise;
     }

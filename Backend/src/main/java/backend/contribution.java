@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  Table: contribution
  Columns:
  contribution_age double PK
- contribution_percentage double
+ contribution_percentage decimal(10,5)
  @author (Teo)
  @version (15-08-2019)
  */

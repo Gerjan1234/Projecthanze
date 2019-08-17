@@ -77,7 +77,7 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pensioenaanspraken`.`contribution` (
   `contribution_age` DOUBLE NOT NULL,
-  `contribution_percentage` DOUBLE NULL DEFAULT NULL,
+  `contribution_percentage` DECIMAL(10,5) NULL DEFAULT NULL,
   PRIMARY KEY (`contribution_age`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -108,10 +108,10 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pensioenaanspraken`.`salary` (
   `socialsecurity_id` DOUBLE NULL DEFAULT NULL,
-  `salary` DOUBLE NULL DEFAULT NULL,
-  `parttime_factor` VARCHAR(255) NULL DEFAULT NULL,
-  `max_pension_salary` DOUBLE NULL DEFAULT NULL,
-  `Franchise` DOUBLE NULL DEFAULT NULL,
+  `salary` DECIMAL(10,2) NULL DEFAULT NULL,
+  `parttime_factor` DECIMAL(10,3)  NULL DEFAULT NULL,
+  `max_pension_salary` DECIMAL(10,2) NULL DEFAULT NULL,
+  `Franchise` DECIMAL(10,2) NULL DEFAULT NULL,
   INDEX `fk_salary_employees_idx` (`socialsecurity_id` ASC) VISIBLE,
   CONSTRAINT `fk_salary_employees`
     FOREIGN KEY (`socialsecurity_id`)
