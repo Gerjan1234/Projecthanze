@@ -50,7 +50,8 @@ public class Filereader {
      */
 
     public void CheckfileAllLinesandTabs() {
-        Path fileLocation = Paths.get("/var/tmp/", "upload.txt"); //test locatie
+        Path fileLocation = Paths.get("E:/tmp/upload.txt"); //test locatie
+        // Path fileLocation = Paths.get("/var/tmp/", "upload.txt"); //test locatie
         // voor file moet uit
         //frontend komen
         System.out.println("file wordt gecontroleerd");
@@ -130,7 +131,8 @@ public class Filereader {
         try {
           ///  File convertFile = new File("/var/tmp/" + file.getOriginalFilename());  //var/temp werkt op linux
             karakter_scheidingsteken = karakers.get(scheidingsteken);
-            File convertFile = new File("/var/tmp/" + "upload.txt");
+            File convertFile = new File("E/tmp/" + "upload.txt");
+           // File convertFile = new File("/var/tmp/" + "upload.txt");
             convertFile.createNewFile();
             FileOutputStream fout = new FileOutputStream(convertFile);
             fout.write(file.getBytes());

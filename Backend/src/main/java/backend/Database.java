@@ -21,18 +21,18 @@ public class Database {
     }
 
     /**
-     * Methode voor een insert naar database
+     * Voorbeeld methode voor een insert naar database
      *  * @author (Gerjan)
      *  * @version (09-08-2019)
      */
 
-    protected static int putdata(Pojo putData) throws SQLException {
+    protected static int putdata(employees putData) throws SQLException {
         String sql = "insert into tabel values (?,?,?);";  //tabel vul hier naam van tabel in
         int rv = -1;
         try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setString(1, putData.kolom1);   //tabel kolom1 invullen
-            stmt.setString(2, putData.kolom2);   //tabel kolom2 invullen
-            stmt.setString(3, putData.kolom3);   //tabel kolom3 invullen
+            stmt.setString(1, putData.first_name);   //tabel kolom1 invullen
+            stmt.setString(2, putData.last_name);   //tabel kolom2 invullen
+            stmt.setString(3, putData.gender);   //tabel kolom3 invullen
             stmt.execute();
             ResultSet keys = stmt.getGeneratedKeys();
             if (keys.next()) rv = keys.getInt(1);
@@ -41,22 +41,22 @@ public class Database {
     }
 
     /**
-     * Methode voor een select van database
+     * Voorbeeld methode voor een select van database
      *  * @author (Gerjan)
      *  * @version (09-08-2019)
      */
 
     protected static ArrayList getdata(int limit) throws SQLException {
-        ArrayList<Pojo> results = new ArrayList<>();
+        ArrayList<salary> results = new ArrayList<>();
         String sql = "select * from tabel order by date desc limit ?;";  //vul hier tabelnaam in
         try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, limit);
             ResultSet res = stmt.executeQuery();
             while (res.next()) {
-                Pojo r = new Pojo();
-                r.kolom1 = res.getString("kolom1"); //tabel kolom1 invullen
-                r.kolom2 = res.getString("kolom3"); //tabel kolom2 invullen
-                r.kolom3 = res.getString("kolom2"); //tabel kolom3 invullen
+                salary r = new salary();
+                r.socialsecurity_id = res.getDouble(1); //tabel kolom1 invullen
+                r.Franchise = res.getDouble(5); //tabel kolom2 invullen
+                r.max_pension_salary = res.getBigDecimal("max_pension_salary"); //tabel kolom3 invullen
                 results.add(r);
             }
         }
