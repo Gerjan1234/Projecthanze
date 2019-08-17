@@ -16,7 +16,10 @@ function uploadFormData(){
 }
   var oMyForm = new FormData();
   oMyForm.append("file", inputGroupFile01.files[0]);
-
+  console.log("werkt dit" + document.getElementById("inputGroupFile01").value)
+var tekst = document.getElementById("inputGroupFile01").value
+  var tst2 = tekst.substring(1, tekst.indexOf('\\'));
+  console.log(tst2)
   $.ajax({
     url: 'http://localhost:8080/upload?Scheidingsteken=' + gekozenvalue,
     data: oMyForm,
