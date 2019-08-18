@@ -10,10 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-//import java.util.Scanner;
 
 /**
  * class Filereader
@@ -23,14 +21,18 @@ import java.util.List;
 
 public class Filereader {
 
-   // private int keuze_scheidingsteken;
-    private ArrayList<String> repodata;
     private ArrayList<String> databaseregelsinhoud;
     private ArrayList<String> databaseregels;
     private String karakter_scheidingsteken;
     private HashMap<Integer, String> karakers;
-    private String OS;
-    private String LocalPath;
+
+   // private String OS;
+    //private String LocalPath;
+
+    private String operatingSystem = "";
+    private String location = "";
+    private String filenameAndextensie = "";
+
     /**
      * Constructor voor objects van class Filereader
      * aanmaken arrayList en methode starten
@@ -46,7 +48,7 @@ public class Filereader {
         karakers.put(4,":");
         karakers.put(5,";");
         karakers.put(6," ");
-        setPathLocal();
+        ///setPathLocal();
     }
 
     /**
@@ -55,37 +57,41 @@ public class Filereader {
      * @version (18-08-2019)
      */
 
-    private void setPathLocal() {
-
-        OS = OsCheck.detectedOS.toString();
-
-        String str = OS;
-        switch(str)
-        {
-            case "Windows":
-                LocalPath = "E:/tmp/";
-                break;
-            case "Linux":
-                LocalPath = "/var/tmp/";
-                break;
-            case "MacOS":
-                LocalPath = "/"; // Henk pad nog invullen
-                break;
-            default:
-        }
-    }
+//    private void setPathLocal() {
+//
+//        OS = OsCheck.detectedOS.toString();
+//
+//        String str = OS;
+//        switch(str)
+//        {
+//            case "Windows":
+//                LocalPath = "E:/tmp/";
+//                break;
+//            case "Linux":
+//                LocalPath = "/var/tmp/";
+//                break;
+//            case "MacOS":
+//                LocalPath = "/"; // Henk pad nog invullen
+//                break;
+//            default:
+//        }
+//    }
 
     /**
      * Methode om de losse regels uit het txt te halen inc tabs.
      */
 
     public void CheckfileAllLinesandTabs() {
-        Path fileLocation = Paths.get(LocalPath, "upload.txt"); //test locatie
+
+        //Path fileLocation = Paths.get(LocalPath, "upload.txt"); //test locatie
         // Path fileLocation = Paths.get("/var/tmp/", "upload.txt"); //test locatie
         // voor file moet uit
         //frontend komen
+
+        Path fileLocation = Paths.get(location, filenameAndextensie);
+
         System.out.println("file wordt gecontroleerd");
-        System.out.println(LocalPath);
+        //System.out.println(LocalPath);
         Charset charset = Charset.forName("ISO-8859-1");
         try {
             List<String> lines = Files.readAllLines(fileLocation, charset);
@@ -118,52 +124,30 @@ public class Filereader {
             System.out.println(databaseregelsinhoud.get(i));
         }
     }
-/*
-    public void keuze_scheidingsteken() {
-        for (int j = 1; j < karakers.size(); j++) {
-            System.out.println(j + ": " + karakers.get(j));
-            System.out.println("kies karater");
-        }
-        try {
-            Scanner s = new Scanner(System.in);
-            keuze_scheidingsteken = s.nextInt();
 
-            switch (keuze_scheidingsteken) {
-                case 1:
-                    karakter_scheidingsteken = karakers.get(1);
-                    break;
-                case 2:
-                    karakter_scheidingsteken = karakers.get(2);
-                    break;
-                case 3:
-                    karakter_scheidingsteken = karakers.get(3);
-                    break;
-                case 4:
-                    karakter_scheidingsteken = karakers.get(4);
-                    break;
-                case 5:
-                    karakter_scheidingsteken = karakers.get(5);
-                    break;
-                case 6:
-                    karakter_scheidingsteken = karakers.get(6);
-                    break;
-                default:
-                    System.out.println("geen juiste keuze");
-                    keuze_scheidingsteken();
-            }
-            CheckfileAllLinesandTabs();
-            printdata();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-*/
-    public String FileUpload(MultipartFile file, int scheidingsteken) {
+    public String FileUpload(MultipartFile file, int scheidingsteken, String filename) {
         try {
-          ///  File convertFile = new File("/var/tmp/" + file.getOriginalFilename());  //var/temp werkt op linux
             karakter_scheidingsteken = karakers.get(scheidingsteken);
-            File convertFile = new File(LocalPath + "upload.txt");
+
+           /// File convertFile = new File(LocalPath + "upload.txt");
            // File convertFile = new File("/var/tmp/" + "upload.txt");
+
+            this.operatingSystem = System.getProperty("os.name");
+            System.out.println(operatingSystem);
+            if ("Linux".equals(operatingSystem) || "Mac OS X".equals(operatingSystem)) {   //locatie op MAC testen
+                this.location = "/var/tmp/";
+                this.filenameAndextensie = filename;
+            }
+            else if ("Windows".equals(operatingSystem)) {
+                this.location = "E/tmp/";
+                this.filenameAndextensie = filename;
+            }
+            else {
+                this.location = "/var/tmp/";
+                this.filenameAndextensie = filename;
+            }
+           File convertFile = new File(location + filenameAndextensie);
+
             convertFile.createNewFile();
             FileOutputStream fout = new FileOutputStream(convertFile);
             fout.write(file.getBytes());
@@ -175,9 +159,7 @@ public class Filereader {
         return "File geupload";
     }
 
-    public static void Filereader() { // main voor het testen //main(String[] args) { //
-        Filereader f = new Filereader();
-       // f.keuze_scheidingsteken();
+    public static void Filereader() {
     }
 }
 

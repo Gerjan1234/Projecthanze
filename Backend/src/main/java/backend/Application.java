@@ -2,6 +2,7 @@ package backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 /**
  * class Application
@@ -9,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @version (09-08-2019)
  * Main met database parameters
  */
-
+@CrossOrigin(origins = "*")
 @SpringBootApplication
 public class Application {
     static String HOST_NAME = "jdbc:mysql://localhost:3306/pensioenaanspraken?serverTimezone=SYSTEM";//hoe heet de tabel
