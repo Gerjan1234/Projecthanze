@@ -26,11 +26,10 @@ public class Filereader {
     private String karakter_scheidingsteken;
     private HashMap<Integer, String> karakers;
 
-   // private String OS;
-    //private String LocalPath;
-
-    private String operatingSystem = "";
-    private String location = "";
+    private String operatingSystem = OsCheck.OS;
+    //private String operatingSystem = "";
+    //private String location = "";
+    private String location = OsCheck.LocalPath;
     private String filenameAndextensie = "";
 
     /**
@@ -48,36 +47,9 @@ public class Filereader {
         karakers.put(4,":");
         karakers.put(5,";");
         karakers.put(6," ");
-        ///setPathLocal();
     }
 
-    /**
-     * Methode om padnaam te bepalen bij verschillende operatingsystems
-     * @author Teo
-     * @version (18-08-2019)
-     */
-
-//    private void setPathLocal() {
-//
-//        OS = OsCheck.detectedOS.toString();
-//
-//        String str = OS;
-//        switch(str)
-//        {
-//            case "Windows":
-//                LocalPath = "E:/tmp/";
-//                break;
-//            case "Linux":
-//                LocalPath = "/var/tmp/";
-//                break;
-//            case "MacOS":
-//                LocalPath = "/"; // Henk pad nog invullen
-//                break;
-//            default:
-//        }
-//    }
-
-    /**
+     /**
      * Methode om de losse regels uit het txt te halen inc tabs.
      */
 
@@ -91,7 +63,7 @@ public class Filereader {
         Path fileLocation = Paths.get(location, filenameAndextensie);
 
         System.out.println("file wordt gecontroleerd");
-        //System.out.println(LocalPath);
+
         Charset charset = Charset.forName("ISO-8859-1");
         try {
             List<String> lines = Files.readAllLines(fileLocation, charset);
@@ -129,23 +101,24 @@ public class Filereader {
         try {
             karakter_scheidingsteken = karakers.get(scheidingsteken);
 
-           /// File convertFile = new File(LocalPath + "upload.txt");
-           // File convertFile = new File("/var/tmp/" + "upload.txt");
+//            this.operatingSystem = System.getProperty("os.name");
 
-            this.operatingSystem = System.getProperty("os.name");
-            System.out.println(operatingSystem);
-            if ("Linux".equals(operatingSystem) || "Mac OS X".equals(operatingSystem)) {   //locatie op MAC testen
-                this.location = "/var/tmp/";
-                this.filenameAndextensie = filename;
-            }
-            else if ("Windows".equals(operatingSystem)) {
-                this.location = "E/tmp/";
-                this.filenameAndextensie = filename;
-            }
-            else {
-                this.location = "/var/tmp/";
-                this.filenameAndextensie = filename;
-            }
+            System.out.println("Besturingssysteem: " + operatingSystem);
+            System.out.println("Opslaglocatie    : " + location);
+            this.filenameAndextensie = filename;
+
+//            if ("Linux".equals(operatingSystem) || "Mac OS X".equals(operatingSystem)) {   //locatie op MAC testen
+//                //this.location = "/var/tmp/";
+//                this.filenameAndextensie = filename;
+//            }
+//            else if ("Windows".equals(operatingSystem)) {
+//                //this.location = "E:/tmp/";
+//                this.filenameAndextensie = filename;
+//            }
+//            else {
+//                //this.location = "/var/tmp/";
+//                this.filenameAndextensie = filename;
+            //}
            File convertFile = new File(location + filenameAndextensie);
 
             convertFile.createNewFile();

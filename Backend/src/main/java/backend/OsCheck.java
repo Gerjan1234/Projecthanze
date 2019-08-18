@@ -1,13 +1,16 @@
 package backend;
 
-/**
- * helper class to check the operating system this Java VM runs in
- */
 import java.util.Locale;
+
+/**
+ * Hulp klasse om te bepalen op welk platform het programma draait.
+ */
+
 public final class OsCheck {
-    /**
-     * types of Operating Systems
-     */
+
+    public static String OS;
+    public static String LocalPath;
+
     public enum OSType {
         Windows, MacOS, Linux, Other
     };
@@ -35,5 +38,32 @@ public final class OsCheck {
         }
 
         return detectedOS;
+    }
+
+    /**
+     * Methode om padnaam te bepalen bij verschillende operatingsystems
+     * @author Teo
+     * @version (18-08-2019)
+     */
+
+    public static void setPathLocal() {
+
+        OS = getOperatingSystemType().toString();
+
+        String str = OS;
+        switch(str)
+        {
+            case "Windows":
+                LocalPath = "E:/tmp/";
+                break;
+            case "Linux":
+                LocalPath = "/var/tmp/";
+                break;
+            case "MacOS":
+                LocalPath = "/var/tmp/"; // Henk pad naar map testen
+                break;
+            default:
+        }
+        OS = System.getProperty("os.name", "generic");
     }
 }
