@@ -3,7 +3,6 @@ package backend;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
 /**
  * class Application
  * @author (Gerjan)
@@ -17,7 +16,9 @@ public class Application {
     static String USER_NAME = "hanze";
     static String PASSWORD = "hanze";
 
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+
+
+    public static void main(String[] args) {SpringApplication.run(Application.class, args);
+        OsCheck.getOperatingSystemType();
     }
 }

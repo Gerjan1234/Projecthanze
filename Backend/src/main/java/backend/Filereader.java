@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 //import java.util.Scanner;
@@ -28,6 +29,8 @@ public class Filereader {
     private ArrayList<String> databaseregels;
     private String karakter_scheidingsteken;
     private HashMap<Integer, String> karakers;
+    private String OS;
+    private String LocalPath;
     /**
      * Constructor voor objects van class Filereader
      * aanmaken arrayList en methode starten
@@ -43,6 +46,33 @@ public class Filereader {
         karakers.put(4,":");
         karakers.put(5,";");
         karakers.put(6," ");
+        setPathLocal();
+    }
+
+    /**
+     * Methode om padnaam te bepalen bij verschillende operatingsystems
+     * @author Teo
+     * @version (18-08-2019)
+     */
+
+    private void setPathLocal() {
+
+        OS = OsCheck.detectedOS.toString();
+
+        String str = OS;
+        switch(str)
+        {
+            case "Windows":
+                LocalPath = "E:/tmp/";
+                break;
+            case "Linux":
+                LocalPath = "/var/tmp/";
+                break;
+            case "MacOS":
+                LocalPath = "/"; // Henk pad nog invullen
+                break;
+            default:
+        }
     }
 
     /**
@@ -50,11 +80,12 @@ public class Filereader {
      */
 
     public void CheckfileAllLinesandTabs() {
-        Path fileLocation = Paths.get("E:/tmp/upload.txt"); //test locatie
+        Path fileLocation = Paths.get(LocalPath, "upload.txt"); //test locatie
         // Path fileLocation = Paths.get("/var/tmp/", "upload.txt"); //test locatie
         // voor file moet uit
         //frontend komen
         System.out.println("file wordt gecontroleerd");
+        System.out.println(LocalPath);
         Charset charset = Charset.forName("ISO-8859-1");
         try {
             List<String> lines = Files.readAllLines(fileLocation, charset);
@@ -131,7 +162,7 @@ public class Filereader {
         try {
           ///  File convertFile = new File("/var/tmp/" + file.getOriginalFilename());  //var/temp werkt op linux
             karakter_scheidingsteken = karakers.get(scheidingsteken);
-            File convertFile = new File("E/tmp/" + "upload.txt");
+            File convertFile = new File(LocalPath + "upload.txt");
            // File convertFile = new File("/var/tmp/" + "upload.txt");
             convertFile.createNewFile();
             FileOutputStream fout = new FileOutputStream(convertFile);
