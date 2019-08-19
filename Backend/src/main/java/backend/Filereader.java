@@ -1,5 +1,6 @@
 package backend;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -9,9 +10,12 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.text.SimpleDateFormat;
 
 /**
  * class Filereader
@@ -21,16 +25,14 @@ import java.util.List;
 
 public class Filereader {
 
-    private ArrayList<String> databaseregelsinhoud;
-    private ArrayList<String> databaseregels;
+    //private HashMap<String, Boolean> databaseregelsinhoud;
+    private ArrayList<HashMap> databaseregels;
     private String karakter_scheidingsteken;
     private HashMap<Integer, String> karakers;
-
     private String operatingSystem = OsCheck.OS;
-    //private String operatingSystem = "";
-    //private String location = "";
     private String location = OsCheck.LocalPath;
     private String filenameAndextensie = "";
+    private ResponseEntity returndata;
 
     /**
      * Constructor voor objects van class Filereader
@@ -38,8 +40,8 @@ public class Filereader {
      */
     public Filereader()
     {
-        databaseregelsinhoud = new ArrayList<>();
-        databaseregels = new ArrayList<>(databaseregelsinhoud);
+        //databaseregelsinhoud = new HashMap<String, Boolean>();
+        databaseregels = new ArrayList<>();
         karakers = new HashMap<>();
         karakers.put(1,"\t");
         karakers.put(2,",");
@@ -51,37 +53,62 @@ public class Filereader {
 
      /**
      * Methode om de losse regels uit het txt te halen inc tabs.
+      * controle of de regels voldoen aan het formaat
      */
 
-    public void CheckfileAllLinesandTabs() {
-
-        //Path fileLocation = Paths.get(LocalPath, "upload.txt"); //test locatie
-        // Path fileLocation = Paths.get("/var/tmp/", "upload.txt"); //test locatie
-        // voor file moet uit
-        //frontend komen
-
+    public ArrayList CheckfileAllLinesandTabs() {
         Path fileLocation = Paths.get(location, filenameAndextensie);
-
         System.out.println("file wordt gecontroleerd");
-
         Charset charset = Charset.forName("ISO-8859-1");
+        employees importdata = new employees();
+
         try {
             List<String> lines = Files.readAllLines(fileLocation, charset);
             String test[] = null;
             for (String line : lines) {
                 System.out.println(line);
                 test = line.split(karakter_scheidingsteken);
-                for (int j = 0; j < test.length; j++) {
-                    databaseregelsinhoud.add(test[j]);
-                    databaseregelsinhoud.removeIf(String -> String.charAt(0) == '#');
-                }
-                databaseregels.add(line);
+               // for (int j = 0; j < test.length; j++) {
+                  //  if (test.length == 10) {
+                        for (int j = 0; j < test.length; j++) {
+                            HashMap<String, Boolean> testhas = new HashMap<>();
+                            try {
+                                Double.parseDouble(test[j]);
+                                testhas.put(test[j], true);
+                            } catch (NumberFormatException e) {
+                                testhas.put(test[j], false);
+                            }
+                            databaseregels.add(testhas);
+                            System.out.println(testhas);
+                        }
             }
-        } catch(IOException e){
+        } catch(Exception e){
             System.out.println(e);
         }
+        return databaseregels;
     }
 
+    public void uploadallowed(){
+
+
+                 /*       importdata.socialsecurity_id = Double.parseDouble(test[0]);
+                        importdata.employer_id = Double.parseDouble(test[1]);
+                        importdata.first_name = test[2];
+                        importdata.last_name = test[3];
+                        importdata.date_of_birth = new SimpleDateFormat("dd/MM/yyyy").parse(test[3]);
+                        importdata.status = test[5];
+                        importdata.gender = test[6];
+                        importdata.adress_id =Integer.parseInt(test[7]);
+                        importdata.communication_type = test[8];
+                        importdata.date_of_birth = new SimpleDateFormat("dd/MM/yyyy").parse(test[9]);*/
+        //  } catch (IOException e) {
+
+
+        //  databaseregelsinhoud.add(test[j]);
+        // databaseregelsinhoud.removeIf(String -> String.charAt(0) == '#');
+        //  }
+
+    }
 
     /**
      * Methode om de losse regels uit het repo bestand weer te geven.
@@ -91,36 +118,19 @@ public class Filereader {
      */
     public void printdata(){
         System.out.println(databaseregels.size());
-        System.out.println(databaseregelsinhoud.size());
-        for(int i =0; i<databaseregelsinhoud.size(); i++) {
-            System.out.println(databaseregelsinhoud.get(i));
-        }
+       // System.out.println(databaseregelsinhoud.size());
+       // for(int i =0; i<databaseregelsinhoud.size(); i++) {
+       //     System.out.println(databaseregelsinhoud.get(i));
+      //  }
     }
 
-    public String FileUpload(MultipartFile file, int scheidingsteken, String filename) {
+    public ArrayList FileUpload(MultipartFile file, int scheidingsteken, String filename) {
         try {
             karakter_scheidingsteken = karakers.get(scheidingsteken);
-
-//            this.operatingSystem = System.getProperty("os.name");
-
             System.out.println("Besturingssysteem: " + operatingSystem);
             System.out.println("Opslaglocatie    : " + location);
             this.filenameAndextensie = filename;
-
-//            if ("Linux".equals(operatingSystem) || "Mac OS X".equals(operatingSystem)) {   //locatie op MAC testen
-//                //this.location = "/var/tmp/";
-//                this.filenameAndextensie = filename;
-//            }
-//            else if ("Windows".equals(operatingSystem)) {
-//                //this.location = "E:/tmp/";
-//                this.filenameAndextensie = filename;
-//            }
-//            else {
-//                //this.location = "/var/tmp/";
-//                this.filenameAndextensie = filename;
-            //}
            File convertFile = new File(location + filenameAndextensie);
-
             convertFile.createNewFile();
             FileOutputStream fout = new FileOutputStream(convertFile);
             fout.write(file.getBytes());
@@ -129,7 +139,7 @@ public class Filereader {
         } catch (Exception e) {
             System.out.println(e);
         }
-        return "File geupload";
+        return databaseregels;
     }
 
     public static void Filereader() {
