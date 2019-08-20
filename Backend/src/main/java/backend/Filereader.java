@@ -11,10 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.text.SimpleDateFormat;
 
 /**
@@ -65,21 +62,45 @@ public class Filereader {
         try {
             List<String> lines = Files.readAllLines(fileLocation, charset);
             String test[] = null;
-            for (String line : lines) {
+            Iterator it = lines.iterator();
+            it.next();
+                while(it.hasNext()) {
+                    String line = (String)it.next();
                 System.out.println(line);
                 test = line.split(karakter_scheidingsteken);
-               // for (int j = 0; j < test.length; j++) {
                   //  if (test.length == 10) {
                         for (int j = 0; j < test.length; j++) {
                             HashMap<String, Boolean> testhas = new HashMap<>();
-                            try {
-                                Double.parseDouble(test[j]);
-                                testhas.put(test[j], true);
-                            } catch (NumberFormatException e) {
-                                testhas.put(test[j], false);
+                            switch(j) {
+                                case 0: //double
+                                case 1:
+                                try {
+                                    Double.parseDouble(test[j]);
+                                    testhas.put(test[j], true);
+                                } catch (NumberFormatException e) {
+                                    testhas.put(test[j], false);
+                                }
+                                break;
+                                case 4:
+                                case 9: //date
+                                    try {
+                                        new SimpleDateFormat("dd/MM/yyyy").parse(test[j]);
+                                        testhas.put(test[j], true);
+                                    } catch (Exception e) {
+                                        testhas.put(test[j], false);
+                                    }
+                                    break;
+                                case 7:  //int
+                                    try {
+                                        Integer.parseInt(test[j]);
+                                        testhas.put(test[j], true);
+                                    } catch (NumberFormatException e) {
+                                        testhas.put(test[j], false);
+                                    }
+                                    break;
                             }
                             databaseregels.add(testhas);
-                            System.out.println(testhas);
+                           // System.out.println(testhas);
                         }
             }
         } catch(Exception e){
