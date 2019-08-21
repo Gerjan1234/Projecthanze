@@ -32,10 +32,18 @@ console.log(last); //
     contentType: false,
     type: 'POST',
     success: function(data){
-      $('#result').html(data);
-    }
 
-  });
+    $('#result').html(data);
+//console.log(data)
+    let data2 = JSON.parse(data);
+    console.log(data2.length)
+    for (var i = 0; i < data2.length; i++) {
+      //maak output aan
+  console.log(data2[i]);
+}
+
+  }
+});
 }
 
 /*

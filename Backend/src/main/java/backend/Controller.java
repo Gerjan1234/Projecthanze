@@ -1,6 +1,7 @@
 package backend;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -75,14 +76,15 @@ public class Controller {
      *  * @version (09-08-2019)
      *  file en scheidingsteken in een post.
      */
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "/upload", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 
-    public String FileUpload(@RequestParam("file") MultipartFile file,
+    public ResponseEntity FileUpload(@RequestParam("file") MultipartFile file,
                              @RequestParam(name ="filename") String filename,
                              @RequestParam(name="Scheidingsteken") int scheidingsteken) {
         System.out.println(scheidingsteken);
         Filereader object = new Filereader();
-        object.FileUpload(file, scheidingsteken, filename);
-        return null;
+        ArrayList returndata = object.FileUpload(file, scheidingsteken, filename);
+        return new ResponseEntity<>(returndata, HttpStatus.OK);
     }
     }
