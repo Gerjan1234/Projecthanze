@@ -22,14 +22,15 @@ import java.text.SimpleDateFormat;
 
 public class Filereader {
 
-    //private HashMap<String, Boolean> databaseregelsinhoud;
     private ArrayList<HashMap> databaseregels;
+    private ArrayList<responsfile> senddata;
     private String karakter_scheidingsteken;
     private HashMap<Integer, String> karakers;
+    private HashMap<String, HashMap> inputdata;
     private String operatingSystem = OsCheck.OS;
     private String location = OsCheck.LocalPath;
     private String filenameAndextensie = "";
-    private ResponseEntity returndata;
+
 
     /**
      * Constructor voor objects van class Filereader
@@ -37,7 +38,6 @@ public class Filereader {
      */
     public Filereader()
     {
-        //databaseregelsinhoud = new HashMap<String, Boolean>();
         databaseregels = new ArrayList<>();
         karakers = new HashMap<>();
         karakers.put(1,"\t");
@@ -57,56 +57,133 @@ public class Filereader {
         Path fileLocation = Paths.get(location, filenameAndextensie);
         System.out.println("file wordt gecontroleerd");
         Charset charset = Charset.forName("ISO-8859-1");
-        employees importdata = new employees();
-
+        this.senddata = new ArrayList<>();
         try {
             List<String> lines = Files.readAllLines(fileLocation, charset);
-            String test[] = null;
+            int regel = 1;
+            System.out.println("aantal regels file " + lines.size());
+            String test[];
             Iterator it = lines.iterator();
             it.next();
                 while(it.hasNext()) {
                     String line = (String)it.next();
-                System.out.println(line);
-                test = line.split(karakter_scheidingsteken);
+                    test = line.split(karakter_scheidingsteken);
                   //  if (test.length == 10) {
                         for (int j = 0; j < test.length; j++) {
-                            HashMap<String, Boolean> testhas = new HashMap<>();
+                            responsfile test2 = new responsfile();
                             switch(j) {
                                 case 0: //double
-                                case 1:
-                                try {
-                                    Double.parseDouble(test[j]);
-                                    testhas.put(test[j], true);
-                                } catch (NumberFormatException e) {
-                                    testhas.put(test[j], false);
-                                }
-                                break;
-                                case 4:
+                                    try {
+                                        Double.parseDouble(test[j]);
+                                        test2.regel = regel;
+                                        test2.type = "socialsecurity_id";
+                                        test2.goedfout = true;
+                                        test2.waarde = test[j];
+                                    } catch (NumberFormatException e) {
+                                        test2.regel = regel;
+                                        test2.type = "socialsecurity_id";
+                                        test2.goedfout = false;
+                                        test2.waarde = test[j];
+                                    }
+                                    break;
+                                case 1: //double
+                                    try {
+                                        Double.parseDouble(test[j]);
+                                        test2.regel = regel;
+                                        test2.type = "employer_id";
+                                        test2.goedfout = true;
+                                        test2.waarde = test[j];
+                                    } catch (NumberFormatException e) {
+                                        test2.regel = regel;
+                                        test2.type = "employer_id";
+                                        test2.goedfout = false;
+                                        test2.waarde = test[j];
+                                    }
+                                    break;
+                                case 2: //String
+                                    test2.regel = regel;
+                                    test2.type = "first_name";
+                                    test2.goedfout = true;
+                                    test2.waarde = test[j];
+                                    break;
+                                case 3: //String
+                                    test2.regel = regel;
+                                    test2.type = "last_name";
+                                    test2.goedfout = true;
+                                    test2.waarde = test[j];
+                                    break;
+                                case 4: //date
+                                    try {
+                                        new SimpleDateFormat("dd/MM/yyyy").parse(test[j]);
+                                        test2.regel = regel;
+                                        test2.type = "date_of_birth";
+                                        test2.goedfout = true;
+                                        test2.waarde = test[j];
+                                    } catch (Exception e) {
+                                        test2.regel = regel;
+                                        test2.type = "date_of_birth";
+                                        test2.goedfout = false;
+                                        test2.waarde = test[j];
+                                    }
+                                    break;
+                                case 5: //String
+                                    test2.regel = regel;
+                                    test2.type = "status";
+                                    test2.goedfout = true;
+                                    test2.waarde = test[j];
+                                    break;
+                                case 6: //String
+                                    test2.regel = regel;
+                                    test2.type = "gender";
+                                    test2.goedfout = true;
+                                    test2.waarde = test[j];
+                                    break;
+                                case 7: //int
+                                    try {
+                                        Integer.parseInt(test[j]);
+                                        test2.regel = regel;
+                                        test2.type = "adress_id";
+                                        test2.goedfout = true;
+                                        test2.waarde = test[j];
+                                    } catch (Exception e) {
+                                        Integer.parseInt(test[j]);
+                                        test2.regel = regel;
+                                        test2.type = "adress_id";
+                                        test2.goedfout = false;
+                                        test2.waarde = test[j];
+                                    }
+                                    break;
+                                case 8: //String
+                                    test2.regel = regel;
+                                    test2.type = "communication_type";
+                                    test2.goedfout = true;
+                                    test2.waarde = test[j];
+                                    break;
                                 case 9: //date
                                     try {
                                         new SimpleDateFormat("dd/MM/yyyy").parse(test[j]);
-                                        testhas.put(test[j], true);
+                                        test2.regel = regel;
+                                        test2.type = "hire_date";
+                                        test2.goedfout = true;
+                                        test2.waarde = test[j];
                                     } catch (Exception e) {
-                                        testhas.put(test[j], false);
+                                        test2.regel = regel;
+                                        test2.type = "hire_date";
+                                        test2.goedfout = false;
+                                        test2.waarde = test[j];
                                     }
                                     break;
-                                case 7:  //int
-                                    try {
-                                        Integer.parseInt(test[j]);
-                                        testhas.put(test[j], true);
-                                    } catch (NumberFormatException e) {
-                                        testhas.put(test[j], false);
-                                    }
-                                    break;
+                                default:
+
                             }
-                            databaseregels.add(testhas);
-                           // System.out.println(testhas);
+                            senddata.add(test2);
                         }
+                regel++;
             }
         } catch(Exception e){
             System.out.println(e);
         }
-        return databaseregels;
+        return senddata;
     }
 
     public void uploadallowed(){
@@ -160,7 +237,7 @@ public class Filereader {
         } catch (Exception e) {
             System.out.println(e);
         }
-        return databaseregels;
+        return senddata;
     }
 
     public static void Filereader() {

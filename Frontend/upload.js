@@ -33,18 +33,36 @@ console.log(last); //
     type: 'POST',
     success: function(data){
 
-    $('#result').html(data);
+  //  $('#result').html(data);
 //console.log(data)
-    let data2 = JSON.parse(data);
+    var data2 = JSON.parse(data);
     console.log(data2.length)
-    for (var i = 0; i < data2.length; i++) {
-      //maak output aan
-  console.log(data2[i]);
-}
+  for (var i = 0; i < data2.length; (i=i+10)) {  //maak output aan
+  var $newListItem = $('<tr>' + '<td>' + data2[i].waarde + '</td>' + '<tr>');
+  $('tr:last').after($newListItem);
+  }
+  for (var i = 1; i < data2.length; (i=i+10)) {  //maak output aan
+  var $newListItem = $('<td>' + data2[i].waarde + '</td>');
+  $('tr:last').near($newListItem);
+  }
+
+
+
+  //var $newListItem = $('<li>' + data2[i].type + '</li>');
+
+//var $newListItem = $('<tr>' + '<td>' + data2[i].type + '</td>' + '<td>' + data2[i].goedfout + '</td>' + '<td>' + data2[i].waarde + '</td>' + '</tr>');
+
+//var $newListItem = $('<tr>' + '<td>' + data2[i].waarde + '</td>' + '<td>employer_id</td>' + '<td>first_name</td>' + '<td>last_name</td>' + '<td>date_of_birth</td>' + '<td>status</td>' + '<td>gender</td>' + '<td>adress_id</td>' + '<td>communication_type</td>' + '<td>hire_date</td>' + '</tr>');
+
+
 
   }
 });
+  $('ul').before('<p>Data geladen</p>');
 }
+
+
+
 
 /*
 //getdata voor de scheider

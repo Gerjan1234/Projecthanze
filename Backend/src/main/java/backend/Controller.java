@@ -84,7 +84,13 @@ public class Controller {
                              @RequestParam(name="Scheidingsteken") int scheidingsteken) {
         System.out.println(scheidingsteken);
         Filereader object = new Filereader();
-        ArrayList returndata = object.FileUpload(file, scheidingsteken, filename);
-        return new ResponseEntity<>(returndata, HttpStatus.OK);
+        ArrayList<responsfile> returndata = new ArrayList<>();
+        returndata = object.FileUpload(file, scheidingsteken, filename);
+        HttpHeaders head = new HttpHeaders();
+        head.set("status-code", "200 Ok");
+        return  ResponseEntity.ok()
+                .headers(head)
+                .body(returndata);
+        //return new ResponseEntity<>(returndata, HttpStatus.OK);
     }
     }
