@@ -34,19 +34,48 @@ console.log(last); //
     success: function(data){
 
   //  $('#result').html(data);
-//console.log(data)
+console.log(data)
     var data2 = JSON.parse(data);
     console.log(data2.length)
-  for (var i = 0; i < data2.length; (i=i+10)) {  //maak output aan
-  var $newListItem = $('<tr>' + '<td>' + data2[i].waarde + '</td>' + '<tr>');
-  $('tr:last').after($newListItem);
-  }
-  for (var i = 1; i < data2.length; (i=i+10)) {  //maak output aan
-  var $newListItem = $('<td>' + data2[i].waarde + '</td>');
-  $('tr:last').near($newListItem);
-  }
+  //for (var i = 0; i < data2.length; (i=i+10)) {  //maak output aan
+//  var $newListItem = $('<tr>' + '<td>' + data2[i].waarde + '</td>' + '<tr>');
+//  $('tr:last').after($newListItem);
+  //}
+//  for (var i = 1; i < data2.length; (i=i+10)) {  //maak output aan
+//  var $newListItem = $('<td>' + data2[i].waarde + '</td>');
+//  $('tr:last').near($newListItem);
+//  }
 
+//  var data2 = JSON.parse(data);
 
+var a = 0;
+var b = 1;
+var c = 2;
+var d = 3;
+var e = 4;
+var f = 5;
+var g = 6;
+var h = 7;
+var i = 8;
+var j = 9;
+for (var k = 0; k < data2.length; (k=k+10)) {
+var $newListItem = $('<tr>' + '<td id=' + data2[a].goedfout + '>' + data2[a].waarde + '</td>' + '<td id=' + data2[b].goedfout + '>' + data2[b].waarde + '</td>' + '<td id=' + data2[c].goedfout + '>' + data2[c].waarde + '</td>' + '<td id=' + data2[d].goedfout + '>' + data2[d].waarde + '</td>' + '</td>'+
+'<td id=' + data2[e].goedfout + '>' + data2[e].waarde + '</td>' + '<td id=' + data2[f].goedfout + '>' + data2[f].waarde + '</td>' + '<td id=' + data2[g].goedfout + '>' + data2[g].waarde + '</td>' + '<td id=' + data2[h].goedfout + '>' + data2[h].waarde + '</td>' + '<td id=' + data2[i].goedfout + '>' + data2[i].waarde + '</td>' + '<td id=' + data2[j].goedfout + '>' + data2[j].waarde + '</td>' + '<tr>');
+    $('tr:last').after($newListItem);
+    a=a+10;
+    b=b+10;
+    c=c+10;
+    d=d+10;
+    e=e+10;
+    f=f+10;
+    g=g+10;
+    h=h+10;
+    i=i+10;
+    j=j+10;
+console.log(a);
+console.log(b);
+console.log(k);
+  }
 
   //var $newListItem = $('<li>' + data2[i].type + '</li>');
 
@@ -59,6 +88,9 @@ console.log(last); //
   }
 });
   $('ul').before('<p>Data geladen</p>');
+  //document.getElementById("true").style.backgroundColor = "green";
+  document.getElementById("false").style.backgroundColor = "red";
+  //document.getElementById("null").style.backgroundColor = "blue";
 }
 
 
