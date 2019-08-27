@@ -3,7 +3,6 @@ $(document).ready(function () {
   bsCustomFileInput.init()
 })
 
-
 //uploader met ajax
 function uploadFormData(){
     $('#result').html('');
@@ -32,22 +31,8 @@ console.log(last); //
     contentType: false,
     type: 'POST',
     success: function(data){
-
-  //  $('#result').html(data);
-console.log(data)
     var data2 = JSON.parse(data);
-    console.log(data2.length)
-  //for (var i = 0; i < data2.length; (i=i+10)) {  //maak output aan
-//  var $newListItem = $('<tr>' + '<td>' + data2[i].waarde + '</td>' + '<tr>');
-//  $('tr:last').after($newListItem);
-  //}
-//  for (var i = 1; i < data2.length; (i=i+10)) {  //maak output aan
-//  var $newListItem = $('<td>' + data2[i].waarde + '</td>');
-//  $('tr:last').near($newListItem);
-//  }
-
-//  var data2 = JSON.parse(data);
-
+//loop om tabel te vullen
 var a = 0;
 var b = 1;
 var c = 2;
@@ -72,26 +57,43 @@ var $newListItem = $('<tr>' + '<td id=' + data2[a].goedfout + '>' + data2[a].waa
     h=h+10;
     i=i+10;
     j=j+10;
-console.log(a);
-console.log(b);
-console.log(k);
+//loop om met kleur aan te geven of een cel groen of rood is
   }
-
-  //var $newListItem = $('<li>' + data2[i].type + '</li>');
-
-//var $newListItem = $('<tr>' + '<td>' + data2[i].type + '</td>' + '<td>' + data2[i].goedfout + '</td>' + '<td>' + data2[i].waarde + '</td>' + '</tr>');
-
-//var $newListItem = $('<tr>' + '<td>' + data2[i].waarde + '</td>' + '<td>employer_id</td>' + '<td>first_name</td>' + '<td>last_name</td>' + '<td>date_of_birth</td>' + '<td>status</td>' + '<td>gender</td>' + '<td>adress_id</td>' + '<td>communication_type</td>' + '<td>hire_date</td>' + '</tr>');
-
-
-
+  var table = document.getElementById("datatabel"); // Get the table
+  for (var i = 1, row; row = table.rows[i]; i++) {        //loop door de rijen begin  in rij 2
+      for (var j = 0, cell; cell = row.cells[j]; j++) {   //loop door de cellen
+  if (cell.id == "true"){ //bij id true dan groen
+          cell.style.backgroundColor = 'green';
+        }
+        else {
+          cell.style.backgroundColor = 'red';
+        }
+      }
+  }
   }
 });
-  $('ul').before('<p>Data geladen</p>');
-  //document.getElementById("true").style.backgroundColor = "green";
-  document.getElementById("false").style.backgroundColor = "red";
-  //document.getElementById("null").style.backgroundColor = "blue";
 }
+
+
+
+
+
+//document.getElementById("false").addEventListener("click",
+
+//function () {
+  //  switchTDBackgroundColor(this.id);
+//});
+
+//document.getElementById("true").addEventListener("click",
+
+//function () {
+  //  switchTDBackgroundColor(this.id);
+//});
+
+  //document.getElementById("true").style.backgroundColor = "green";
+  //document.getElementById("false").style.backgroundColor = "red";
+  //document.getElementById("null").style.backgroundColor = "blue";
+
 
 
 
