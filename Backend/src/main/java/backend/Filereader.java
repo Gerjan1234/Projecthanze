@@ -84,6 +84,7 @@ public class Filereader {
                                         test2.type = "socialsecurity_id";
                                         test2.goedfout = false;
                                         test2.waarde = test[j];
+                                        test2.format = "getal_10_cijvers";
                                     }
                                     break;
                                 case 1: //double
@@ -98,6 +99,7 @@ public class Filereader {
                                         test2.type = "employer_id";
                                         test2.goedfout = false;
                                         test2.waarde = test[j];
+                                        test2.format = "getal_5_cijvers";
                                     }
                                     break;
                                 case 2: //String
@@ -124,6 +126,7 @@ public class Filereader {
                                         test2.type = "date_of_birth";
                                         test2.goedfout = false;
                                         test2.waarde = test[j];
+                                        test2.format = "formaat_dd/MM/yyyy";
                                     }
                                     break;
                                 case 5: //String
@@ -151,6 +154,7 @@ public class Filereader {
                                         test2.type = "adress_id";
                                         test2.goedfout = false;
                                         test2.waarde = test[j];
+                                        test2.format = "getal_4_cijvers";
                                     }
                                     break;
                                 case 8: //String
@@ -171,6 +175,7 @@ public class Filereader {
                                         test2.type = "hire_date";
                                         test2.goedfout = false;
                                         test2.waarde = test[j];
+                                        test2.format = "formaat_dd/MM/yyyy";
                                     }
                                     break;
                                 default:

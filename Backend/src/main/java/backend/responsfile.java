@@ -7,4 +7,5 @@ public class responsfile {
     public String type;
     public Boolean goedfout;
     public String waarde;
+    public String format;
 }
