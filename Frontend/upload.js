@@ -43,7 +43,8 @@ console.log(last); //
       var tabel = "";
     //loop door items van een  regel
         for (var l = q; l < r; l++) {
-          var colom = '<td id=' + data2[l].goedfout + ' title=' + data2[l].format + '>' + data2[l].waarde + '</td>'
+          //var colom = '<td id=' + data2[l].goedfout + ' title=' + data2[l].format + '>' + data2[l].waarde + '</td>'
+var colom = '<td id=' + data2[l].goedfout + ' title=' + data2[l].format + '><form class="true"> <input type="text" name="' + data2[l].goedfout + '" value=" ' + data2[l].waarde + ' "></td>'
           var tabel = tabel + colom  //maak van cellen een regel
         }
       var $newListItem = $('<tr>' + tabel + '<tr>'); $('tr:last').after($newListItem);   //zet de regels in tabel.
@@ -60,9 +61,13 @@ console.log(last); //
           console.log(cell.title);
   if (cell.id == "true"){ //bij id true dan groen
           cell.style.backgroundColor = 'green';
+ //getElementsByClassName='true';
+
         }
         else {
           cell.style.backgroundColor = 'red';
+
+
         }
       }
   }
