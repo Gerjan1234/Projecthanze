@@ -31,6 +31,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 <link rel="stylesheet" type="text/css" href="Login.css">
 
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="login.js"></script>
+
 <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
 
 <div id="id01" class="modal">
@@ -48,7 +51,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
       <label for="password"><b>Wachtwoord</b></label>
       <input type="password" placeholder="Wachtwoord invoeren" name="password" required>
         
-      <button type="submit">Login</button>
+      <button type="submit" onclick="showlogin(this.form)">Login</button>
+
       <label>
         <input type="checkbox" checked="checked" name="remember"> Inloggegevens onthouden
       </label>
