@@ -3,6 +3,44 @@ $(document).ready(function () {
   bsCustomFileInput.init()
 })
 
+//document.querySelector('input').addEventListener('input', onInput)
+
+
+
+
+$(document).ready(function(){
+    $('input[type=radio]').click(function(){
+      //if (this.id == "myradio")
+          var x = (this.value);
+          switch(x) {
+  case "1":
+    var z = "tap"
+    break;
+  case "2":
+    var z = "komma"
+    break;
+    case "3":
+      var z = "punt"
+      break;
+    case "4":
+    var z = "Dubbelepunt"
+      break;
+      case "5":
+        var z = "Puntkomma"
+        break;
+      case "6":
+        var z = "spatie"
+        break;
+  default:
+    var z = "geen keuze gemaakt"
+}
+        $('#result1').html('<div class="alert alert-success alert-dismissible"><a href="#"class="close" data-dismiss="alert" aria-label="close">&times;</a>Type gekozen keuze is: ' + z + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"></div>');
+
+    });
+
+});
+
+
 //uploader met ajax
 function uploadFormData(){
     $('#result').html('');
@@ -12,7 +50,11 @@ function uploadFormData(){
       for(i = 0; i < ele.length; i++) {
          if(ele[i].checked)
             gekozenvalue = ele[i].value
+
+
+
 }
+
 var oMyForm = new FormData();
 oMyForm.append("file", inputGroupFile01.files[0]);
 //haal document naam op:
@@ -44,7 +86,7 @@ console.log(last); //
     //loop door items van een  regel
         for (var l = q; l < r; l++) {
           //var colom = '<td id=' + data2[l].goedfout + ' title=' + data2[l].format + '>' + data2[l].waarde + '</td>'
-var colom = '<td id=' + data2[l].goedfout + ' title=' + data2[l].format + '><form class="true"> <input type="text" name="' + data2[l].goedfout + '" value=" ' + data2[l].waarde + ' "></td>'
+var colom = '<td id="intable" title=' + data2[l].format + '><form class="form-data"><input type="text" name="' + data2[l].goedfout + '"value="' + data2[l].waarde + '"></form></td>'
           var tabel = tabel + colom  //maak van cellen een regel
         }
       var $newListItem = $('<tr>' + tabel + '<tr>'); $('tr:last').after($newListItem);   //zet de regels in tabel.
@@ -54,23 +96,23 @@ var colom = '<td id=' + data2[l].goedfout + ' title=' + data2[l].format + '><for
     }
 
 //loop voor de tabel van kleur te voor zien
-  var table = document.getElementById("datatabel"); // Get the table
-  for (var i = 1, row; row = table.rows[i]; i++) {        //loop door de rijen begin  in rij 2
-      for (var j = 0, cell; cell = row.cells[j]; j++) {   //loop door de cellen
-        console.log(cell.id);
-          console.log(cell.title);
-  if (cell.id == "true"){ //bij id true dan groen
-          cell.style.backgroundColor = 'green';
- //getElementsByClassName='true';
-
-        }
-        else {
-          cell.style.backgroundColor = 'red';
-
-
-        }
-      }
-  }
+ //  var table = document.getElementById("datatabel"); // Get the table
+ //  for (var i = 1, row; row = table.rows[i]; i++) {        //loop door de rijen begin  in rij 2
+ //      for (var j = 0, cell; cell = row.cells[j]; j++) {   //loop door de cellen
+ //        console.log(cell.id);
+ //          console.log(cell.title);
+ //  if (cell.id == "true"){ //bij id true dan groen
+ //          cell.style.backgroundColor = 'green';
+ // //getElementsByClassName='true';
+ //
+ //        }
+ //        else {
+ //          cell.style.backgroundColor = 'red';
+ //
+ //
+ //        }
+ //      }
+ //  }
   }
 });
 }

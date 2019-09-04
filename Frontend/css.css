@@ -1,12 +1,51 @@
-.container {
-      display: flex;
-      justify-content: left;
-      align-items: left;
+
+body {background-color: #F1F0F1;}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 10px;
+  /* background-color: #2196F3; */
+  padding: 10px;
 }
 
-      input[name="true"], textarea.container {
-          background-color : green;
-        }
-        input[name="false"], textarea.container {
-            background-color : red;
-          }
+.grid-container > div {
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+
+.alertbox {
+ height: 100px;
+ width: 700px;
+ font-size: 1.3rem;
+ font-family: Sans-serif;
+}
+
+.inner {
+    text-align : left;
+    margin-left: 30px;
+    /* background: yellow;  test voor grid  */
+}
+
+.form-data {
+    width: 200px;
+    font-size: 1.3rem;
+    font-family: Sans-serif;
+  }
+
+input[type=text] {
+width: 200px;
+font-size: 1.3rem;
+font-family: Sans-serif;
+
+}
+
+
+input[name="true"], textarea.container {
+      background-color : green;
+}
+input[name="false"], textarea.container {
+      background-color : red;
+}
