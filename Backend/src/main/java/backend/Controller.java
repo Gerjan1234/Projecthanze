@@ -7,8 +7,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.concurrent.atomic.AtomicLong;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import static backend.Database.chkInlog;
 
 
 /**
@@ -17,7 +25,7 @@ import java.util.ArrayList;
  * @version (09-08-2019)
  * class voor de post en getters
  */
-
+@CrossOrigin(origins = "*")
 @RestController
 public class Controller {
 
@@ -90,4 +98,23 @@ public class Controller {
                 .body(returndata);
         //return new ResponseEntity<>(returndata, HttpStatus.OK);
     }
+
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+
+    public ResponseEntity InlogGegevens(
+            @RequestParam(name ="usr") double usr,
+            @RequestParam(name="psw") String psw) throws SQLException {
+        System.out.println("Ontvangen User: " + usr);
+        System.out.println("Ontvangen Wachtwoord: " + psw);
+        String returndata = chkInlog(usr, psw);
+        System.out.println("Ontvangen chk: " + returndata);
+        HttpHeaders head = new HttpHeaders();
+        head.set("status-code", "200 Ok");
+        return  ResponseEntity.ok()
+                .headers(head)
+                .body(returndata);
+        //return new ResponseEntity<>(returndata, HttpStatus.OK);
+    }
+
 }

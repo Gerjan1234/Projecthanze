@@ -25,7 +25,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
         OsCheck.getOperatingSystemType();
         OsCheck.setPathLocal();
-        boolean Test = Database.chkInlog("82369017","X2369017");
-        System.out.println(Test);
+        String Test = Database.chkInlog(82369017,"X2369017");
+        System.out.println("Aplicatietest: " + Test);
     }
 }

@@ -1,9 +1,11 @@
 function showlogin(form) {
      $('#result').html('');
 
+document.getElementById('id01');
+
 var User = new Object();
-    User.usr = form.usr.value;
-    User.psw = form.psw.value;
+    User.usr = usr.value;
+    User.psw = psw.value;
 
 
 var InlogGeg = JSON.parse(JSON.stringify(User));
@@ -16,26 +18,40 @@ console.log("User usr : " + User.usr);
 console.log("User psw : " + User.psw);
 
 alert ("Gebruiker: " + InlogGeg.usr + " en wachtwoord :" + User.psw);
-alert("InlogGeg usr : " + InlogGeg.usr);
-alert("InlogGeg psw : " + InlogGeg.psw);
-alert("User usr : " + User.usr);
-alert("User psw : " + User.psw);
+//alert("InlogGeg usr : " + InlogGeg.usr);
+//alert("InlogGeg psw : " + InlogGeg.psw);
+//alert("User usr : " + User.usr);
+//alert("User psw : " + User.psw);
 
+$(document).ready(function(){
 
-//  $.ajax({
-//   url:'/login?',
-//   type:"POST",
-//   data:InlogGeg,
-//   contentType:"application/json",
-//   success:function(response){
-//  alert(response);
-//  },
-//  error:function(error){
-//  alert(error);
-//  }
-}
+$('.box').hide().fadeIn(1000);
 
-function field_focus(field, usr)
+  //   $.post("demo_test_post.asp",
+//$.get('http://localhost:8080/login.html',
+//     {
+//       InlogGeg
+//     },
+//     function(data,status){
+//       alert("Data: " + data + "\nStatus: " + status);
+//     });
+//   });
+
+<!---->
+$.ajax({
+    url: 'http://localhost:8080/login',
+    data: InlogGeg,
+    dataType: 'json',
+    processData: true,
+    contentType: 'text',
+    type: 'GET',
+    success: function(data){
+    console.log(data);
+    }
+    });
+});
+};
+function field_focus(field, email)
   {
     if(field.value == email)
     {
@@ -44,7 +60,7 @@ function field_focus(field, usr)
   }
 
 
-  function field_blur(field, usr)
+  function field_blur(field, email)
   {
     if(field.value == '')
     {
@@ -53,14 +69,15 @@ function field_focus(field, usr)
   }
 
 
-//Fade in dashboard box
-$(document).ready(function(){
-    $('.box').hide().fadeIn(1000);
-    });
+////Fade in dashboard box
+//$(document).ready(function(){
+//    $('.box').hide().fadeIn(1000);
+//    });
+
 
 //Stop click event
 $('a').click(function(event){
     event.preventDefault();
-    //showlogin(this.form);
+    showlogin(this.form);
 	});
 

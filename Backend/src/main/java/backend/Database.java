@@ -70,16 +70,16 @@ public class Database {
      *  * @version (02-09-2019)
      */
 
-    protected static Boolean chkInlog(String usr, String psw) throws SQLException {
+    protected static String chkInlog(double usr, String psw) throws SQLException {
         ArrayList<security> results = new ArrayList<>();
-        boolean oke = true;
+        String oke = "Combinatie gebruiker en wachtwoord is correct";
                 String sql = "SELECT * FROM security WHERE security.security_id = ?";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setString(1, usr);
+            stmt.setDouble(1, usr);
             ResultSet res = stmt.executeQuery();
             while (res.next()) {
                 security r = new security();
-                r.security_id = res.getDouble(1);
+                r.security_id = res.getDouble( 1);
                 r.password = res.getString(2);
                 r.mailadress = res.getString(3);
                 results.add(r);
@@ -87,12 +87,19 @@ public class Database {
 
         }
         int tst = results.size();
-        System.out.println(tst);
-        if(tst == 0) {oke = false;
+        System.out.println("Lengte van de retour array: " + tst);
+
+        if(tst == 1) {
+            System.out.println("sql resultaat: " + results.get(0).security_id + " " + psw == results.get(0).password);
         }
 
-        return oke;
-
+        if(usr == results.get(0).security_id || psw == results.get(0).password) {
+            System.out.println(results.get(0).security_id + ' ' + psw == results.get(0).password);
+            return oke;
+        }else {
+            return oke = "Combinatie gebruiker en wachtwoord is Fout!";
+        }
+        //if(tst == 0) {oke = "Combinatie gebruiker en wachtwoord is Fout!";
+        }
     }
-}
 
