@@ -63,5 +63,36 @@ public class Database {
         return results;
 
     }
+
+    /**
+     * Methode check inlognaam
+     *  * @author (Teo)
+     *  * @version (02-09-2019)
+     */
+
+    protected static Boolean chkInlog(String usr, String psw) throws SQLException {
+        ArrayList<security> results = new ArrayList<>();
+        boolean oke = true;
+                String sql = "SELECT * FROM security WHERE security.security_id = ?";
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setString(1, usr);
+            ResultSet res = stmt.executeQuery();
+            while (res.next()) {
+                security r = new security();
+                r.security_id = res.getDouble(1);
+                r.password = res.getString(2);
+                r.mailadress = res.getString(3);
+                results.add(r);
+                }
+
+        }
+        int tst = results.size();
+        System.out.println(tst);
+        if(tst == 0) {oke = false;
+        }
+
+        return oke;
+
+    }
 }
 

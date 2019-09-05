@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.sql.SQLException;
+
 /**
  * class Application
  * @author (Gerjan)
@@ -13,15 +15,17 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin(origins = "*")
 @SpringBootApplication
 public class Application {
-    static String HOST_NAME = "jdbc:mysql://localhost:3306/pensioenaanspraken?serverTimezone=SYSTEM";//hoe heet de tabel
+    static String HOST_NAME = "jdbc:mysql://localhost:3306/pensioenaanspraken?serverTimezone=UTC";//hoe heet de tabel
     static String USER_NAME = "hanze";
     static String PASSWORD = "hanze";
 
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         SpringApplication.run(Application.class, args);
         OsCheck.getOperatingSystemType();
         OsCheck.setPathLocal();
+        boolean Test = Database.chkInlog("82369017","X2369017");
+        System.out.println(Test);
     }
 }

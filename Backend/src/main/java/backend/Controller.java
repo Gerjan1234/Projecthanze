@@ -22,12 +22,10 @@ import java.util.ArrayList;
 public class Controller {
 
     /**
-
     /**
      * Methode voor een post
      *  * @author (Gerjan)
      *  * @version (09-08-2019)
-
         @CrossOrigin(origins = "*")
         @PostMapping("/") //site invullen
         public ResponseEntity post(@RequestBody employers newData) {  //naam invullen voor een post
@@ -43,7 +41,6 @@ public class Controller {
                 e.printStackTrace();
                 return null;
             }
-
         }
     */
 
