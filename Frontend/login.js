@@ -42,11 +42,11 @@ $.ajax({
     url: 'http://localhost:8080/login',
     data: InlogGeg,
     dataType: 'json',
-    processData: true,
+    processData: false,
     contentType: 'text',
     type: 'GET',
     success: function(data){
-    console.log(data);
+    console.log('ajaxmelding' + data);
     }
     });
 });
