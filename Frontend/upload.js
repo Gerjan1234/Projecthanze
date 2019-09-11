@@ -3,7 +3,7 @@
 //testje
 
 //
-var res = {}
+
 var b
 $(document).ready(function(){
   bsCustomFileInput.init()  //file upload knopje
@@ -114,51 +114,93 @@ function checkFormData(){
 //console.log(this.value)
     //  $(this).closest('tr').find('input[name="dbFlag"]').val(this);
 //  });
-
-
-
- //var res = {}
-     for (c = 0; c < b; c++) {
-
-
-
-
-
+var data = []
+var arrtest = []
+var arrs = []
+var res = {}
+var res1 = {}
+var res2 = []
+var res3 = []
+var arr11 = []
+var arr12 = []
+var arr15 =[];
+     for (var c = 0; c < b; c++) {
  let arr1 = $('#socialsecurity_id' + c.toString()).serializeArray()
- console.log(arr1)
-  var arr2 = $("#employer_id" + c.toString()).serializeArray()
+ var vrr1 = res3['"socialsecurity_id"'] = arr1[0].value
+ var vrrr1 = "\"socialsecurity_id\":\"" + vrr1 + "\""
+  let arr2 = $("#employer_id" + c.toString()).serializeArray()
+ var vrr2 = res3['"employer_id"'] = arr2[0].value
+ var vrrr2 = "\"employer_id\":\"" + vrr2 + "\""
     let arr3 = $( "#first_name"  + c.toString()).serializeArray()
+    var vrr3 = res3['"first_name"'] = arr3[0].value
+    var vrrr3 = "\"first_name\":\"" + vrr3 + "\""
       let arr4 = $( "#last_name"  + c.toString()).serializeArray()
+      var vrr4 = res3['"last_name"'] = arr4[0].value
+      var vrrr4 = "\"last_name\":\"" + vrr4 + "\""
         let arr5 = $( "#date_of_birth"  + c.toString()).serializeArray()
+        var vrr5 = res3['"date_of_birth"'] = arr5[0].value
+        var vrrr5 = "\"date_of_birth\":\"" + vrr5 + "\""
           let arr6 = $( "#status"  + c.toString()).serializeArray()
+          var vrr6 = res3['"status"'] = arr6[0].value
+          var vrrr6 = "\"status\":\"" + vrr6 + "\""
             let arr7 = $( "#gender"  + c.toString()).serializeArray()
+            var vrr7 = res3['"gender"'] = arr7[0].value
+            var vrrr7 = "\"gender\":\"" + vrr7 + "\""
               let arr8 = $( "#adress_id"  + c.toString()).serializeArray()
+              var vrr8 = res3['"adress_id"'] = arr8[0].value
+              var vrrr8 = "\"adress_id\":\"" + vrr8 + "\""
                 let arr9 = $( "#communication_type"  + c.toString()).serializeArray()
+                var vrr9 = res3['"communication_type"'] = arr9[0].value
+                var vrrr9 = "\"communication_type\":\"" + vrr9 + "\""
                   let arr10 = $( "#hire_date"  + c.toString()).serializeArray()
-    arr1.forEach ( (el, idx) => res['socialsecurity_id' + c.toString()]  = el.value)
-    arr2.forEach ( (el, idx) => res["employer_id" + c.toString()]  = el.value)
-    arr3.forEach ( (el, idx) => res["first_name" + c.toString()]  = el.value)
-    arr4.forEach ( (el, idx) => res["last_name" + c.toString()]  = el.value)
-    arr5.forEach ( (el, idx) => res["date_of_birth" + c.toString()]  = el.value)
-    arr6.forEach ( (el, idx) => res["status" + c.toString()]  = el.value)
-    arr7.forEach ( (el, idx) => res["gender" + c.toString()]  = el.value)
-    arr8.forEach ( (el, idx) => res["adress_id" + c.toString()]  = el.value)
-    arr9.forEach ( (el, idx) => res["communication_type" + c.toString()]  = el.value)
-    arr10.forEach ( (el, idx) => res["hire_date" + c.toString()]  = el.value)
+                  var vrr10 = res3['"hire_date"'] = arr10[0].value
+                  var vrrr10 = "\"hire_date\":\"" + vrr10 + "\""
+
+arrtest = [vrrr1,vrrr2,vrrr3,vrrr4,vrrr5,vrrr6,vrrr7,vrrr8,vrrr9,vrrr10]
+data.push(arrtest)
+//console.log(arrtest)
+    // arr1.forEach ( (el, idx) => res['socialsecurity_id' + c.toString()] = el.value)
+    // console.log(res)
+    // arr2.forEach ( (el, idx) => res["employer_id" + c.toString()]  = el.value)
+    // arr3.forEach ( (el, idx) => res["first_name" + c.toString()]  = el.value)
+    // arr4.forEach ( (el, idx) => res["last_name" + c.toString()]  = el.value)
+    // arr5.forEach ( (el, idx) => res["date_of_birth" + c.toString()]  = el.value)
+    // arr6.forEach ( (el, idx) => res["status" + c.toString()]  = el.value)
+    // arr7.forEach ( (el, idx) => res["gender" + c.toString()]  = el.value)
+    // arr8.forEach ( (el, idx) => res["adress_id" + c.toString()]  = el.value)
+    // arr9.forEach ( (el, idx) => res["communication_type" + c.toString()]  = el.value)
+    // arr10.forEach ( (el, idx) => res["hire_date" + c.toString()]  = el.value)
+    // arr11 = [res]
+//  console.log(arr11)
+
 }
+
+final = "{" + data + "}"
  console.log("loopt het script")
-   data = JSON.stringify(res)
-   console.log(data)
+ //data3 = JSON.stringify(arrtest)
+ console.log(final)
+   //data = JSON.stringify(res)
+   //console.log(data)
    $.ajax({
+     data: final,
+     dataType: 'text',
+     processData: false,
+     contentType: false,
     type:'post',
     dataType:'json',
     contentType: 'application/json;charset=utf-8',
-  //  url:'http://143.176.115.180:8080/ontlasting',
-   url:'localhost/checkdata',
-    data
+   url:'http://localhost:8080/checkdata',
   })
 
 }
+// data: oMyForm,
+// dataType: 'text',
+// processData: false,
+// contentType: false,
+// type: 'POST',
+// success: function(data){
+// var data2 = JSON.parse(data);
+
   //event.preventDefault()
   // var res = {}
   // let arr = $( "#updatetabel" ).serializeArray()
