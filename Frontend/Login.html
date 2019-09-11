@@ -1,81 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {font-family: Arial, Helvetica, sans-serif;}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="*">
+<link rel='stylesheet' type='text/css' href="Login.css">
 
-@-webkit-keyframes animatezoom {
-  from {-webkit-transform: scale(0)}
-  to {-webkit-transform: scale(1)}
-}
+<form>
 
-@keyframes animatezoom {
-  from {transform: scale(0)}
-  to {transform: scale(1)}
-}
+    <div class="box">
+        <h1>Dashboard</h1>
 
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.password {
-     display: block;
-     float: none;
-  }
-  .cancelbtn {
-     width: 100%;
-  }
-}
-</style>
-</head>
-<body>
+        <input type="number" id="usr" name="usr" value="email" onFocus="field_focus(this, 'email');" onblur="field_blur(this, 'email');" class="email" />
 
-<link rel="stylesheet" type="text/css" href="Login.css">
+        <input type="password" id="psw" name="psw" value="email" onFocus="field_focus(this, 'email');" onblur="field_blur(this, 'email');" class="email" />
 
+        <a href="#"><div class="btn">Sign In</div></a> <!-- End Btn -->
+
+        <a href="#"><div id="btn2">Sign Up</div></a> <!-- End Btn2 -->
+
+    </div> <!-- End Box -->
+
+</form>
+
+<p>Forgot your password? <u style="color:#f1c40f;">Click Here!</u></p>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="login.js"></script>
 
-<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
-
-<div id="id01" class="modal">
-  
-  <form class="modal-content animate" action="/action_page.php">
-    <div class="imgcontainer">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="lock.jpg" alt="Avatar" class="avatar">
-    </div>
-
-    <div class="container">
-      <label for="username"><b>Gebruikersnaam</b></label>
-      <input type="text" placeholder="Invoeren gebruikersnaam of mailadres" name="username" required>
-
-      <label for="password"><b>Wachtwoord</b></label>
-      <input type="password" placeholder="Wachtwoord invoeren" name="password" required>
-        
-      <button type="submit" onclick="showlogin(this.form)">Login</button>
-
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Inloggegevens onthouden
-      </label>
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Stoppen</button>
-      <span class="password"><a href="#">Wachtwoord vergeten</a></span>
-    </div>
-  </form>
-</div>
-
-<script>
-// Get the modal
-var modal = document.getElementById('id01');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
-
-</body>
-</html>

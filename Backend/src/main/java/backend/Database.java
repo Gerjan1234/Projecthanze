@@ -46,22 +46,62 @@ public class Database {
      *  * @version (09-08-2019)
      */
 
-    protected static ArrayList getdata(int limit) throws SQLException {
-        ArrayList<salary> results = new ArrayList<>();
-        String sql = "select * from tabel order by date desc limit ?;";  //vul hier tabelnaam in
+//    protected static ArrayList getdata(int limit) throws SQLException {
+//        ArrayList<salary> results = new ArrayList<>();
+//        String sql = "select * from tabel order by date desc limit ?;";  //vul hier tabelnaam in
+//        try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+//            stmt.setInt(1, limit);
+//            ResultSet res = stmt.executeQuery();
+//            while (res.next()) {
+//                salary r = new salary();
+//                r.socialsecurity_id = res.getDouble(1); //tabel kolom1 invullen
+//                r.Franchise = res.getDouble(5); //tabel kolom2 invullen
+//                r.max_pension_salary = res.getBigDecimal("max_pension_salary"); //tabel kolom3 invullen
+//                results.add(r);
+//            }
+//        }
+//        return results;
+//
+//    }
+
+    /**
+     * Methode check inlognaam
+     *  * @author (Teo)
+     *  * @version (02-09-2019)
+     */
+
+    protected static String chkInlog(double usr, String psw) throws SQLException {
+        ArrayList<security> results = new ArrayList<>();
+        String oke = "init";
+                String sql = "SELECT * FROM security WHERE security.security_id = ?";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setInt(1, limit);
+            stmt.setDouble(1, usr);
             ResultSet res = stmt.executeQuery();
             while (res.next()) {
-                salary r = new salary();
-                r.socialsecurity_id = res.getDouble(1); //tabel kolom1 invullen
-                r.Franchise = res.getDouble(5); //tabel kolom2 invullen
-                r.max_pension_salary = res.getBigDecimal("max_pension_salary"); //tabel kolom3 invullen
+                security r = new security();
+                r.security_id = (int)res.getDouble( 1);
+                r.password = res.getString(2);
+                r.mailadress = res.getString(3);
                 results.add(r);
-            }
-        }
-        return results;
+                }
 
+        }
+        int tst = results.size();
+        System.out.println("Lengte van de retour array: " + tst);
+
+        if(tst > 0) {
+            System.out.println("sql resultaat Id: " + results.get(0).security_id);
+            System.out.println("sql resultaat psw: " + results.get(0).password);
+        }
+
+        if((int)usr == results.get(0).security_id && psw.equals(results.get(0).password)) {
+            System.out.println("chkLogin-Id: "  +  results.get(0).security_id);
+            System.out.println("chkLogin-psw: " +  results.get(0).password);
+            return oke = "Combinatie gebruiker en wachtwoord is correct";
+        }else {
+            return oke = "Combinatie gebruiker en wachtwoord is fout!";
+            }
+
+        }
     }
-}
 
