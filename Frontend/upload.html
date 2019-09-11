@@ -10,6 +10,11 @@
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+<!--script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script-->
+
 <script src="upload.js"></script>
 
 <body>
@@ -73,23 +78,29 @@
 </div>
 <br><br>
 
+
 <div class="grid-container">
-<div></div>
+
 <div>
-         <table id="datatabel">
+  <form id="updatetabel" class= "" action="isdfndex.html" method="post">
+        <table id="datatabel">
           <tr id="tr">
-           <th><form class="form-data"><input type="text" value="socialsecurity_id" readonly="readonly"></form></th>
-           <th><form class="form-data"><input type="text" value="employer_id" readonly="readonly"></form></th>
-           <th><form class="form-data"><input type="text" value="first_name" readonly="readonly"></form></th>
-           <th><form class="form-data"><input type="text" value="last_name" readonly="readonly"></form></th>
-           <th><form class="form-data"><input type="text" value="date_of_birth" readonly="readonly"></form></th>
-           <th><form class="form-data"><input type="text" value="status" readonly="readonly"></form></th>
-           <th><form class="form-data"><input type="text" value="gender" readonly="readonly"></form></th>
-           <th><form class="form-data"><input type="text" value="adress_id" readonly="readonly"></form></th>
-           <th><form class="form-data"><input type="text" value="communication_type" readonly="readonly"></form></th>
-           <th><form class="form-data"><input type="text" value="hire_date" readonly="readonly"></form></th>
-          </tr>
+            <div class="grid-container2">
+              <div>
+           <input class="form-data" type="text" value="socialsecurity_id" readonly="readonly"> </div><div>
+           <input class="form-data" type="text" value="employer_id" readonly="readonly"></div><div>
+           <input class="form-data" type="text" value="first_name" readonly="readonly"> </div><div>
+           <input class="form-data" type="text" value="last_name" readonly="readonly"> </div><div>
+           <input class="form-data" type="text" value="date_of_birth" readonly="readonly"> </div><div>
+           <input class="form-data" type="text" value="status" readonly="readonly"> </div><div>
+           <input class="form-data" type="text" value="gender" readonly="readonly"> </div><div>
+           <input class="form-data"  type="text" value="adress_id" readonly="readonly"> </div><div>
+           <input class="form-data" type="text" value="communication_type" readonly="readonly"> </div><div>
+           <input class="form-data" type="text" value="hire_date" readonly="readonly"> </div><div>
+           </div>
+            </tr>
           </table>
+            </form>
       </div>
 <div></div>
 </div>
