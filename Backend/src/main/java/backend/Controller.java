@@ -118,22 +118,22 @@ public class Controller {
     }
 
     /**
-     * Methode voor een de file uploader
-     *  * @author (Gerjan)
-     *  * @version (09-08-2019)
-     *  file en scheidingsteken in een post.
-     */
-    @CrossOrigin(origins = "*")
-    @RequestMapping(value = "/checkdata", method = RequestMethod.POST)
-    public ResponseEntity checkdata(@RequestBody datacheck datalist) {
+ //    * Methode voor een de file uploader
+//     *  * @author (Gerjan)
+//     *  * @version (09-08-2019)
+ //    *  file en scheidingsteken in een post.
+  //   */
+ //   @CrossOrigin(origins = "*")
+ //   @RequestMapping(value = "/checkdata", method = RequestMethod.POST)
+  //  public ResponseEntity checkdata(@RequestBody datacheck datalist) {
 
-        System.out.println(datalist.employer_id);
-        HttpHeaders head = new HttpHeaders();
-        head.set("status-code", "200 Ok");
-        return  ResponseEntity.ok()
-                .headers(head)
-                .body(datalist);
-        //return new ResponseEntity<>(datalist, HttpStatus.OK);
-    }
+ //       System.out.println(datalist.employer_id);
+  //      HttpHeaders head = new HttpHeaders();
+  //      head.set("status-code", "200 Ok");
+  //      return  ResponseEntity.ok()
+ //               .headers(head)
+ //               .body(datalist);
+  //      //return new ResponseEntity<>(datalist, HttpStatus.OK);
+//    }
 
 }
