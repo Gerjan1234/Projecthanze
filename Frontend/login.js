@@ -46,7 +46,7 @@ $.ajax({
     contentType: 'text',
     type: 'GET',
     success: function(data){
-    console.log('ajaxmelding' + data);
+    //console.log('ajaxmelding' + data);
     }
     });
 });
