@@ -64,3 +64,25 @@ FROM (salary INNER JOIN (employers INNER JOIN invoice ON employers.employer_id =
 WHERE (((invoice.start_date) Like '%') AND ((employers.employer_id)=2369302))
 ORDER BY employers.employer_id, salary.invoice_id, employees.last_name;
 
+-- test premie --
+SELECT salary.socialsecurity_id, salary.invoice_id, salary.salary, salary.parttime_factor, salary.Franchise, 
+truncate((salary*parttime_factor)-franchise,2) AS Premie
+FROM salary;
+
+-- test premie-2--
+SELECT salary.socialsecurity_id, salary.invoice_id, salary.salary, salary.parttime_factor, salary.Franchise, truncate(((salary/parttime_factor)-franchise),2) AS premie
+FROM salary
+WHERE (((salary.invoice_id)=103));
+
+-- test leeftijd --
+SELECT employees.socialsecurity_id, employees.first_name, employees.last_name, employees.date_of_birth, truncate((datediff(Now(),date_of_birth)/'365,25'),0) AS Leeftijd, 
+year(date_of_birth) AS jaar, month(date_of_birth) AS mnd, day(date_of_birth) AS dag
+FROM employees
+WHERE (((employees.date_of_birth) Like "%1962%"));
+
+-- Geeft de leeftijd van vandaag() en contributiepercentage weer per bsn nummer--
+SELECT employees.socialsecurity_id, employees.first_name, employees.last_name, employees.date_of_birth, truncate((datediff(Now(),date_of_birth)/'365,25'),0) AS Leeftijd, contribution.contribution_percentage
+FROM employees, contribution
+WHERE (((employees.socialsecurity_id) Like "%113%") AND ((contribution.contribution_age)=(truncate((datediff(Now(),date_of_birth)/'365,25'),0))))
+ORDER BY employees.last_name;
+
