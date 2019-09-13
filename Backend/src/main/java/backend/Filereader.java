@@ -1,16 +1,13 @@
 package backend;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.multipart.MultipartFile;
 
+import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.DateFormat;
 import java.util.*;
 import java.text.SimpleDateFormat;
 
@@ -51,8 +48,7 @@ public class Filereader {
     }
 
      /**
-     * Methode om de losse regels uit het txt te halen inc tabs.
-      * controle of de regels voldoen aan het formaat
+     * Methode om de losse regels uit het txt te halen..
      */
 
     public void CheckfileAllLinesandTabs() {
@@ -68,13 +64,12 @@ public class Filereader {
         }
     }
 
-        public ArrayList Updatecheckdata(List lines) {
-            for(int i = 0; i < lines.size(); i++){
-                System.out.println(lines.get(i));
-               // System.out.println(xx);
-            }
+    /**
+     * Methode om de losse regels om te zetten naar cellen.
+     * controle of de regels voldoen aan het formaat.
+     */
 
-            //System.out.println(lines.toString());
+        public ArrayList Updatecheckdata(List lines) {
             int regel = 1;
             System.out.println("aantal regels file " + lines.size());
             String test[];
@@ -202,29 +197,12 @@ public class Filereader {
                         }
                 regel++;
             }
-
-
         return senddata;
     }
 
-    public void chekdata(datacheck check){
-        System.out.println("hier komt hire data");
-        System.out.println(check.hire_date);
-    }
-
     /**
-     * Methode om de losse regels uit het repo bestand weer te geven.
-     *
-     * @param Arraynummber input voor regel nummer uit het repo bestand (zonder de '#')
-     * @return    deze method geeft eens String terug (zin uit de txt file)
+     * Methode om de file in te laden en begin data vastleggen.
      */
-    public void printdata(){
-        System.out.println(databaseregels.size());
-       // System.out.println(databaseregelsinhoud.size());
-       // for(int i =0; i<databaseregelsinhoud.size(); i++) {
-       //     System.out.println(databaseregelsinhoud.get(i));
-      //  }
-    }
 
     public ArrayList FileUpload(MultipartFile file, int scheidingsteken, String filename) {
         try {
@@ -243,15 +221,17 @@ public class Filereader {
         }
         return senddata;
     }
+
+    /**
+     * Methode om de gewijzigde data weer te controleren.
+     */
+
     public ArrayList checkscheider(List lines, int scheidingsteken){
         karakter_scheidingsteken = karakers.get(scheidingsteken);
         Firststap = false;
         this.senddata = new ArrayList<>();
         Updatecheckdata(lines);
         return senddata;
-    }
-
-    public static void Filereader() {
     }
 }
 
