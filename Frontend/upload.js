@@ -1,7 +1,9 @@
 //filebrowser voor bootstrap
-var tabellengte = 1
-var data2
-var b
+var tabellengte = 1 //intal voor eerste regel tabel en daarna voor volgende regels
+var data2 //data voor tabel
+var b //regel teller
+var allesOk = false //boolean voor alles oke
+var urlsendorcheck = 'http://localhost:8080/checkdata'
 
 $(document).ready(function(){
   bsCustomFileInput.init()  //file upload knopje
@@ -96,11 +98,16 @@ function MakeTabel() {
     var r = r + 10; //waarde voor volgene regel
     }
 //toevoegen van knopje rechts onder de tabel
+//checkalles oke voor juiste knopje
+checkAllesOke()
+if (allesOk == false) {
     var knopje = '<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><div class="knopje">  <button class="btn btn-outline-secondary" type="button" onclick="checkFormData()" id="checkformdata">Checkdata</button></div></td>'
+  } else {
+    var knopje = '<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><div class="knopje">  <button class="btn btn-outline-secondary" type="button" onclick="checkFormData()" id="checkformdata">Verstuurdata</button></div></td>'
+  }
     var $newListItem = $('<tr>' + knopje + '<tr>'); $('tr:last').after($newListItem);   //zet de regels in tabel.
     var $newListItem = "";
 }
-
 //aangepast te data uitlezen
 function checkFormData(){
 //  var input = document.getElementById('socialsecurity_id');
@@ -133,13 +140,14 @@ datarows.push(rowtrim)
 final = datarows
 //data verzenden naar backend
    $.ajax({
-     url: 'http://localhost:8080/checkdata',
+     url: urlsendorcheck,
      data: final,
      dataType: 'text',
      processData: false,
      contentType: false,
      type: 'POST',
      success: function(data){
+       //if dat is 200 dan doorgaan anders 202 melding on screen nog maken
      data2 = JSON.parse(data);
 
      var x = document.getElementsByTagName("tr");
@@ -151,4 +159,14 @@ final = datarows
 MakeTabel()
   }
 });
+}
+
+function checkAllesOke() {
+  var allestrue = $("input[name='false']").val();
+console.log(allestrue)
+  if (allestrue == undefined) {
+    allesOk = true
+    urlsendorcheck = 'http://localhost:8080/senddata'
+  }
+  console.log(allesOk)
 }

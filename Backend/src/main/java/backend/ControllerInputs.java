@@ -66,5 +66,26 @@ public class ControllerInputs {
                 .headers(head)
                 .body(returndata);
     }
+
+    /**
+     * Methode voor een de file uploader data verzenden naar database
+     * * @author (Gerjan)
+     * * @version (13-09-2019)
+     * file en scheidingsteken in een post.
+     */
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/senddata", method = RequestMethod.POST)
+    public ResponseEntity senddata(@RequestBody String datalist) {
+        List<String> line = asList(datalist.split(","));
+        Filereader object = new Filereader();
+        ArrayList<responsfile> returndata = new ArrayList<>();
+        //returndata = object.checkscheider(line, 5);
+        HttpHeaders head = new HttpHeaders();
+        head.set("status-code", "202 Ok");
+        return ResponseEntity.ok()
+                .headers(head)
+                .body("succes vol verstuurd");
+    }
+
 }
 
