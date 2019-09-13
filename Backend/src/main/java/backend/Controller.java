@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +19,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static backend.Database.chkInlog;
+import static java.util.Arrays.asList;
 
 
 /**
@@ -125,14 +128,26 @@ public class Controller {
      */
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/checkdata", method = RequestMethod.POST)
-    public ResponseEntity checkdata(@RequestBody datacheck datalist) {
+    public ResponseEntity checkdata(@RequestBody String datalist) {
+        List<String> line = asList(datalist.split(","));
 
-        System.out.println(datalist.employer_id);
+        System.out.println(line.size());
+        for(int i = 0; i < line.size(); i++){
+        String xx = line.get(i);
+            System.out.println(xx);
+        }
+        //List line = new ArrayList();
+        //line.add(test);
+        Filereader object = new Filereader();
+        ArrayList<responsfile> returndata = new ArrayList<>();
+        returndata = object.checkscheider(line, 5);//scheiding nog uit fronend halen
+        //System.out.println(datalist.toString());
         HttpHeaders head = new HttpHeaders();
         head.set("status-code", "200 Ok");
         return  ResponseEntity.ok()
                 .headers(head)
-                .body(datalist);
+                .body(returndata);
+
         //return new ResponseEntity<>(datalist, HttpStatus.OK);
     }
 

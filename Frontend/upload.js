@@ -3,7 +3,8 @@
 //testje
 
 //
-
+var tabellengte = 1
+var data2
 var b
 $(document).ready(function(){
   bsCustomFileInput.init()  //file upload knopje
@@ -64,10 +65,14 @@ var last = tekst.substring(pos2 +1, len) //haal de tekst na de 2e / op.
     contentType: false,
     type: 'POST',
     success: function(data){
-    var data2 = JSON.parse(data);
+    data2 = JSON.parse(data);
     //data parameters zetten
+    MakeTabel()
+  }
+});
+}
 
-
+function MakeTabel() {
 
 //retour data op scherm in tabel zetten
   var q = 0 //begin bij 0
@@ -95,13 +100,11 @@ var last = tekst.substring(pos2 +1, len) //haal de tekst na de 2e / op.
     var knopje = '<td>  <input type="text" name="dbFlag" value="N" /></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><div class="knopje">  <button class="btn btn-outline-secondary" type="button" onclick="checkFormData()" id="checkformdata">Checkdata</button></div></td>'
     var $newListItem = $('<tr>' + knopje + '<tr>'); $('tr:last').after($newListItem);   //zet de regels in tabel.
     var $newListItem = "";
-
-
-
-
-  }
-});
 }
+
+
+
+
 //aangepast te data verzenden naar backend.
 function checkFormData(){
   var input = document.getElementById('socialsecurity_id');
@@ -114,6 +117,7 @@ function checkFormData(){
 //console.log(this.value)
     //  $(this).closest('tr').find('input[name="dbFlag"]').val(this);
 //  });
+var datarows =[]
 var data = []
 var arrtest = []
 var arrs = []
@@ -126,6 +130,7 @@ var arr12 = []
 var arr15 =[];
      for (var c = 0; c < b; c++) {
  let arr1 = $('#socialsecurity_id' + c.toString()).serializeArray()
+
  var vrr1 = res3['"socialsecurity_id"'] = arr1[0].value
  var vrrr1 = "\"socialsecurity_id\":\"" + vrr1 + "\""
   let arr2 = $("#employer_id" + c.toString()).serializeArray()
@@ -156,6 +161,21 @@ var arr15 =[];
                   var vrr10 = res3['"hire_date"'] = arr10[0].value
                   var vrrr10 = "\"hire_date\":\"" + vrr10 + "\""
 
+let cel1 = arr1[0].value
+let cel2 = arr2[0].value
+let cel3 = arr3[0].value
+let cel4 = arr4[0].value
+let cel5 = arr5[0].value
+let cel6 = arr6[0].value
+let cel7 = arr7[0].value
+let cel8 = arr8[0].value
+let cel9 = arr9[0].value
+let cel10 = arr10[0].value
+
+var row = cel1 + ";" + cel2 + ";" + cel3 + ";" + cel4 + ";" + cel5 + ";" + cel6 + ";" + cel7 + ";" + cel8 + ";" + cel9 + ";" + cel10
+var rowtrim = row.trim()
+datarows.push(rowtrim)
+
 arrtest = [vrrr1,vrrr2,vrrr3,vrrr4,vrrr5,vrrr6,vrrr7,vrrr8,vrrr9,vrrr10]
 data.push(arrtest)
 //console.log(arrtest)
@@ -175,23 +195,62 @@ data.push(arrtest)
 
 }
 
-final = "{" + data + "}"
+//final = "{" + data + "}"
+final = datarows
  console.log("loopt het script")
  //data3 = JSON.stringify(arrtest)
  console.log(final)
    //data = JSON.stringify(res)
    //console.log(data)
+
+   // $.ajax({
+   //   data: final,
+   //   dataType: 'text',
+   //   processData: false,
+   //   contentType: false,
+   //  type:'post',
+   //  dataType:'json',
+   //  contentType: 'application/json;charset=utf-8',
+   // url:'http://localhost:8080/checkdata',
+   // success: function(dataxx){
+   // var data2 = JSON.parse(dataxx);
+
    $.ajax({
+     url: 'http://localhost:8080/checkdata',
      data: final,
      dataType: 'text',
      processData: false,
      contentType: false,
-    type:'post',
-    dataType:'json',
-    contentType: 'application/json;charset=utf-8',
-   url:'http://localhost:8080/checkdata',
-  })
+     type: 'POST',
+     success: function(data){
+     data2 = JSON.parse(data);
 
+//$('#datatabel').remove();
+
+
+
+     var x = document.getElementsByTagName("tr");
+    //   document.getElementById("datatabel").innerHTML = "";
+
+    console.log(x.length)
+     for (var i = tabellengte; i < x.length ;i++) {
+       console.log(i)
+
+       document.getElementById("datatabel").deleteRow(i);
+
+    }
+    tabellengte =  x.length
+
+    document.getElementById('updatetabel').reset();
+MakeTabel()
+//  })
+//dubbel tijdelijk!!!!!!!!!!!!!!!!
+//retour data op scherm in tabel zetten
+
+
+
+  }
+});
 }
 // data: oMyForm,
 // dataType: 'text',

@@ -30,6 +30,8 @@ public class Filereader {
     private String operatingSystem = OsCheck.OS;
     private String location = OsCheck.LocalPath;
     private String filenameAndextensie = "";
+    private List<String> lines;
+    private Boolean Firststap = true;
 
 
     /**
@@ -53,18 +55,33 @@ public class Filereader {
       * controle of de regels voldoen aan het formaat
      */
 
-    public ArrayList CheckfileAllLinesandTabs() {
+    public void CheckfileAllLinesandTabs() {
         Path fileLocation = Paths.get(location, filenameAndextensie);
         System.out.println("file wordt gecontroleerd");
         Charset charset = Charset.forName("ISO-8859-1");
         this.senddata = new ArrayList<>();
         try {
-            List<String> lines = Files.readAllLines(fileLocation, charset);
+            lines = Files.readAllLines(fileLocation, charset);
+            Updatecheckdata(lines);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+        public ArrayList Updatecheckdata(List lines) {
+            for(int i = 0; i < lines.size(); i++){
+                System.out.println(lines.get(i));
+               // System.out.println(xx);
+            }
+
+            //System.out.println(lines.toString());
             int regel = 1;
             System.out.println("aantal regels file " + lines.size());
             String test[];
             Iterator it = lines.iterator();
-            it.next();
+            if(Firststap == true){
+                it.next();
+            }
                 while(it.hasNext()) {
                     String line = (String)it.next();
                     test = line.split(karakter_scheidingsteken);
@@ -185,32 +202,14 @@ public class Filereader {
                         }
                 regel++;
             }
-        } catch(Exception e){
-            System.out.println(e);
-        }
+
+
         return senddata;
     }
 
-    public void uploadallowed(){
-
-
-                 /*       importdata.socialsecurity_id = Double.parseDouble(test[0]);
-                        importdata.employer_id = Double.parseDouble(test[1]);
-                        importdata.first_name = test[2];
-                        importdata.last_name = test[3];
-                        importdata.date_of_birth = new SimpleDateFormat("dd/MM/yyyy").parse(test[3]);
-                        importdata.status = test[5];
-                        importdata.gender = test[6];
-                        importdata.adress_id =Integer.parseInt(test[7]);
-                        importdata.communication_type = test[8];
-                        importdata.date_of_birth = new SimpleDateFormat("dd/MM/yyyy").parse(test[9]);*/
-        //  } catch (IOException e) {
-
-
-        //  databaseregelsinhoud.add(test[j]);
-        // databaseregelsinhoud.removeIf(String -> String.charAt(0) == '#');
-        //  }
-
+    public void chekdata(datacheck check){
+        System.out.println("hier komt hire data");
+        System.out.println(check.hire_date);
     }
 
     /**
@@ -242,6 +241,13 @@ public class Filereader {
         } catch (Exception e) {
             System.out.println(e);
         }
+        return senddata;
+    }
+    public ArrayList checkscheider(List lines, int scheidingsteken){
+        karakter_scheidingsteken = karakers.get(scheidingsteken);
+        Firststap = false;
+        this.senddata = new ArrayList<>();
+        Updatecheckdata(lines);
         return senddata;
     }
 
