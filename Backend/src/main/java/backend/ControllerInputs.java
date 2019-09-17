@@ -84,7 +84,7 @@ public class ControllerInputs {
         head.set("status-code", "202 Ok");
         return ResponseEntity.ok()
                 .headers(head)
-                .body("succes vol verstuurd");
+                .body("202");
     }
 
 }
