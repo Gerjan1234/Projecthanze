@@ -33,7 +33,7 @@ $('input[type=radio]').click(function(){
       var z = "geen keuze gemaakt"
 }
 //alert op scherm tonen
-$('#result1').html('<div class="alert alert-success alert-dismissible"><a href="#"class="close" data-dismiss="alert" aria-label="close">&times;</a>Type gekozen keuze is: ' + z + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"></div>');
+$('#ScheidingstekenGekozen').html('<div class="alert alert-success alert-dismissible"><a href="#"class="close" data-dismiss="alert" aria-label="close">&times;</a>Type gekozen keuze is: ' + z + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"></div>');
 });
 });
 
@@ -55,6 +55,10 @@ var pos1 = tekst.indexOf("\\");          	// zoek eerste /
 var pos2 = tekst.indexOf("\\", pos1 + 1); // zoek 2e /
 var len = tekst.length; //pak lengte string
 var last = tekst.substring(pos2 +1, len) //haal de tekst na de 2e / op.
+if (allesOk == true) {
+$('#uploadCompleteAlert').html('')
+urlsendorcheck = 'http://localhost:8080/checkdata'
+allesOk = false} //bij nieuwe uplaod knop weer origineel
 //document en scheidingsteken en filename versturen naar backend
   $.ajax({
     url: 'http://localhost:8080/upload?Scheidingsteken=' + gekozenvalue + "&filename=" + last,
@@ -139,24 +143,32 @@ datarows.push(rowtrim)
 }
 final = datarows
 //data verzenden naar backend
-   $.ajax({
+ $.ajax({
      url: urlsendorcheck,
      data: final,
      dataType: 'text',
      processData: false,
      contentType: false,
      type: 'POST',
-     success: function(data){
-       //if dat is 200 dan doorgaan anders 202 melding on screen nog maken
+     //2 extra opties als test die haal ik hederstatus op nog uitzoeken
+     success: function(data, textStatus, xhr) {
+        console.log("xhr " + xhr.getResponseHeader);
+  console.log("tekst status " + textStatus);
+    console.log("data status " + data);
+    //einde test
      data2 = JSON.parse(data);
-
      var x = document.getElementsByTagName("tr");
      for (var i = tabellengte; i < x.length ;i++) {
        document.getElementById("datatabel").deleteRow(i);
     }
     tabellengte =  x.length
-
+       //if dat is 200 dan doorgaan anders 202 melding on screen nog maken
+    if (data == "202"){
+      console.log(" door if statument")
+      $('#uploadCompleteAlert').html('<div class="alert alert-success alert-dismissible"><a href="#"class="close" data-dismiss="alert" aria-label="close">&times;</a>Upload gelukt<button type="button" class="close" data-dismiss="alert" aria-label="Close"></div>');
+    }else{
 MakeTabel()
+}
   }
 });
 }
