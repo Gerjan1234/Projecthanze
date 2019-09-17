@@ -20,7 +20,7 @@ import static backend.Database.chkInlog;
  */
 @CrossOrigin(origins = "*")
 @RestController
-public class Controller {
+public class ControllerLogin {
 
 
     @CrossOrigin(origins = "*")
