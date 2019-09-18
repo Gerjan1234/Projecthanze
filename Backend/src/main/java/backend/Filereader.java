@@ -29,6 +29,7 @@ public class Filereader {
     private String filenameAndextensie = "";
     private List<String> lines;
     private Boolean Firststap = true;
+    private int regel = 1;
 
 
     /**
@@ -66,22 +67,32 @@ public class Filereader {
 
     /**
      * Methode om de losse regels om te zetten naar cellen.
-     * controle of de regels voldoen aan het formaat.
      */
 
-        public ArrayList Updatecheckdata(List lines) {
-            int regel = 1;
+        public void Updatecheckdata(List lines) {
             System.out.println("aantal regels file " + lines.size());
             String test[];
             Iterator it = lines.iterator();
-            if(Firststap == true){
+            if (Firststap == true) {
                 it.next();
             }
-                while(it.hasNext()) {
-                    String line = (String)it.next();
-                    test = line.split(karakter_scheidingsteken);
-                  //  if (test.length == 10) {
-                        for (int j = 0; j < test.length; j++) {
+            while (it.hasNext()) {
+                String line = (String) it.next();
+                test = line.split(karakter_scheidingsteken);
+                //  if (test.length == 10) {
+                for (int j = 0; j < test.length; j++) {
+                    dataToSwith(test, j);
+                }
+            }
+        }
+
+    /**
+     * Methode voor de swith.
+     * controle of de regels voldoen aan het formaat.
+     */
+
+                            public ArrayList dataToSwith(String test[], int j) {
+                                System.out.println("werk dit nog" + test.length);
                             responsfile test2 = new responsfile();
                             switch(j) {
                                 case 0: //double
@@ -191,12 +202,10 @@ public class Filereader {
                                     }
                                     break;
                                 default:
-
                             }
-                            senddata.add(test2);
-                        }
+
+                senddata.add(test2);
                 regel++;
-            }
         return senddata;
     }
 
@@ -233,5 +242,42 @@ public class Filereader {
         Updatecheckdata(lines);
         return senddata;
     }
+
+    /**
+     * Methode om de gewijzigde data weer te controleren.
+     */
+
+    public ArrayList salarismutatiecheckcontrole(List lines, int scheidingsteken){
+        karakter_scheidingsteken = karakers.get(scheidingsteken);
+      //  Firststap = false;
+        this.senddata = new ArrayList<>();
+
+        String[] test;
+
+        // allocating memory for 5 objects of type Student.
+        test = new String[8];
+        System.out.println("testlengt " + test.length);
+        //String[] test = new String[7];
+        //test[] = new String[20];
+        Iterator it = lines.iterator();
+        //if (Firststap == true) {
+       //     it.next();
+       // }
+        while (it.hasNext()) {
+            String line = (String) it.next();
+            test = line.split(karakter_scheidingsteken);
+            //  if (test.length == 10) {
+           // for (int j = 0; j < test.length; j++) {
+                dataToSwith(test, 0);
+            dataToSwith(test, 1);
+            dataToSwith(test, 2);
+            dataToSwith(test, 3);
+           // }
+      //  }
+    }
+
+        return senddata;
+    }
+
 }
 

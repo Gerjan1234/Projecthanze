@@ -87,5 +87,47 @@ public class ControllerInputs {
                 .body("202");
     }
 
+
+    /**
+     * Methode voor een de file uploader data controle salarismutatie
+     * * @author (Gerjan)
+     * * @version (18-09-2019)
+     * file en scheidingsteken in een post.
+     */
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/salarismutatiecheck", method = RequestMethod.POST)
+    public ResponseEntity salarismutatiecheck(@RequestBody String datalist) {
+        List<String> line = asList(datalist.split(","));
+        Filereader object = new Filereader();
+        ArrayList<responsfile> returndata = new ArrayList<>();
+        returndata = object.salarismutatiecheckcontrole(line, 5);
+        HttpHeaders head = new HttpHeaders();
+        head.set("status-code", "200 Ok");
+        return ResponseEntity.ok()
+                .headers(head)
+                .body(returndata);
+    }
+
+    /**
+     * Methode voor een de file uploader data verzenden naar database salarismutatie
+     * * @author (Gerjan)
+     * * @version (18-09-2019)
+     * file en scheidingsteken in een post.
+     */
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/verstuursalarismutatiecheck", method = RequestMethod.POST)
+    public ResponseEntity verstuursalarismutatiecheck(@RequestBody String datalist) {
+        List<String> line = asList(datalist.split(","));
+        Filereader object = new Filereader();
+        ArrayList<responsfile> returndata = new ArrayList<>();
+        //returndata = object.checkscheider(line, 5);
+        HttpHeaders head = new HttpHeaders();
+        head.set("status-code", "202 Ok");
+        return ResponseEntity.ok()
+                .headers(head)
+                .body("202");
+    }
+
+
 }
 
