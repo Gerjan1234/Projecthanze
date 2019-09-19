@@ -6,13 +6,15 @@ import java.util.ArrayList;
 
 /**
  * class Database
+ *
  * @author (Gerjan)
- * @version (09-08-2019)
+ * @version (09 - 08 - 2019)
  * class voor de database selects en put
  */
 public class Database {
 
     private static Connection conn = null;
+
     private static Connection getConnection() throws SQLException {
         if (conn == null) {
             conn = DriverManager.getConnection(Application.HOST_NAME, Application.USER_NAME, Application.PASSWORD);
@@ -22,8 +24,8 @@ public class Database {
 
     /**
      * Voorbeeld methode voor een insert naar database
-     *  * @author (Gerjan)
-     *  * @version (09-08-2019)
+     * * @author (Gerjan)
+     * * @version (09-08-2019)
      */
 
     protected static int putdata(employees putData) throws SQLException {
@@ -66,42 +68,52 @@ public class Database {
 
     /**
      * Methode check inlognaam
-     *  * @author (Teo)
-     *  * @version (02-09-2019)
+     * * @author (Teo)
+     * * @version (02-09-2019)
      */
 
     protected static String chkInlog(double usr, String psw) throws SQLException {
         ArrayList<security> results = new ArrayList<>();
         String oke = "init";
-                String sql = "SELECT * FROM security WHERE security.security_id = ?";
+        String sql = "SELECT * FROM security WHERE security.security_id = ?";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setDouble(1, usr);
             ResultSet res = stmt.executeQuery();
             while (res.next()) {
                 security r = new security();
-                r.security_id = (int)res.getDouble( 1);
+                r.security_id = (int) res.getDouble(1);
                 r.password = res.getString(2);
                 r.mailadress = res.getString(3);
                 results.add(r);
-                }
+            }
 
         }
         int tst = results.size();
         System.out.println("Lengte van de retour array: " + tst);
 
-        if(tst > 0) {
+        if (tst > 0) {
             System.out.println("sql resultaat Id: " + results.get(0).security_id);
             System.out.println("sql resultaat psw: " + results.get(0).password);
         }
 
-        if((int)usr == results.get(0).security_id && psw.equals(results.get(0).password)) {
-            System.out.println("chkLogin-Id: "  +  results.get(0).security_id);
-            System.out.println("chkLogin-psw: " +  results.get(0).password);
+        if ((int) usr == results.get(0).security_id && psw.equals(results.get(0).password)) {
+            System.out.println("chkLogin-Id: " + results.get(0).security_id);
+            System.out.println("chkLogin-psw: " + results.get(0).password);
             return oke = "Combinatie gebruiker en wachtwoord is correct";
-        }else {
+        } else {
             return oke = "Combinatie gebruiker en wachtwoord is fout!";
-            }
-
         }
+
     }
+
+    static int getAantalWerknemersPerWerkgever(String employerId) {
+
+//        -- aantal werknemers per werkgever --
+        SELECT employer_id , count(employer_id) as `count`
+        FROM pensioenaanspraken.employees
+        GROUP BY employer_id;
+
+
+    }
+}
 
