@@ -87,24 +87,6 @@ public class ControllerInputs {
                 .body("202");
     }
 
-<<<<<<< HEAD
-    /**
-     * Methode voor een de file uploader data verzenden naar database
-     * * @author (Gerjan)
-     * * @version (13-09-2019)
-     * file en scheidingsteken in een post.
-     */
-    @CrossOrigin(origins = "*")
-    @RequestMapping(value = "/employers/{id}/count", method = RequestMethod.POST)
-    public ResponseEntity employeeCount(@RequestParam String id) {
-
-        int numberOfEmployees = Database.getAantalWerknemersPerWerkgever(id);
-
-//        List<String> line = asList(datalist.split(","));
-//        Filereader object = new Filereader();
-//        ArrayList<responsfile> returndata = new ArrayList<>();
-//        //returndata = object.checkscheider(line, 5);
-=======
 
     /**
      * Methode voor een de file uploader data controle salarismutatie
@@ -119,16 +101,10 @@ public class ControllerInputs {
         Filereader object = new Filereader();
         ArrayList<responsfile> returndata = new ArrayList<>();
         returndata = object.salarismutatiecheckcontrole(line, 5);
->>>>>>> b69302c65ddc718ac30425e80028ee0b3cf7c27c
         HttpHeaders head = new HttpHeaders();
         head.set("status-code", "200 Ok");
         return ResponseEntity.ok()
                 .headers(head)
-<<<<<<< HEAD
-                .body("succes vol verstuurd");
-    }
-
-=======
                 .body(returndata);
     }
 
@@ -153,6 +129,4 @@ public class ControllerInputs {
     }
 
 
->>>>>>> b69302c65ddc718ac30425e80028ee0b3cf7c27c
 }
-

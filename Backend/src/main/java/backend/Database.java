@@ -106,14 +106,14 @@ public class Database {
 
     }
 
-    static int getAantalWerknemersPerWerkgever(String employerId) {
-
-//        -- aantal werknemers per werkgever --
-        SELECT employer_id , count(employer_id) as `count`
-        FROM pensioenaanspraken.employees
-        GROUP BY employer_id;
-
-
-    }
+//    static int getAantalWerknemersPerWerkgever(String employerId) {
+//
+////        -- aantal werknemers per werkgever --
+//        SELECT employer_id , count(employer_id) as `count`
+//        FROM pensioenaanspraken.employees
+//        GROUP BY employer_id;
+//
+//
+//    }
 }
 
