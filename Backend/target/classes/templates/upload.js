@@ -5,6 +5,10 @@ var b //regel teller
 var allesOk = false //boolean voor alles oke
 var urlsendorcheck = 'http://localhost:8080/checkdata'
 var max = true //volledig upload false is 4 kolomen
+<<<<<<< HEAD
+=======
+
+>>>>>>> 04f5bbd4227a242e2d48f0c4793dc6609ff0475b
 
 //
 // $(document).ready(function(){
