@@ -106,7 +106,7 @@ public class Database {
 
     }
 
-<<<<<<< HEAD
+
   /*  static int getAantalWerknemersPerWerkgever(String employerId) {
 
 =======
@@ -121,8 +121,8 @@ public class Database {
 
 <<<<<<< HEAD
     }*/
-=======
+
    // }
->>>>>>> 04f5bbd4227a242e2d48f0c4793dc6609ff0475b
+
 }
 

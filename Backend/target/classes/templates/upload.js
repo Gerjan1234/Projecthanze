@@ -5,42 +5,25 @@ var b //regel teller
 var allesOk = false //boolean voor alles oke
 var urlsendorcheck = 'http://localhost:8080/checkdata'
 var max = true //volledig upload false is 4 kolomen
-<<<<<<< HEAD
-=======
+var gekozenvalue = '' //scheidingsteken
 
->>>>>>> 04f5bbd4227a242e2d48f0c4793dc6609ff0475b
+//kies upload 4 regels of 10
+function Selectedsoortupload(){
+//function GetSelectedValue(){
+				var e = document.getElementById("Selectedsoortupload");
+				var z = e.options[e.selectedIndex].value;
+        console.log(z)
+				max = JSON.parse(z); //maak van stirng boolean
+}
 
-//
-// $(document).ready(function(){
-//   $(document).on('click', '.dropdown-menu', function() {
-// var e = document.getElementById("demolistx").value;
-// console.log("demolist " + e)
-//
-//    console.log($('#demolist > li > a:selected').html())
-//
-//    var e = document.getElementById("demolistx");
-// 	var result = e.options[e.selectedIndex].value;
-// 	alert(result); //ID002
-
-//
-// });
-// });
+//get scheidingsteken
 function GetSelectedValue(){
 //function GetSelectedValue(){
 				var e = document.getElementById("ScheidingstekenGekozen1");
 				var x = e.options[e.selectedIndex].value;
         console.log(x)
+gekozenvalue = x;
 
-//        $('#ScheidingstekenGekozen').html('<div class="alert alert-success alert-dismissible"><a href="#"class="close" data-dismiss="alert" aria-label="close">&times;</a>Type gekozen keuze is: ' + result + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"></div>');
-
-
-
-
-// $(document).ready(function(){
-//   bsCustomFileInput.init()  //file upload knopje
-//   //radio buttton uitlezen
-// $('input[type=radio]').click(function(){
-//var x = (this.value);
   switch(x) {
     case "1":
       var z = "tap"
@@ -68,16 +51,8 @@ $('#ScheidingstekenGekozen').html('<div class="alert alert-success alert-dismiss
 //});
 // });
 }
-//get gekozen scheidingsteken voor de backend
-function uploadFormData(){
-    $('#result').html('');
-    var gekozenvalue = ''
-      var ele = document.getElementsByClassName('form-check-input');
-      for(i = 0; i < ele.length; i++) {
-         if(ele[i].checked)
-            gekozenvalue = ele[i].value
-}
 //document ophalen van gebruiker
+function uploadFormData(){
 var oMyForm = new FormData();
 oMyForm.append("file", inputGroupFile01.files[0]);
 //haal document naam op:
@@ -95,6 +70,7 @@ urlsendorcheck = 'http://localhost:8080/salarismutatiecheck'
 }
 allesOk = false} //bij nieuwe uplaod knop weer origineel
 //document en scheidingsteken en filename versturen naar backend
+console.log("wat is max " + max)
   $.ajax({
     url: 'http://localhost:8080/upload?Scheidingsteken=' + gekozenvalue + "&filename=" + last,
     data: oMyForm,
@@ -138,7 +114,11 @@ if(max == true){
       var $newListItem = $('<tr>' + tabel + '<tr>'); $('tr:last').after($newListItem);   //zet de regels in tabel..
       $newListItem.show();
     var q = l;  //waarde voor de volgende regel
+		if(max == true){
     var r = r + 10; //waarde voor volgene regel
+	}else {
+		var r = 4
+	}
     }
 //toevoegen van knopje rechts onder de tabel
 //checkalles oke voor juiste knopje

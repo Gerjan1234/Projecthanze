@@ -27,68 +27,43 @@
 
 <body>
 
-<div class="grid-container">
+<div class="grid-container5">
   <div></div>
   <div><div class="inner"><i>Klik hier voor de file upload</i><br>
+    <select id="Selectedsoortupload" onchange="Selectedsoortupload()">
+      <option value="0;">-- Select --</option>
+      <option value="true">Personeelmutatie</option>
+        <option value="false">Slaris gegevens updaten</option>
+        </select>
+    <select id="ScheidingstekenGekozen1" onchange="GetSelectedValue()">
+      <option value="0;">-- Select --</option>
+      <option value="1">Tab: "   "</option>
+      <option value="2">Komma: ","</option>
+        <option value="3">Punt: "."</option>
+          <option value="4">Dubbelepunt: ":"</option>
+            <option value="5">Puntkomma: ";"</option>
+            <option value="6">spatie: " </option>
+    </select>
 
-    <div class="btn-group" role="group" aria-label="Button group with nested dropdown" id="buttonkort">
-      <button type="button" class="btn btn-secondary">Salaris update</button>
-      <button type="button" class="btn btn-secondary">Personeels gegevens aanapssen</button>
-
-      <div class="btn-group" role="group">
-        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onchange="GetSelectedValue()">
-          <option value="0;">-- Select --</option>
-        </button>
-        <div class="dropdown-menu" id="ScheidingstekenGekozen1j" aria-labelledby="btnGroupDrop1" type="button" data-toggle="dropdown">
-          <option value="1">Tab: "   "</option>
-          <option value="2">Komma: ","</option>
-            <option value="3">Punt: "."</option>
-              <option value="4">Dubbelepunt: ":"</option>
-                <option value="5">Puntkomma: ";"</option>
-                <option value="6">spatie: " </option>
         </div>
 
 
-        		<select id="ScheidingstekenGekozen1" onchange="GetSelectedValue()">
-        			<option value="0;">-- Select --</option>
-        			<option value="1">Tab: "   "</option>
-        			<option value="2">Komma: ","</option>
-              	<option value="3">Punt: "."</option>
-                	<option value="4">Dubbelepunt: ":"</option>
-                  	<option value="5">Puntkomma: ";"</option>
-                  	<option value="6">spatie: " </option>
-        		</select>
+
 
       </div>
-    </div>
 
 
-  </div></div>
+
+
   <div></div>
 
 <div></div>
-<div><div class="inner">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1" checked>
-  <label class="form-check-label" for="exampleRadios1">Tab: "   "</label>
-  <br>
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="2">
-  <label class="form-check-label" for="exampleRadios2">Komma: ","</label>
-<br>
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="3">
-  <label class="form-check-label" for="exampleRadios3">Punt: "."</label>
-<br>
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="4">
-  <label class="form-check-label" for="exampleRadios4">Dubbelepunt: ":"</label>
-<br>
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios5" value="5">
-  <label class="form-check-label" for="exampleRadios5">Puntkomma: ";"</label>
-<br>
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios6" value="6">
-  <label class="form-check-label" for="exampleRadios6">spatie: " "</label>
-<br></div>
+<div><div>
+</div>
 </div>
 <div></div>
 <div></div>
+
 <div>
   <div class="alertbox">
     <i id="ScheidingstekenGekozen" ></i>
@@ -97,31 +72,28 @@
 <div></div>
 </div>
 
-<div class="grid-container">
+<div class="grid-container5">
   <div></div>
-<div class="inner"><div class="alertbox">
-  <div class="row">
-    <div class="col">
+
       <div class="input-group">
         <div class="input-group-prepend">
           <button class="btn btn-outline-secondary" type="button" onclick="uploadFormData()" id="inputGroupFileAddon01">Upload</button>
         </div>
           <div class="custom-file">
             <input type="file" class="custom-file-input" id="inputGroupFile01"aria-describedby="inputGroupFileAddon01">
-              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-          </div>
-      </div>
-      </div>
+              <label class="custom-file-label" for="inputGroupFile01"></label>
+
     </div>
   </div>
+  <div></div>
 </div>
 <div></div>
 <div></div>
 </div>
 <br><br>
+  </div>
 
-
-<div class="grid-container">
+<div class="grid-container5">
 
 <div>
   <form id="updatetabel" class= "" action="isdfndex.html" method="post">
@@ -147,7 +119,7 @@
 <div></div>
 </div>
 
-<div class="grid-container">
+<div class="grid-container5">
 <div></div>
 <div>
   <div class="alertbox">
