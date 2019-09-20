@@ -106,7 +106,7 @@ public class Database {
 
     }
 
-    static int getAantalWerknemersPerWerkgever(String employerId) {
+  /*  static int getAantalWerknemersPerWerkgever(String employerId) {
 
 //        -- aantal werknemers per werkgever --
         SELECT employer_id , count(employer_id) as `count`
@@ -114,6 +114,6 @@ public class Database {
         GROUP BY employer_id;
 
 
-    }
+    }*/
 }
 

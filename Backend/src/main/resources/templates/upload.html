@@ -3,11 +3,19 @@
   <head>
     <meta charset="utf-8">
         <title>File Uploader</title>
+<link rel="stylesheet" type="text/css" href="css.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="css.css">
 
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
@@ -19,34 +27,43 @@
 
 <body>
 
-<div class="grid-container">
+<div class="grid-container5">
   <div></div>
-  <div><div class="inner"><i>Klik hier voor de file upload</i></div></div>
+  <div><div class="inner"><i>Klik hier voor de file upload</i><br>
+    <select id="Selectedsoortupload" onchange="Selectedsoortupload()">
+      <option value="0;">-- Select --</option>
+      <option value="true">Personeelmutatie</option>
+        <option value="false">Slaris gegevens updaten</option>
+        </select>
+    <select id="ScheidingstekenGekozen1" onchange="GetSelectedValue()">
+      <option value="0;">-- Select --</option>
+      <option value="1">Tab: "   "</option>
+      <option value="2">Komma: ","</option>
+        <option value="3">Punt: "."</option>
+          <option value="4">Dubbelepunt: ":"</option>
+            <option value="5">Puntkomma: ";"</option>
+            <option value="6">spatie: " </option>
+    </select>
+
+        </div>
+
+
+
+
+      </div>
+
+
+
+
   <div></div>
 
 <div></div>
-<div><div class="inner">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1" checked>
-  <label class="form-check-label" for="exampleRadios1">Tab: "   "</label>
-  <br>
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="2">
-  <label class="form-check-label" for="exampleRadios2">Komma: ","</label>
-<br>
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="3">
-  <label class="form-check-label" for="exampleRadios3">Punt: "."</label>
-<br>
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="4">
-  <label class="form-check-label" for="exampleRadios4">Dubbelepunt: ":"</label>
-<br>
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios5" value="5">
-  <label class="form-check-label" for="exampleRadios5">Puntkomma: ";"</label>
-<br>
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios6" value="6">
-  <label class="form-check-label" for="exampleRadios6">spatie: " "</label>
-<br></div>
+<div><div>
+</div>
 </div>
 <div></div>
 <div></div>
+
 <div>
   <div class="alertbox">
     <i id="ScheidingstekenGekozen" ></i>
@@ -55,31 +72,28 @@
 <div></div>
 </div>
 
-<div class="grid-container">
+<div class="grid-container5">
   <div></div>
-<div class="inner"><div class="alertbox">
-  <div class="row">
-    <div class="col">
+
       <div class="input-group">
         <div class="input-group-prepend">
           <button class="btn btn-outline-secondary" type="button" onclick="uploadFormData()" id="inputGroupFileAddon01">Upload</button>
         </div>
           <div class="custom-file">
             <input type="file" class="custom-file-input" id="inputGroupFile01"aria-describedby="inputGroupFileAddon01">
-              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-          </div>
-      </div>
-      </div>
+              <label class="custom-file-label" for="inputGroupFile01"></label>
+
     </div>
   </div>
+  <div></div>
 </div>
 <div></div>
 <div></div>
 </div>
 <br><br>
+  </div>
 
-
-<div class="grid-container">
+<div class="grid-container5">
 
 <div>
   <form id="updatetabel" class= "" action="isdfndex.html" method="post">
@@ -105,7 +119,7 @@
 <div></div>
 </div>
 
-<div class="grid-container">
+<div class="grid-container5">
 <div></div>
 <div>
   <div class="alertbox">
@@ -114,5 +128,9 @@
 </div>
 <div></div>
 </div>
+
+
+
+
 </body>
 </html>

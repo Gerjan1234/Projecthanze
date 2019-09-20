@@ -4,12 +4,39 @@ var data2 //data voor tabel
 var b //regel teller
 var allesOk = false //boolean voor alles oke
 var urlsendorcheck = 'http://localhost:8080/checkdata'
+var max = true //volledig upload false is 4 kolomen
 
-$(document).ready(function(){
-  bsCustomFileInput.init()  //file upload knopje
-  //radio buttton uitlezen
-$('input[type=radio]').click(function(){
-  var x = (this.value);
+//
+// $(document).ready(function(){
+//   $(document).on('click', '.dropdown-menu', function() {
+// var e = document.getElementById("demolistx").value;
+// console.log("demolist " + e)
+//
+//    console.log($('#demolist > li > a:selected').html())
+//
+//    var e = document.getElementById("demolistx");
+// 	var result = e.options[e.selectedIndex].value;
+// 	alert(result); //ID002
+
+//
+// });
+// });
+function GetSelectedValue(){
+//function GetSelectedValue(){
+				var e = document.getElementById("ScheidingstekenGekozen1");
+				var x = e.options[e.selectedIndex].value;
+        console.log(x)
+
+//        $('#ScheidingstekenGekozen').html('<div class="alert alert-success alert-dismissible"><a href="#"class="close" data-dismiss="alert" aria-label="close">&times;</a>Type gekozen keuze is: ' + result + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"></div>');
+
+
+
+
+// $(document).ready(function(){
+//   bsCustomFileInput.init()  //file upload knopje
+//   //radio buttton uitlezen
+// $('input[type=radio]').click(function(){
+//var x = (this.value);
   switch(x) {
     case "1":
       var z = "tap"
@@ -34,9 +61,9 @@ $('input[type=radio]').click(function(){
 }
 //alert op scherm tonen
 $('#ScheidingstekenGekozen').html('<div class="alert alert-success alert-dismissible"><a href="#"class="close" data-dismiss="alert" aria-label="close">&times;</a>Type gekozen keuze is: ' + z + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"></div>');
-});
-});
-
+//});
+// });
+}
 //get gekozen scheidingsteken voor de backend
 function uploadFormData(){
     $('#result').html('');
@@ -57,7 +84,11 @@ var len = tekst.length; //pak lengte string
 var last = tekst.substring(pos2 +1, len) //haal de tekst na de 2e / op.
 if (allesOk == true) {
 $('#uploadCompleteAlert').html('')
+if(max == true){
 urlsendorcheck = 'http://localhost:8080/checkdata'
+}else{
+urlsendorcheck = 'http://localhost:8080/salarismutatiecheck'
+}
 allesOk = false} //bij nieuwe uplaod knop weer origineel
 //document en scheidingsteken en filename versturen naar backend
   $.ajax({
@@ -85,7 +116,11 @@ function MakeTabel() {
 
 //retour data op scherm in tabel zetten
   var q = 0 //begin bij 0
+if(max == true){
   var r = 10 //r = aantal kolomen
+}else {
+  var r = 4
+}
   var aantalregels = (data2.length / r);  //delen door aantal kolomen
   console.log(aantalregels)
   //loop door een  regel
@@ -104,11 +139,21 @@ function MakeTabel() {
 //toevoegen van knopje rechts onder de tabel
 //checkalles oke voor juiste knopje
 checkAllesOke()
+if(max == true){
 if (allesOk == false) {
     var knopje = '<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><div class="knopje">  <button class="btn btn-outline-secondary" type="button" onclick="checkFormData()" id="checkformdata">Checkdata</button></div></td>'
   } else {
     var knopje = '<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><div class="knopje">  <button class="btn btn-outline-secondary" type="button" onclick="checkFormData()" id="checkformdata">Verstuurdata</button></div></td>'
   }
+}
+  if(max == false){
+  if (allesOk == false) {
+  var knopje = '<td></td><td></td><td></td><td><div class="knopje">  <button class="btn btn-outline-secondary" type="button" onclick="checkFormData()" id="checkformdata">Checkdata</button></div></td>'
+}else{
+  var knopje = '<td></td><td></td><td></td><td><div class="knopje">  <button class="btn btn-outline-secondary" type="button" onclick="checkFormData()" id="checkformdata">Verstuurdata</button></div></td>'
+}
+}
+
     var $newListItem = $('<tr>' + knopje + '<tr>'); $('tr:last').after($newListItem);   //zet de regels in tabel.
     var $newListItem = "";
 }
@@ -118,26 +163,31 @@ function checkFormData(){
 var datarows =[]
      for (var c = 0; c < b; c++) {
  let arr1 = $('#socialsecurity_id' + c.toString()).serializeArray()
+ let cel1 = arr1[0].value
   let arr2 = $("#employer_id" + c.toString()).serializeArray()
+    let cel2 = arr2[0].value
     let arr3 = $( "#first_name"  + c.toString()).serializeArray()
+      let cel3 = arr3[0].value
       let arr4 = $( "#last_name"  + c.toString()).serializeArray()
-        let arr5 = $( "#date_of_birth"  + c.toString()).serializeArray()
-          let arr6 = $( "#status"  + c.toString()).serializeArray()
-            let arr7 = $( "#gender"  + c.toString()).serializeArray()
-              let arr8 = $( "#adress_id"  + c.toString()).serializeArray()
-                let arr9 = $( "#communication_type"  + c.toString()).serializeArray()
-                  let arr10 = $( "#hire_date"  + c.toString()).serializeArray()
-let cel1 = arr1[0].value
-  let cel2 = arr2[0].value
-    let cel3 = arr3[0].value
       let cel4 = arr4[0].value
-        let cel5 = arr5[0].value
-          let cel6 = arr6[0].value
-            let cel7 = arr7[0].value
+      if(max == true){
+        let arr5 = $( "#date_of_birth"  + c.toString()).serializeArray()
+          let cel5 = arr5[0].value
+          let arr6 = $( "#status"  + c.toString()).serializeArray()
+            let cel6 = arr6[0].value
+            let arr7 = $( "#gender"  + c.toString()).serializeArray()
+              let cel7 = arr7[0].value
+              let arr8 = $( "#adress_id"  + c.toString()).serializeArray()
               let cel8 = arr8[0].value
-                let cel9 = arr9[0].value
-                  let cel10 = arr10[0].value
+                let arr9 = $( "#communication_type"  + c.toString()).serializeArray()
+                  let cel9 = arr9[0].value
+                  let arr10 = $( "#hire_date"  + c.toString()).serializeArray()
+                    let cel10 = arr10[0].value
 var row = cel1 + ";" + cel2 + ";" + cel3 + ";" + cel4 + ";" + cel5 + ";" + cel6 + ";" + cel7 + ";" + cel8 + ";" + cel9 + ";" + cel10
+}else{
+var row = cel1 + ";" + cel2 + ";" + cel3 + ";" + cel4
+}
+
 var rowtrim = row.trim()
 datarows.push(rowtrim)
 }
@@ -176,9 +226,18 @@ MakeTabel()
 function checkAllesOke() {
   var allestrue = $("input[name='false']").val();
 console.log(allestrue)
+    if(max == true){
   if (allestrue == undefined) {
     allesOk = true
     urlsendorcheck = 'http://localhost:8080/senddata'
+  }else{
+
   }
+}else {
+  if (allestrue == undefined) {
+    allesOk = true
+    urlsendorcheck = 'http://localhost:8080/verstuursalarismutatiecheck'
+}
   console.log(allesOk)
+}
 }

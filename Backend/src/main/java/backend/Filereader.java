@@ -246,38 +246,37 @@ public class Filereader {
     /**
      * Methode om de gewijzigde data weer te controleren.
      */
+            public ArrayList salarismutatiecheckcontrole(List lines, int scheidingsteken){
+            karakter_scheidingsteken = karakers.get(scheidingsteken);
+            //  Firststap = false;
+            this.senddata = new ArrayList<>();
 
-    public ArrayList salarismutatiecheckcontrole(List lines, int scheidingsteken){
-        karakter_scheidingsteken = karakers.get(scheidingsteken);
-      //  Firststap = false;
-        this.senddata = new ArrayList<>();
+            String[] test;
 
-        String[] test;
-
-        // allocating memory for 5 objects of type Student.
-        test = new String[8];
-        System.out.println("testlengt " + test.length);
-        //String[] test = new String[7];
-        //test[] = new String[20];
-        Iterator it = lines.iterator();
-        //if (Firststap == true) {
-       //     it.next();
-       // }
-        while (it.hasNext()) {
-            String line = (String) it.next();
-            test = line.split(karakter_scheidingsteken);
-            //  if (test.length == 10) {
-           // for (int j = 0; j < test.length; j++) {
+            // allocating memory for 5 objects of type Student.
+            test = new String[8];
+            System.out.println("testlengt " + test.length);
+            //String[] test = new String[7];
+            //test[] = new String[20];
+            Iterator it = lines.iterator();
+            //if (Firststap == true) {
+            //     it.next();
+            // }
+            while (it.hasNext()) {
+                String line = (String) it.next();
+                test = line.split(karakter_scheidingsteken);
+                //  if (test.length == 10) {
+                // for (int j = 0; j < test.length; j++) {
                 dataToSwith(test, 0);
-            dataToSwith(test, 1);
-            dataToSwith(test, 2);
-            dataToSwith(test, 3);
-           // }
-      //  }
-    }
+                dataToSwith(test, 1);
+                dataToSwith(test, 2);
+                dataToSwith(test, 3);
+                // }
+                //  }
+            }
 
-        return senddata;
-    }
+            return senddata;
+        }
 
 }
 
