@@ -209,10 +209,15 @@ final = datarows
        document.getElementById("datatabel").deleteRow(i);
     }
     tabellengte =  x.length
+
        //if dat is 200 dan doorgaan anders 202 melding on screen nog maken
-    if (data == "202"){
+			  var eerstedata = data.substring(0, 3)
+				 var aantal_wijzigingen = data.substring(3, 9)
+				 console.log(eerstedata + " eerstedata");
+				 console.log(aantal_wijzigingen + " aantal_wijzigingen");
+    if (eerstedata == "202"){
       console.log(" door if statument")
-      $('#uploadCompleteAlert').html('<div class="alert alert-success alert-dismissible"><a href="#"class="close" data-dismiss="alert" aria-label="close">&times;</a>Upload gelukt<button type="button" class="close" data-dismiss="alert" aria-label="Close"></div>');
+      $('#uploadCompleteAlert').html('<div class="alert alert-success alert-dismissible"><a href="#"class="close" data-dismiss="alert" aria-label="close">&times;</a>Upload gelukt aantal ingevoerde regels = ' + aantal_wijzigingen + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"></div>');
     }else{
 MakeTabel()
 }
