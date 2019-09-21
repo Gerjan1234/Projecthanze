@@ -13,6 +13,11 @@ function Selectedsoortupload(){
 				var e = document.getElementById("Selectedsoortupload");
 				var z = e.options[e.selectedIndex].value;
         console.log(z)
+				if(max == true){
+$('#tabel').html('<form id="updatetabel" class= "" action="isdfndex.html" method="post"><table id="datatabel"><tr id="tr"><div class="grid-container2"><div><input class="form-data" type="text" value="socialsecurity_id" readonly="readonly"> </div><div><input class="form-data" type="text" value="employer_id" readonly="readonly"></div><div><input class="form-data" type="text" value="invoice_id" readonly="readonly"> </div><div><input class="form-data" type="text" value="salary" readonly="readonly"> </div><div><input class="form-data" type="text" value="parttime_factor" readonly="readonly"> </div><div></div></tr></table></form>')
+				}else{
+					$('#tabel').html('<form id="updatetabel" class= "" action="isdfndex.html" method="post"><table id="datatabel"><tr id="tr"><div class="grid-container2"><div><input class="form-data" type="text" value="socialsecurity_id" readonly="readonly"> </div><div><input class="form-data" type="text" value="employer_id" readonly="readonly"></div><div><input class="form-data" type="text" value="invoice_id" readonly="readonly"> </div><div><input class="form-data" type="text" value="salary" readonly="readonly"> </div><div><input class="form-data" type="text" value="parttime_factor" readonly="readonly"> </div><div><input class="form-data" type="text" value="first_name" readonly="readonly"> </div><div><input class="form-data" type="text" value="last_name" readonly="readonly"> </div><div><input class="form-data" type="text" value="date_of_birth" readonly="readonly"> </div><div><input class="form-data" type="text" value="status" readonly="readonly"> </div><div><input class="form-data" type="text" value="gender" readonly="readonly"> </div><div><input class="form-data"  type="text" value="adress_id" readonly="readonly"> </div><div><input class="form-data" type="text" value="communication_type" readonly="readonly"> </div><div><input class="form-data" type="text" value="hire_date" readonly="readonly"> </div><div></div></tr></table></form>')
+}
 				max = JSON.parse(z); //maak van stirng boolean
 }
 
@@ -80,6 +85,7 @@ console.log("wat is max " + max)
     type: 'POST',
     success: function(data){
     data2 = JSON.parse(data);
+		console.log(data2)
 //gooi oude tabel weg
     var x = document.getElementsByTagName("tr");
     for (var i = tabellengte; i < x.length ;i++) {
@@ -97,11 +103,12 @@ function MakeTabel() {
 //retour data op scherm in tabel zetten
   var q = 0 //begin bij 0
 if(max == true){
-  var r = 10 //r = aantal kolomen
+  var r = 13 //r = aantal kolomen
 }else {
-  var r = 4
+  var r = 5
 }
   var aantalregels = (data2.length / r);  //delen door aantal kolomen
+	console.log(data2.length)
   console.log(aantalregels)
   //loop door een  regel
     for (b = 0; b < aantalregels; b++) {
@@ -115,9 +122,9 @@ if(max == true){
       $newListItem.show();
     var q = l;  //waarde voor de volgende regel
 		if(max == true){
-    var r = r + 10; //waarde voor volgene regel
+    var r = r + 13; //waarde voor volgene regel
 	}else {
-		var r = 4
+		var r = r + 5
 	}
     }
 //toevoegen van knopje rechts onder de tabel
@@ -125,16 +132,16 @@ if(max == true){
 checkAllesOke()
 if(max == true){
 if (allesOk == false) {
-    var knopje = '<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><div class="knopje">  <button class="btn btn-outline-secondary" type="button" onclick="checkFormData()" id="checkformdata">Checkdata</button></div></td>'
+    var knopje = '<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><div class="knopje">  <button class="btn btn-outline-secondary" type="button" onclick="checkFormData()" id="checkformdata">Checkdata</button></div></td>'
   } else {
-    var knopje = '<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><div class="knopje">  <button class="btn btn-outline-secondary" type="button" onclick="checkFormData()" id="checkformdata">Verstuurdata</button></div></td>'
+    var knopje = '<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><div class="knopje">  <button class="btn btn-outline-secondary" type="button" onclick="checkFormData()" id="checkformdata">Verstuurdata</button></div></td>'
   }
 }
   if(max == false){
   if (allesOk == false) {
-  var knopje = '<td></td><td></td><td></td><td><div class="knopje">  <button class="btn btn-outline-secondary" type="button" onclick="checkFormData()" id="checkformdata">Checkdata</button></div></td>'
+  var knopje = '<td></td><td></td><td></td><td></td><td><div class="knopje">  <button class="btn btn-outline-secondary" type="button" onclick="checkFormData()" id="checkformdata">Checkdata</button></div></td>'
 }else{
-  var knopje = '<td></td><td></td><td></td><td><div class="knopje">  <button class="btn btn-outline-secondary" type="button" onclick="checkFormData()" id="checkformdata">Verstuurdata</button></div></td>'
+  var knopje = '<td></td><td></td><td></td><td></td><td><div class="knopje">  <button class="btn btn-outline-secondary" type="button" onclick="checkFormData()" id="checkformdata">Verstuurdata</button></div></td>'
 }
 }
 
@@ -150,26 +157,32 @@ var datarows =[]
  let cel1 = arr1[0].value
   let arr2 = $("#employer_id" + c.toString()).serializeArray()
     let cel2 = arr2[0].value
-    let arr3 = $( "#first_name"  + c.toString()).serializeArray()
+    let arr3 = $( "#invoice_id"  + c.toString()).serializeArray()
       let cel3 = arr3[0].value
-      let arr4 = $( "#last_name"  + c.toString()).serializeArray()
+      let arr4 = $( "#salary"  + c.toString()).serializeArray()
       let cel4 = arr4[0].value
+			let arr5 = $( "#parttime_factor"  + c.toString()).serializeArray()
+			let cel5 = arr5[0].value
       if(max == true){
-        let arr5 = $( "#date_of_birth"  + c.toString()).serializeArray()
-          let cel5 = arr5[0].value
-          let arr6 = $( "#status"  + c.toString()).serializeArray()
-            let cel6 = arr6[0].value
-            let arr7 = $( "#gender"  + c.toString()).serializeArray()
-              let cel7 = arr7[0].value
-              let arr8 = $( "#adress_id"  + c.toString()).serializeArray()
-              let cel8 = arr8[0].value
-                let arr9 = $( "#communication_type"  + c.toString()).serializeArray()
-                  let cel9 = arr9[0].value
-                  let arr10 = $( "#hire_date"  + c.toString()).serializeArray()
-                    let cel10 = arr10[0].value
-var row = cel1 + ";" + cel2 + ";" + cel3 + ";" + cel4 + ";" + cel5 + ";" + cel6 + ";" + cel7 + ";" + cel8 + ";" + cel9 + ";" + cel10
+				let arr6 = $( "#first_name"  + c.toString()).serializeArray()
+					let cel6 = arr6[0].value
+					let arr7 = $( "#last_name"  + c.toString()).serializeArray()
+					let cel7 = arr7[0].value
+        let arr8 = $( "#date_of_birth"  + c.toString()).serializeArray()
+          let cel8 = arr8[0].value
+          let arr9 = $( "#status"  + c.toString()).serializeArray()
+            let cel9 = arr9[0].value
+            let arr10 = $( "#gender"  + c.toString()).serializeArray()
+              let cel10 = arr10[0].value
+              let arr11 = $( "#adress_id"  + c.toString()).serializeArray()
+              let cel11 = arr11[0].value
+                let arr12 = $( "#communication_type"  + c.toString()).serializeArray()
+                  let cel12 = arr12[0].value
+                  let arr13 = $( "#hire_date"  + c.toString()).serializeArray()
+                    let cel13 = arr13[0].value
+var row = cel1 + ";" + cel2 + ";" + cel3 + ";" + cel4 + ";" + cel5 + ";" + cel6 + ";" + cel7 + ";" + cel8 + ";" + cel9 + ";" + cel10 + ";" + cel11 + ";" + cel12 + ";" + cel13
 }else{
-var row = cel1 + ";" + cel2 + ";" + cel3 + ";" + cel4
+var row = cel1 + ";" + cel2 + ";" + cel3 + ";" + cel4 + ";" + cel5
 }
 
 var rowtrim = row.trim()
@@ -225,3 +238,21 @@ console.log(allestrue)
   console.log(allesOk)
 }
 }
+///Sv-loon en parttimefactor.
+
+
+//socialsecurity_id 	double
+//employer_id					double
+	//invoice_id    		double
+
+//salary							floot
+//parttime_factor 	 floot
+
+//first_name     			String
+//last_name					 String
+//date_of_birth  			Date
+//status							String
+//gender							String
+//adress_id						int
+//communication_type	String
+//hire_date  						 Date

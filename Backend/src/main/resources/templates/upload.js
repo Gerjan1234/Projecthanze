@@ -13,6 +13,11 @@ function Selectedsoortupload(){
 				var e = document.getElementById("Selectedsoortupload");
 				var z = e.options[e.selectedIndex].value;
         console.log(z)
+				if(max == true){
+$('#tabel').html('<form id="updatetabel" class= "" action="isdfndex.html" method="post"><table id="datatabel"><tr id="tr"><div class="grid-container2"><div><input class="form-data" type="text" value="socialsecurity_id" readonly="readonly"> </div><div><input class="form-data" type="text" value="employer_id" readonly="readonly"></div><div><input class="form-data" type="text" value="invoice_id" readonly="readonly"> </div><div><input class="form-data" type="text" value="salary" readonly="readonly"> </div><div><input class="form-data" type="text" value="parttime_factor" readonly="readonly"> </div><div></div></tr></table></form>')
+				}else{
+					$('#tabel').html('<form id="updatetabel" class= "" action="isdfndex.html" method="post"><table id="datatabel"><tr id="tr"><div class="grid-container2"><div><input class="form-data" type="text" value="socialsecurity_id" readonly="readonly"> </div><div><input class="form-data" type="text" value="employer_id" readonly="readonly"></div><div><input class="form-data" type="text" value="invoice_id" readonly="readonly"> </div><div><input class="form-data" type="text" value="salary" readonly="readonly"> </div><div><input class="form-data" type="text" value="parttime_factor" readonly="readonly"> </div><div><input class="form-data" type="text" value="first_name" readonly="readonly"> </div><div><input class="form-data" type="text" value="last_name" readonly="readonly"> </div><div><input class="form-data" type="text" value="date_of_birth" readonly="readonly"> </div><div><input class="form-data" type="text" value="status" readonly="readonly"> </div><div><input class="form-data" type="text" value="gender" readonly="readonly"> </div><div><input class="form-data"  type="text" value="adress_id" readonly="readonly"> </div><div><input class="form-data" type="text" value="communication_type" readonly="readonly"> </div><div><input class="form-data" type="text" value="hire_date" readonly="readonly"> </div><div></div></tr></table></form>')
+}
 				max = JSON.parse(z); //maak van stirng boolean
 }
 
@@ -119,7 +124,7 @@ if(max == true){
 		if(max == true){
     var r = r + 13; //waarde voor volgene regel
 	}else {
-		var r = 5
+		var r = r + 5
 	}
     }
 //toevoegen van knopje rechts onder de tabel
@@ -159,13 +164,10 @@ var datarows =[]
 			let arr5 = $( "#parttime_factor"  + c.toString()).serializeArray()
 			let cel5 = arr5[0].value
       if(max == true){
-
 				let arr6 = $( "#first_name"  + c.toString()).serializeArray()
 					let cel6 = arr6[0].value
 					let arr7 = $( "#last_name"  + c.toString()).serializeArray()
 					let cel7 = arr7[0].value
-
-
         let arr8 = $( "#date_of_birth"  + c.toString()).serializeArray()
           let cel8 = arr8[0].value
           let arr9 = $( "#status"  + c.toString()).serializeArray()
@@ -207,10 +209,15 @@ final = datarows
        document.getElementById("datatabel").deleteRow(i);
     }
     tabellengte =  x.length
+
        //if dat is 200 dan doorgaan anders 202 melding on screen nog maken
-    if (data == "202"){
+			  var eerstedata = data.substring(0, 3)
+				 var aantal_wijzigingen = data.substring(3, 9)
+				 console.log(eerstedata + " eerstedata");
+				 console.log(aantal_wijzigingen + " aantal_wijzigingen");
+    if (eerstedata == "202"){
       console.log(" door if statument")
-      $('#uploadCompleteAlert').html('<div class="alert alert-success alert-dismissible"><a href="#"class="close" data-dismiss="alert" aria-label="close">&times;</a>Upload gelukt<button type="button" class="close" data-dismiss="alert" aria-label="Close"></div>');
+      $('#uploadCompleteAlert').html('<div class="alert alert-success alert-dismissible"><a href="#"class="close" data-dismiss="alert" aria-label="close">&times;</a>Upload gelukt aantal ingevoerde regels = ' + aantal_wijzigingen + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"></div>');
     }else{
 MakeTabel()
 }

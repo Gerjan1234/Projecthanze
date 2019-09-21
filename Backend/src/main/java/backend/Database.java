@@ -3,6 +3,8 @@ package backend;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * class Database
@@ -28,19 +30,45 @@ public class Database {
      * * @version (09-08-2019)
      */
 
-    protected static int putdata(employees putData) throws SQLException {
-        String sql = "insert into tabel values (?,?,?);";  //tabel vul hier naam van tabel in
+    protected static int addsalarismutatie(List lines) throws SQLException {
+        String[] test;
+        int K = 0;
+        int L = 0;
         int rv = -1;
-        try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setString(1, putData.first_name);   //tabel kolom1 invullen
-            stmt.setString(2, putData.last_name);   //tabel kolom2 invullen
-            stmt.setString(3, putData.gender);   //tabel kolom3 invullen
-            stmt.execute();
-            ResultSet keys = stmt.getGeneratedKeys();
-            if (keys.next()) rv = keys.getInt(1);
+        long key = -1L;
+        String sql2 = "SELECT COUNT(socialsecurity_id) FROM salary;";
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS)) {
+            ResultSet res = stmt.executeQuery();
+            while (res.next()) {
+                K = res.getInt(1);
+            }
         }
-        return rv;
-    }
+        Iterator it = lines.iterator();
+        while (it.hasNext()) {
+            String line = (String) it.next();
+            test = line.split(";");
+            String sql = "insert into salary values (?,?,?,?);";  //tabel vul hier naam van tabel in
+            try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                stmt.setString(1, test[0]);   //tabel kolom1 invullen
+                stmt.setString(2, test[2]);   //tabel kolom2 invullen
+                stmt.setString(3, test[3]);   //tabel kolom3 invullen
+                stmt.setString(4, test[4]);   //tabel kolom3 invullen
+                stmt.execute();
+                ResultSet keys = stmt.getGeneratedKeys();
+                System.out.println(keys);
+                if (keys.next()) rv = keys.getInt(1);
+            }
+        }
+            try (PreparedStatement stmt = getConnection().prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS)){
+            ResultSet res = stmt.executeQuery();
+            while (res.next()) {
+                L = res.getInt(1);
+            }
+            }
+            int M = L-K;
+        System.out.println(L + " ; " + K);
+            return M;
+        }
 
     /**
      * Voorbeeld methode voor een select van database
