@@ -117,15 +117,24 @@ public class ControllerInputs {
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/verstuursalarismutatiecheck", method = RequestMethod.POST)
     public ResponseEntity verstuursalarismutatiecheck(@RequestBody String datalist) {
+        int resultaantal = 0;
         List<String> line = asList(datalist.split(","));
-        Filereader object = new Filereader();
+        Database Database = new Database();
         ArrayList<responsfile> returndata = new ArrayList<>();
+        try {
+            resultaantal = Database.addsalarismutatie(line);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         //returndata = object.checkscheider(line, 5);
         HttpHeaders head = new HttpHeaders();
         head.set("status-code", "202 Ok");
         return ResponseEntity.ok()
                 .headers(head)
-                .body("202");
+                .body("202" + resultaantal);
     }
 
 }
+
+
+

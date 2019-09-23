@@ -3,6 +3,8 @@ package backend;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * class Database
@@ -23,23 +25,84 @@ public class Database {
     }
 
     /**
-     * Voorbeeld methode voor een insert naar database
+     *  methode voor een insert naar database vanuit de salaris uploader.
+     *  telt eerst aantal regels in database
+     *  dan contorle in 2 tabel of employee  nummer oke is niet oke geen insert
+     *  wel oke dan  insert
+     *  indien geen insert dan return 0
      * * @author (Gerjan)
-     * * @version (09-08-2019)
+     * * @version (21-09-2019)
      */
 
-    protected static int putdata(employees putData) throws SQLException {
-        String sql = "insert into tabel values (?,?,?);";  //tabel vul hier naam van tabel in
+    protected static int addsalarismutatie(List lines) throws SQLException {
+        boolean allelinenoke = false;
+        String[] test;
+        String[] test2;
+        test = new String[8];
+        int K = 0;
+        int L = 0;
         int rv = -1;
-        try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setString(1, putData.first_name);   //tabel kolom1 invullen
-            stmt.setString(2, putData.last_name);   //tabel kolom2 invullen
-            stmt.setString(3, putData.gender);   //tabel kolom3 invullen
-            stmt.execute();
-            ResultSet keys = stmt.getGeneratedKeys();
-            if (keys.next()) rv = keys.getInt(1);
+        long key = -1L;
+        Double employer_id = 0.0;
+        String sql2 = "SELECT COUNT(socialsecurity_id) FROM salary;";
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS)) {
+            ResultSet res = stmt.executeQuery();
+            while (res.next()) {
+                K = res.getInt(1);
+            }
         }
-        return rv;
+        Iterator it = lines.iterator();
+        int aantaloke = 0;
+        while (it.hasNext()) {
+            String line = (String) it.next();
+            test = line.split(";");
+            String sql3 = "select employer_id from employees where socialsecurity_id like '344996808';";
+            try (PreparedStatement stmt = getConnection().prepareStatement(sql3, Statement.RETURN_GENERATED_KEYS)) {
+                ResultSet res = stmt.executeQuery();
+                while (res.next()) {
+                    employer_id = res.getDouble(1);
+                    if (employer_id.toString().substring(0, employer_id.toString().length() - 2).equals(test[1].replaceAll(" ", ""))) {
+                        System.out.println(" oke");
+                        aantaloke = aantaloke + 1;
+                    }
+
+                }
+            }
+            System.out.println(lines.size());
+            System.out.println(aantaloke);
+            if (lines.size() == aantaloke) {
+                allelinenoke = true;
+            }
+
+        }
+        if (allelinenoke == true) {
+            Iterator it2 = lines.iterator();
+            while (it2.hasNext()) {
+                String line2 = (String) it2.next();
+                test2 = line2.split(";");
+                String sql = "insert into salary values (?,?,?,?);";
+                try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                    stmt.setString(1, test2[0]);
+                    stmt.setString(2, test2[2]);
+                    stmt.setString(3, test2[3]);
+                    stmt.setString(4, test2[4]);
+                    stmt.execute();
+                    ResultSet keys = stmt.getGeneratedKeys();
+                    System.out.println(keys);
+                    if (keys.next()) rv = keys.getInt(1);
+                }
+            }
+            try (PreparedStatement stmt = getConnection().prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS)) {
+                ResultSet res = stmt.executeQuery();
+                while (res.next()) {
+                    L = res.getInt(1);
+                }
+            }
+            int M = L - K;
+            System.out.println(L + " ; " + K);
+            return M;
+        }
+        return 0;
     }
 
     /**
@@ -106,14 +169,23 @@ public class Database {
 
     }
 
+
+  /*  static int getAantalWerknemersPerWerkgever(String employerId) {
+
+=======
  //   static int getAantalWerknemersPerWerkgever(String employerId) {
 //
+>>>>>>> 04f5bbd4227a242e2d48f0c4793dc6609ff0475b
 //        -- aantal werknemers per werkgever --
  //       SELECT employer_id , count(employer_id) as `count`
  //       FROM pensioenaanspraken.employees
    //     GROUP BY employer_id;
 
 
+<<<<<<< HEAD
+    }*/
+
    // }
+
 }
 

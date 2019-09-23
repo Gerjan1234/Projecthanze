@@ -125,19 +125,64 @@ public class Filereader {
                                         test2.format = "getal_5_cijvers";
                                     }
                                     break;
-                                case 2: //String
+                                case 2: //double
+                                    try {
+                                        Double.parseDouble(test[j]);
+                                        test2.regel = regel;
+                                        test2.type = "invoice_id";
+                                        test2.goedfout = true;
+                                        test2.waarde = test[j];
+                                    } catch (NumberFormatException e) {
+                                        test2.regel = regel;
+                                        test2.type = "invoice_id";
+                                        test2.goedfout = false;
+                                        test2.waarde = test[j];
+                                        test2.format = "getal";
+                                    }
+                                    break;
+                                case 3: //float
+                                    try {
+                                        Float.parseFloat(test[j]);
+                                        test2.regel = regel;
+                                        test2.type = "salary";
+                                        test2.goedfout = true;
+                                        test2.waarde = test[j];
+                                    } catch (NumberFormatException e) {
+                                        test2.regel = regel;
+                                        test2.type = "salary";
+                                        test2.goedfout = false;
+                                        test2.waarde = test[j];
+                                        test2.format = "getal met punt";
+                                    }
+                                    break;
+                                case 4: //float
+                                    try {
+                                        Float.parseFloat(test[j]);
+                                        test2.regel = regel;
+                                        test2.type = "parttime_factor";
+                                        test2.goedfout = true;
+                                        test2.waarde = test[j];
+                                    } catch (NumberFormatException e) {
+                                        test2.regel = regel;
+                                        test2.type = "parttime_factor";
+                                        test2.goedfout = false;
+                                        test2.waarde = test[j];
+                                        test2.format = "getal met punt";
+                                    }
+                                    break;
+                                case 5: //String
                                     test2.regel = regel;
                                     test2.type = "first_name";
                                     test2.goedfout = true;
                                     test2.waarde = test[j];
                                     break;
-                                case 3: //String
+                                case 6: //String
                                     test2.regel = regel;
                                     test2.type = "last_name";
                                     test2.goedfout = true;
                                     test2.waarde = test[j];
                                     break;
-                                case 4: //date
+                                case 7: //date
                                     try {
                                         new SimpleDateFormat("dd/MM/yyyy").parse(test[j]);
                                         test2.regel = regel;
@@ -152,19 +197,19 @@ public class Filereader {
                                         test2.format = "formaat_dd/MM/yyyy";
                                     }
                                     break;
-                                case 5: //String
+                                case 8: //String
                                     test2.regel = regel;
                                     test2.type = "status";
                                     test2.goedfout = true;
                                     test2.waarde = test[j];
                                     break;
-                                case 6: //String
+                                case 9: //String
                                     test2.regel = regel;
                                     test2.type = "gender";
                                     test2.goedfout = true;
                                     test2.waarde = test[j];
                                     break;
-                                case 7: //int
+                                case 10: //int
                                     try {
                                         Integer.parseInt(test[j]);
                                         test2.regel = regel;
@@ -180,13 +225,13 @@ public class Filereader {
                                         test2.format = "getal_4_cijvers";
                                     }
                                     break;
-                                case 8: //String
+                                case 11: //String
                                     test2.regel = regel;
                                     test2.type = "communication_type";
                                     test2.goedfout = true;
                                     test2.waarde = test[j];
                                     break;
-                                case 9: //date
+                                case 12: //date
                                     try {
                                         new SimpleDateFormat("dd/MM/yyyy").parse(test[j]);
                                         test2.regel = regel;
@@ -246,38 +291,38 @@ public class Filereader {
     /**
      * Methode om de gewijzigde data weer te controleren.
      */
+            public ArrayList salarismutatiecheckcontrole(List lines, int scheidingsteken){
+            karakter_scheidingsteken = karakers.get(scheidingsteken);
+            //  Firststap = false;
+            this.senddata = new ArrayList<>();
 
-    public ArrayList salarismutatiecheckcontrole(List lines, int scheidingsteken){
-        karakter_scheidingsteken = karakers.get(scheidingsteken);
-      //  Firststap = false;
-        this.senddata = new ArrayList<>();
+            String[] test;
 
-        String[] test;
-
-        // allocating memory for 5 objects of type Student.
-        test = new String[8];
-        System.out.println("testlengt " + test.length);
-        //String[] test = new String[7];
-        //test[] = new String[20];
-        Iterator it = lines.iterator();
-        //if (Firststap == true) {
-       //     it.next();
-       // }
-        while (it.hasNext()) {
-            String line = (String) it.next();
-            test = line.split(karakter_scheidingsteken);
-            //  if (test.length == 10) {
-           // for (int j = 0; j < test.length; j++) {
+            // allocating memory for 5 objects of type Student.
+            test = new String[8];
+            System.out.println("testlengt " + test.length);
+            //String[] test = new String[7];
+            //test[] = new String[20];
+            Iterator it = lines.iterator();
+            //if (Firststap == true) {
+            //     it.next();
+            // }
+            while (it.hasNext()) {
+                String line = (String) it.next();
+                test = line.split(karakter_scheidingsteken);
+                //  if (test.length == 10) {
+                // for (int j = 0; j < test.length; j++) {
                 dataToSwith(test, 0);
-            dataToSwith(test, 1);
-            dataToSwith(test, 2);
-            dataToSwith(test, 3);
-           // }
-      //  }
-    }
+                dataToSwith(test, 1);
+                dataToSwith(test, 2);
+                dataToSwith(test, 3);
+                dataToSwith(test, 4);
+                // }
+                //  }
+            }
 
-        return senddata;
-    }
+            return senddata;
+        }
 
 }
 
