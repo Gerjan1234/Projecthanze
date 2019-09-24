@@ -136,6 +136,7 @@ public class Database {
 
     protected static int addsenddata(List lines) throws SQLException {
         boolean allelinenoke = false;
+        boolean bestaat_al = false;
         String[] test;
         String[] test2;
         test = new String[15];
@@ -152,28 +153,63 @@ public class Database {
             }
         }
 
-            Iterator it2 = lines.iterator();
-            while (it2.hasNext()) {
-                String line2 = (String) it2.next();
-                test2 = line2.split(";");
-                String sql = "insert into employees values (?,?,?,?,?,?,?,?,?,?);";
-                try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                    stmt.setString(1, test2[0]);
-                    stmt.setString(2, test2[1]);
-                    stmt.setString(3, test2[5]);
-                    stmt.setString(4, test2[6]);
-                    stmt.setString(5, test2[7]);
-                    stmt.setString(6, test2[8]);
-                    stmt.setString(7, test2[9]);
-                    stmt.setString(8, test2[10]);
-                    stmt.setString(9, test2[11]);
-                    stmt.setString(10, test2[12]);
-                    //stmt.setString(11, test2[13]);
-                    stmt.execute();
-                    ResultSet keys = stmt.getGeneratedKeys();
-                    System.out.println(keys);
-                    if (keys.next()) rv = keys.getInt(1);
+//chcek of socialid al bestaat:
+        Iterator it = lines.iterator();
+        int aantaloke = 0;
+        while (it.hasNext()) {
+            String line = (String) it.next();
+            test = line.split(";");
+            String sql3 = "select employer_id from employees where socialsecurity_id like '"+test[0]+"';";
+            try (PreparedStatement stmt = getConnection().prepareStatement(sql3, Statement.RETURN_GENERATED_KEYS)) {
+                ResultSet res = stmt.executeQuery();
+                while (res.next()) {
+                    employer_id = res.getDouble(1);
+                    if (employer_id.toString().substring(0, employer_id.toString().length() - 2).equals(test[1].replaceAll(" ", ""))) {
+                        System.out.println(" employee id is dubbel");
+                        aantaloke = aantaloke + 1;
+                        bestaat_al = false;
+                        String sql = "update into employees values (?,?,?,?,?,?,?,?,?);";
+                        try (PreparedStatement stmt3 = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                            stmt3.setString(1, test[1]);
+                            stmt3.setString(2, test[5]);
+                            stmt3.setString(3, test[6]);
+                            stmt3.setString(4, test[7]);
+                            stmt3.setString(5, test[8]);
+                            stmt3.setString(6, test[9]);
+                            stmt3.setString(7, test[10]);
+                            stmt3.setString(8, test[11]);
+                            stmt3.setString(9, test[12]);
+                            //stmt.setString(11, test2[13]);
+                            stmt3.execute();
+                            ResultSet keys = stmt3.getGeneratedKeys();
+                            System.out.println(keys);
+                            if (keys.next()) rv = keys.getInt(1);
+                        }
+
+                    } else {
+                        bestaat_al = true;
+                        String sql = "insert into employees values (?,?,?,?,?,?,?,?,?,?);";
+                        try (PreparedStatement stmt2 = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                            stmt2.setString(1, test[0]);
+                            stmt2.setString(2, test[1]);
+                            stmt2.setString(3, test[5]);
+                            stmt2.setString(4, test[6]);
+                            stmt2.setString(5, test[7]);
+                            stmt2.setString(6, test[8]);
+                            stmt2.setString(7, test[9]);
+                            stmt2.setString(8, test[10]);
+                            stmt2.setString(9, test[11]);
+                            stmt2.setString(10, test[12]);
+                            //stmt.setString(11, test2[13]);
+                            stmt2.execute();
+                            ResultSet keys = stmt2.getGeneratedKeys();
+                            System.out.println(keys);
+                            if (keys.next()) rv = keys.getInt(1);
+                        }
+
+                    }
                 }
+            }
 
             try (PreparedStatement stmt = getConnection().prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS)) {
                 ResultSet res = stmt.executeQuery();
