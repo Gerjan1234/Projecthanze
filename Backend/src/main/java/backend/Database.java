@@ -106,6 +106,29 @@ public class Database {
     }
 
     /**
+     *  methode voor een check op bestaan van ID of EMPOYEE_ID
+     * * @author (Gerjan)
+     * * @version (23-09-2019)
+     */
+
+    protected static Boolean checkIDorEmplo_id(String Value, String Id) throws SQLException {
+        boolean oke = false;
+        Long ID;
+        String sql8 = "select " + Id + " from employees where " + Id + " like '" + Value.replaceAll(" ", "") + "';";
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql8, Statement.RETURN_GENERATED_KEYS)) {
+            System.out.println(sql8);
+            ResultSet res = stmt.executeQuery();
+            while (res.next()) {
+                ID = res.getLong(1);
+                if (ID.toString().equals(Value.replaceAll(" ", ""))) {
+                    oke = true;
+                }
+            }
+        }
+        return oke;
+    }
+
+    /**
      * Voorbeeld methode voor een select van database
      *  * @author (Gerjan)
      *  * @version (09-08-2019)

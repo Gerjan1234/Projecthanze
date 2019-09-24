@@ -30,6 +30,7 @@ public class Filereader {
     private List<String> lines;
     private Boolean Firststap = true;
     private int regel = 1;
+    private Boolean update = false;
 
 
     /**
@@ -79,7 +80,9 @@ public class Filereader {
             while (it.hasNext()) {
                 String line = (String) it.next();
                 test = line.split(karakter_scheidingsteken);
-                //  if (test.length == 10) {
+                if (test.length < 10) {
+                    update = true;
+                }
                 for (int j = 0; j < test.length; j++) {
                     dataToSwith(test, j);
                 }
@@ -98,9 +101,15 @@ public class Filereader {
                                 case 0: //double
                                     try {
                                         Double.parseDouble(test[j]);
+                                        if(update == true){
+                                            try {
+                                                test2.goedfout = Database.checkIDorEmplo_id(test[j], "socialsecurity_id");
+                                            } catch (Exception e) {
+                                                test2.goedfout = false;
+                                            }
+                                        }else {test2.goedfout = true;}
                                         test2.regel = regel;
                                         test2.type = "socialsecurity_id";
-                                        test2.goedfout = true;
                                         test2.waarde = test[j];
                                     } catch (NumberFormatException e) {
                                         test2.regel = regel;
@@ -113,9 +122,13 @@ public class Filereader {
                                 case 1: //double
                                     try {
                                         Double.parseDouble(test[j]);
+                                        if(update == true){
+                                        try {
+                                         test2.goedfout =  Database.checkIDorEmplo_id(test[j], "employer_id");
+                                        } catch (Exception e) {test2.goedfout = false; }
+                                    }else {test2.goedfout = true;}
                                         test2.regel = regel;
                                         test2.type = "employer_id";
-                                        test2.goedfout = true;
                                         test2.waarde = test[j];
                                     } catch (NumberFormatException e) {
                                         test2.regel = regel;
@@ -295,7 +308,8 @@ public class Filereader {
             karakter_scheidingsteken = karakers.get(scheidingsteken);
             //  Firststap = false;
             this.senddata = new ArrayList<>();
-
+            update = true;
+                System.out.println(update + " is dit update");
             String[] test;
 
             // allocating memory for 5 objects of type Student.
