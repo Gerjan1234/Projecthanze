@@ -15,9 +15,9 @@ import java.sql.SQLException;
 @CrossOrigin(origins = "*")
 @SpringBootApplication
 public class Application {
-    static String HOST_NAME = "jdbc:mysql://localhost:3306/pensioenaanspraken?serverTimezone=UTC";//hoe heet de tabel
-    static String USER_NAME = "hanze";
-    static String PASSWORD = "hanze";
+    public static String HOST_NAME = "jdbc:mysql://localhost:3306/pensioenaanspraken?serverTimezone=UTC";//hoe heet de tabel
+    public static String USER_NAME = "hanze";
+    public static String PASSWORD = "hanze";
 
 
 

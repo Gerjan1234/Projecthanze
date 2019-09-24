@@ -1,6 +1,7 @@
 package backend.aanspraak.service;
 
 import backend.aanspraak.model.Aanspraak;
+import backend.aanspraak.model.Werkgever;
 import backend.aanspraak.repository.AanspraakRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,9 @@ public class AanspraakService {
 
     public List<Aanspraak> getAanspraken() {
         return aanspraakRepository.getAanspraken();
+    }
+
+    public List<Werkgever> getWerkgeversZonderPersoneel() {
+        return aanspraakRepository.getWerkgeversZonderPersoneel();
     }
 }

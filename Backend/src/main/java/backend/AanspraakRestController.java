@@ -1,6 +1,7 @@
 package backend;
 
 import backend.aanspraak.model.Aanspraak;
+import backend.aanspraak.model.Werkgever;
 import backend.aanspraak.service.AanspraakService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +18,7 @@ public class AanspraakRestController {
 
     @Autowired
     private AanspraakService aanspraakService;
+
     /**
      * Methode voor ophalen data
      * * @author (Henk)
@@ -36,6 +38,14 @@ public class AanspraakRestController {
         return ResponseEntity.ok()
 //                .headers(head)
                 .body(aanspraken);
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping(value = "/werkgevers")
+    public ResponseEntity<List<Werkgever>> werkgevers() {
+        List<Werkgever> werkgevers = aanspraakService.getWerkgeversZonderPersoneel();
+        return ResponseEntity.ok()
+                .body(werkgevers);
     }
 
 }
