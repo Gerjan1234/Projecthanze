@@ -17,7 +17,7 @@ console.log("InlogGeg psw : " + InlogGeg.psw);
 console.log("User usr : " + User.usr);
 console.log("User psw : " + User.psw);
 
-alert ("Gebruiker: " + InlogGeg.usr + " en wachtwoord :" + User.psw);
+//alert ("Gebruiker: " + InlogGeg.usr + " en wachtwoord :" + User.psw);
 //alert("InlogGeg usr : " + InlogGeg.usr);
 //alert("InlogGeg psw : " + InlogGeg.psw);
 //alert("User usr : " + User.usr);
@@ -25,19 +25,11 @@ alert ("Gebruiker: " + InlogGeg.usr + " en wachtwoord :" + User.psw);
 
 $(document).ready(function(){
 
+var resultaat;
+
 $('.box').hide().fadeIn(1000);
+$("#Antw").html(resultaat);
 
-  //   $.post("demo_test_post.asp",
-//$.get('http://localhost:8080/login.html',
-//     {
-//       InlogGeg
-//     },
-//     function(data,status){
-//       alert("Data: " + data + "\nStatus: " + status);
-//     });
-//   });
-
-<!---->
 $.ajax({
     url: 'http://localhost:8080/login',
     data: InlogGeg,
@@ -46,8 +38,9 @@ $.ajax({
     contentType: 'text',
     type: 'GET',
     success: function(data){
-    console.log(data);
+    resultaat = data;
     }
+
     });
 });
 };
@@ -68,15 +61,10 @@ function field_focus(field, email)
     }
   }
 
-
-////Fade in dashboard box
-//$(document).ready(function(){
-//    $('.box').hide().fadeIn(1000);
-//    });
-
-
 //Stop click event
 $('a').click(function(event){
     event.preventDefault();
     showlogin(this.form);
 	});
+
+
