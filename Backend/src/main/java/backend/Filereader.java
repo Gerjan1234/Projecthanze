@@ -197,7 +197,7 @@ public class Filereader {
                                     break;
                                 case 7: //date
                                     try {
-                                        new SimpleDateFormat("dd/MM/yyyy").parse(test[j]);
+                                        new SimpleDateFormat("yyyy-MM-dd").parse(test[j]);
                                         test2.regel = regel;
                                         test2.type = "date_of_birth";
                                         test2.goedfout = true;
@@ -207,7 +207,7 @@ public class Filereader {
                                         test2.type = "date_of_birth";
                                         test2.goedfout = false;
                                         test2.waarde = test[j];
-                                        test2.format = "formaat_dd/MM/yyyy";
+                                        test2.format = "formaat_yyy-MM-dd";
                                     }
                                     break;
                                 case 8: //String
@@ -246,7 +246,7 @@ public class Filereader {
                                     break;
                                 case 12: //date
                                     try {
-                                        new SimpleDateFormat("dd/MM/yyyy").parse(test[j]);
+                                        new SimpleDateFormat("yyy-MM-dd").parse(test[j]);
                                         test2.regel = regel;
                                         test2.type = "hire_date";
                                         test2.goedfout = true;
@@ -256,7 +256,7 @@ public class Filereader {
                                         test2.type = "hire_date";
                                         test2.goedfout = false;
                                         test2.waarde = test[j];
-                                        test2.format = "formaat_dd/MM/yyyy";
+                                        test2.format = "formaat_yyy-MM-dd";
                                     }
                                     break;
                                 default:

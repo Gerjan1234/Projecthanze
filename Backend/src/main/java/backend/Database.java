@@ -129,6 +129,67 @@ public class Database {
     }
 
     /**
+     *  methode voor een insert naar database vanuit de senddata uploader.
+     * * @author (Gerjan)
+     * * @version (21-09-2019)
+     */
+
+    protected static int addsenddata(List lines) throws SQLException {
+        boolean allelinenoke = false;
+        String[] test;
+        String[] test2;
+        test = new String[15];
+        int K = 0; //totaal aantal records
+        int L = 0;
+        int rv = -1;
+        long key = -1L;
+        Double employer_id = 0.0;
+        String sql2 = "SELECT COUNT(socialsecurity_id) FROM employees;";
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS)) {
+            ResultSet res = stmt.executeQuery();
+            while (res.next()) {
+                K = res.getInt(1);
+            }
+        }
+
+            Iterator it2 = lines.iterator();
+            while (it2.hasNext()) {
+                String line2 = (String) it2.next();
+                test2 = line2.split(";");
+                String sql = "insert into employees values (?,?,?,?,?,?,?,?,?,?);";
+                try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                    stmt.setString(1, test2[0]);
+                    stmt.setString(2, test2[1]);
+                    stmt.setString(3, test2[5]);
+                    stmt.setString(4, test2[6]);
+                    stmt.setString(5, test2[7]);
+                    stmt.setString(6, test2[8]);
+                    stmt.setString(7, test2[9]);
+                    stmt.setString(8, test2[10]);
+                    stmt.setString(9, test2[11]);
+                    stmt.setString(10, test2[12]);
+                    //stmt.setString(11, test2[13]);
+                    stmt.execute();
+                    ResultSet keys = stmt.getGeneratedKeys();
+                    System.out.println(keys);
+                    if (keys.next()) rv = keys.getInt(1);
+                }
+
+            try (PreparedStatement stmt = getConnection().prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS)) {
+                ResultSet res = stmt.executeQuery();
+                while (res.next()) {
+                    L = res.getInt(1);
+                }
+            }
+            int M = L - K;
+            System.out.println(L + " ; " + K);
+            return M;
+        }
+        return 0;
+    }
+
+
+    /**
      * Voorbeeld methode voor een select van database
      *  * @author (Gerjan)
      *  * @version (09-08-2019)

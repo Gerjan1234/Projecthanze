@@ -76,7 +76,7 @@ public class ControllerInputs {
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/senddata", method = RequestMethod.POST)
     public ResponseEntity senddata(@RequestBody String datalist) {
-        List<String> line = asList(datalist.split(","));
+       /* List<String> line = asList(datalist.split(","));
         Filereader object = new Filereader();
         ArrayList<responsfile> returndata = new ArrayList<>();
         //returndata = object.checkscheider(line, 5);
@@ -84,8 +84,23 @@ public class ControllerInputs {
         head.set("status-code", "202 Ok");
         return ResponseEntity.ok()
                 .headers(head)
-                .body("202");
+                .body("202");*/
+        int resultaantal = 0;
+        List<String> line = asList(datalist.split(","));
+        Database Database = new Database();
+        ArrayList<responsfile> returndata = new ArrayList<>();
+        try {
+            resultaantal = Database.addsenddata(line);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        HttpHeaders head = new HttpHeaders();
+        head.set("status-code", "202 Ok");
+        return ResponseEntity.ok()
+                .headers(head)
+                .body("202" + resultaantal);
     }
+
 
 
     /**
