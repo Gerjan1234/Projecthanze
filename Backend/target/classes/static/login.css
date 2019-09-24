@@ -1,7 +1,6 @@
 body{
   font-family: 'Open Sans', sans-serif;
-  background:#3498db;
-  margin: 0 auto 0 auto;
+  background-color: rgb(200,200,200);
   width:100%;
   text-align:center;
   margin: 20px 0px 20px 0px;
@@ -13,16 +12,15 @@ p{
   color:#ffffff;
 }
 
-h1{
+b{
   font-size:1.5em;
   color:#525252;
 }
-
 .box{
   background:white;
   width:300px;
   border-radius:6px;
-  margin: 0 auto 0 auto;
+  margin: 60 auto 0 auto;
   padding:0px 0px 70px 0px;
   border: #2980b9 4px solid;
 }
@@ -88,3 +86,10 @@ h1{
 #btn2:hover{
 background:#3594D2;
 }
+
+			.header 	{
+                        	padding: 40px 0px 0px 5px;			}
+			#footer	{
+				text-align:center;
+				padding: 400px 0px 0px 0px;}
+

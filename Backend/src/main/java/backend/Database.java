@@ -165,6 +165,7 @@ public class Database {
         try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setDouble(1, usr);
             ResultSet res = stmt.executeQuery();
+
             while (res.next()) {
                 security r = new security();
                 r.security_id = (int) res.getDouble(1);
@@ -180,7 +181,7 @@ public class Database {
         if (tst > 0) {
             System.out.println("sql resultaat Id: " + results.get(0).security_id);
             System.out.println("sql resultaat psw: " + results.get(0).password);
-        }
+
 
         if ((int) usr == results.get(0).security_id && psw.equals(results.get(0).password)) {
             System.out.println("chkLogin-Id: " + results.get(0).security_id);
@@ -189,7 +190,8 @@ public class Database {
         } else {
             return oke = "Combinatie gebruiker en wachtwoord is fout!";
         }
-
+    }
+        return oke;
     }
 
 

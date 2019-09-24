@@ -3,10 +3,15 @@
 /Users/henkhuizing/Projecthanze/Backend/src/main/java/backend/ControllerInputs.java
 /Users/henkhuizing/Projecthanze/Backend/src/main/java/backend/Application.java
 /Users/henkhuizing/Projecthanze/Backend/src/main/java/backend/adress.java
+/Users/henkhuizing/Projecthanze/Backend/src/main/java/backend/aanspraak/service/AanspraakService.java
 /Users/henkhuizing/Projecthanze/Backend/src/main/java/backend/ControllerLogin.java
 /Users/henkhuizing/Projecthanze/Backend/src/main/java/backend/OsCheck.java
+/Users/henkhuizing/Projecthanze/Backend/src/main/java/backend/Controllershowdata.java
+/Users/henkhuizing/Projecthanze/Backend/src/main/java/backend/aanspraak/repository/AanspraakRepository.java
 /Users/henkhuizing/Projecthanze/Backend/src/main/java/backend/Database.java
 /Users/henkhuizing/Projecthanze/Backend/src/main/java/backend/employees.java
+/Users/henkhuizing/Projecthanze/Backend/src/main/java/backend/HomeController.java
+/Users/henkhuizing/Projecthanze/Backend/src/main/java/backend/aanspraak/model/Aanspraak.java
 /Users/henkhuizing/Projecthanze/Backend/src/main/java/backend/employers.java
 /Users/henkhuizing/Projecthanze/Backend/src/main/java/backend/contribution.java
 /Users/henkhuizing/Projecthanze/Backend/src/main/java/backend/responsfile.java
