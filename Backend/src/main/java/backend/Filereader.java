@@ -30,6 +30,7 @@ public class Filereader {
     private List<String> lines;
     private Boolean Firststap = true;
     private int regel = 1;
+    private Boolean update = false;
 
 
     /**
@@ -70,7 +71,6 @@ public class Filereader {
      */
 
         public void Updatecheckdata(List lines) {
-            System.out.println("aantal regels file " + lines.size());
             String test[];
             Iterator it = lines.iterator();
             if (Firststap == true) {
@@ -79,7 +79,9 @@ public class Filereader {
             while (it.hasNext()) {
                 String line = (String) it.next();
                 test = line.split(karakter_scheidingsteken);
-                //  if (test.length == 10) {
+                if (test.length < 10) {
+                    update = true;
+                }
                 for (int j = 0; j < test.length; j++) {
                     dataToSwith(test, j);
                 }
@@ -92,15 +94,20 @@ public class Filereader {
      */
 
                             public ArrayList dataToSwith(String test[], int j) {
-                                System.out.println("werk dit nog" + test.length);
                             responsfile test2 = new responsfile();
                             switch(j) {
                                 case 0: //double
                                     try {
                                         Double.parseDouble(test[j]);
+                                        if(update == true){
+                                            try {
+                                                test2.goedfout = Database.checkIDorEmplo_id(test[j], "socialsecurity_id");
+                                            } catch (Exception e) {
+                                                test2.goedfout = false;
+                                            }
+                                        }else {test2.goedfout = true;}
                                         test2.regel = regel;
                                         test2.type = "socialsecurity_id";
-                                        test2.goedfout = true;
                                         test2.waarde = test[j];
                                     } catch (NumberFormatException e) {
                                         test2.regel = regel;
@@ -113,9 +120,13 @@ public class Filereader {
                                 case 1: //double
                                     try {
                                         Double.parseDouble(test[j]);
+                                        if(update == true){
+                                        try {
+                                         test2.goedfout =  Database.checkIDorEmplo_id(test[j], "employer_id");
+                                        } catch (Exception e) {test2.goedfout = false; }
+                                    }else {test2.goedfout = true;}
                                         test2.regel = regel;
                                         test2.type = "employer_id";
-                                        test2.goedfout = true;
                                         test2.waarde = test[j];
                                     } catch (NumberFormatException e) {
                                         test2.regel = regel;
@@ -184,7 +195,7 @@ public class Filereader {
                                     break;
                                 case 7: //date
                                     try {
-                                        new SimpleDateFormat("dd/MM/yyyy").parse(test[j]);
+                                        new SimpleDateFormat("yyyy-MM-dd").parse(test[j]);
                                         test2.regel = regel;
                                         test2.type = "date_of_birth";
                                         test2.goedfout = true;
@@ -194,7 +205,7 @@ public class Filereader {
                                         test2.type = "date_of_birth";
                                         test2.goedfout = false;
                                         test2.waarde = test[j];
-                                        test2.format = "formaat_dd/MM/yyyy";
+                                        test2.format = "formaat_yyy-MM-dd";
                                     }
                                     break;
                                 case 8: //String
@@ -233,7 +244,7 @@ public class Filereader {
                                     break;
                                 case 12: //date
                                     try {
-                                        new SimpleDateFormat("dd/MM/yyyy").parse(test[j]);
+                                        new SimpleDateFormat("yyy-MM-dd").parse(test[j]);
                                         test2.regel = regel;
                                         test2.type = "hire_date";
                                         test2.goedfout = true;
@@ -243,7 +254,7 @@ public class Filereader {
                                         test2.type = "hire_date";
                                         test2.goedfout = false;
                                         test2.waarde = test[j];
-                                        test2.format = "formaat_dd/MM/yyyy";
+                                        test2.format = "formaat_yyy-MM-dd";
                                     }
                                     break;
                                 default:
@@ -293,34 +304,19 @@ public class Filereader {
      */
             public ArrayList salarismutatiecheckcontrole(List lines, int scheidingsteken){
             karakter_scheidingsteken = karakers.get(scheidingsteken);
-            //  Firststap = false;
             this.senddata = new ArrayList<>();
-
+            update = true;
             String[] test;
-
-            // allocating memory for 5 objects of type Student.
-            test = new String[8];
-            System.out.println("testlengt " + test.length);
-            //String[] test = new String[7];
-            //test[] = new String[20];
             Iterator it = lines.iterator();
-            //if (Firststap == true) {
-            //     it.next();
-            // }
             while (it.hasNext()) {
                 String line = (String) it.next();
                 test = line.split(karakter_scheidingsteken);
-                //  if (test.length == 10) {
-                // for (int j = 0; j < test.length; j++) {
                 dataToSwith(test, 0);
                 dataToSwith(test, 1);
                 dataToSwith(test, 2);
                 dataToSwith(test, 3);
                 dataToSwith(test, 4);
-                // }
-                //  }
             }
-
             return senddata;
         }
 

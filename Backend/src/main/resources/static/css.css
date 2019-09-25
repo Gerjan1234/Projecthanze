@@ -1,16 +1,16 @@
 
-body {background-color: #F1F0F1;}
+body {background-color: rgb(200,200,200)}
 
 .grid-container5 {
   display: grid;
   grid-template-columns: auto auto auto;
   grid-gap: 10px;
-   background-color: #2196F3;
+   background-color: rgb(200,200,200)
      padding: 10px;
 }
 
 .grid-container5 > div {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgb(200,200,200)
   text-align: center;
   padding: 20px 0;
   font-size: 30px;
@@ -20,7 +20,7 @@ body {background-color: #F1F0F1;}
   display: grid;
   grid-template-columns: auto auto auto  auto auto auto  auto auto auto auto;
   grid-gap: 1px;
-background-color: #2196F3;
+background-color: rgb(200,200,200)
   padding: 1px;
   font-size: 0.3rem;
   font-family: Sans-serif;
@@ -44,11 +44,28 @@ font-size: 10%;
     /* background: yellow;  test voor grid  */
 }
 
-.form-data {
+.grid-container6 	{
+/* font-family: Arial, Verdana, sans-serif;
+  background-color: rgb(200,200,200); */
+  width: 96%;
+  margin: 20px 20px 20px 24px;
+  line-height: 2.0em;
+  padding: 20px 20px 20px 2px;
+  position: fixed;
+  }
+
+/* .form-data {
     width: 200px;
     font-size: 1.3rem;
     font-family: Sans-serif;
-  }
+  } */
+/*
+  .updatetabel {
+      width: 200px;
+      font-size: 1.3rem;
+      font-family: Sans-serif;
+    } */
+
 
 input[type=text] {
 width: 100px;
