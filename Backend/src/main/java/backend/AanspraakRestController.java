@@ -23,7 +23,7 @@ public class AanspraakRestController {
      * Methode voor ophalen data
      * * @author (Henk)
      * * @version (18-09-2019)
-     * file en scheidingsteken in een post.
+     *
      */
     @CrossOrigin(origins = "*")
     @GetMapping(value = "/aanspraken")

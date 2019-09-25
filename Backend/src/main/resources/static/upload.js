@@ -84,8 +84,7 @@ console.log("wat is max " + max)
     contentType: false,
     type: 'POST',
     success: function(data){
-    data2 = JSON.parse(data);
-		console.log(data2)
+
 //gooi oude tabel weg
     var x = document.getElementsByTagName("tr");
     for (var i = tabellengte; i < x.length ;i++) {

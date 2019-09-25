@@ -7,7 +7,6 @@ var User = new Object();
     User.usr = usr.value;
     User.psw = psw.value;
 
-
 var InlogGeg = JSON.parse(JSON.stringify(User));
 
 console.log('gebruikersnaam is: ' + User.usr);
