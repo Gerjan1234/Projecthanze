@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 
-import static backend.Database.chkInlog;
-
 /**
  * class Controller
  * @author (Teo)
@@ -27,18 +25,17 @@ public class ControllerLogin {
             @RequestParam(name="psw") String psw) throws SQLException {
         System.out.println("Ontvangen User: " + usr);
         System.out.println("Ontvangen Wachtwoord: " + psw);
-        String returndata = "leeg";
+        inlogresp returndata = new inlogresp();
         if (usr == null) {
-           returndata = "Gebruiker komt niet voor in database !!";
+           returndata.answer = "Gebruiker komt niet voor in database !!";
         } else {
-            returndata = chkInlog(usr, psw);}
-        System.out.println("Ontvangen chk: " + returndata);
+            returndata.answer = Database.chkInlog(usr, psw);}
+        System.out.println("Ontvangen returndata.answer: " + returndata.answer);
         HttpHeaders head = new HttpHeaders();
         head.set("status-code", "200 Ok");
         return  ResponseEntity.ok()
                 .headers(head)
                 .body(returndata);
-        //return new ResponseEntity<>(returndata, HttpStatus.OK);
-    }
+        }
 
 }

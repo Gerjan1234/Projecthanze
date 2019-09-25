@@ -3,13 +3,11 @@ package backend.aanspraak.repository;
 import backend.Application;
 import backend.aanspraak.model.Aanspraak;
 import backend.aanspraak.model.Werkgever;
-import jdk.internal.org.objectweb.asm.tree.FieldInsnNode;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Repository
