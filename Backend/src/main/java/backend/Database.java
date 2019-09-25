@@ -41,8 +41,6 @@ public class Database {
         test = new String[8];
         int K = 0;
         int L = 0;
-        int rv = -1;
-        long key = -1L;
         Double employer_id = 0.0;
         String sql2 = "SELECT COUNT(socialsecurity_id) FROM salary;";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS)) {
@@ -56,7 +54,7 @@ public class Database {
         while (it.hasNext()) {
             String line = (String) it.next();
             test = line.split(";");
-            String sql3 = "select employer_id from employees where socialsecurity_id like '344996808';";
+            String sql3 = "select employer_id from employees where socialsecurity_id like '"+test[0]+"';";
             try (PreparedStatement stmt = getConnection().prepareStatement(sql3, Statement.RETURN_GENERATED_KEYS)) {
                 ResultSet res = stmt.executeQuery();
                 while (res.next()) {
@@ -68,8 +66,6 @@ public class Database {
 
                 }
             }
-            System.out.println(lines.size());
-            System.out.println(aantaloke);
             if (lines.size() == aantaloke) {
                 allelinenoke = true;
             }
@@ -87,9 +83,6 @@ public class Database {
                     stmt.setString(3, test2[3]);
                     stmt.setString(4, test2[4]);
                     stmt.execute();
-                    ResultSet keys = stmt.getGeneratedKeys();
-                    System.out.println(keys);
-                    if (keys.next()) rv = keys.getInt(1);
                 }
             }
             try (PreparedStatement stmt = getConnection().prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS)) {
@@ -130,6 +123,7 @@ public class Database {
 
     /**
      *  methode voor een insert naar database vanuit de senddata uploader.
+     *  update tabel employees en salary
      * * @author (Gerjan)
      * * @version (21-09-2019)
      */
@@ -137,13 +131,11 @@ public class Database {
     protected static int addsenddata(List lines) throws SQLException {
         boolean allelinenoke = false;
         boolean bestaat_al = false;
+        int tellerinsert = 0;
+        int tellerupdate = 0;
         String[] test;
-        String[] test2;
-        test = new String[15];
         int K = 0; //totaal aantal records
         int L = 0;
-        int rv = -1;
-        long key = -1L;
         Double employer_id = 0.0;
         String sql2 = "SELECT COUNT(socialsecurity_id) FROM employees;";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS)) {
@@ -152,43 +144,47 @@ public class Database {
                 K = res.getInt(1);
             }
         }
-
+        System.out.println("stap voor de iteratr");
 //chcek of socialid al bestaat:
         Iterator it = lines.iterator();
         int aantaloke = 0;
         while (it.hasNext()) {
             String line = (String) it.next();
             test = line.split(";");
+            System.out.println(test);
             String sql3 = "select employer_id from employees where socialsecurity_id like '"+test[0]+"';";
             try (PreparedStatement stmt = getConnection().prepareStatement(sql3, Statement.RETURN_GENERATED_KEYS)) {
                 ResultSet res = stmt.executeQuery();
                 while (res.next()) {
                     employer_id = res.getDouble(1);
                     if (employer_id.toString().substring(0, employer_id.toString().length() - 2).equals(test[1].replaceAll(" ", ""))) {
-                        System.out.println(" employee id is dubbel");
                         aantaloke = aantaloke + 1;
                         bestaat_al = false;
-                        String sql = "update into employees values (?,?,?,?,?,?,?,?,?);";
-                        try (PreparedStatement stmt3 = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                            stmt3.setString(1, test[1]);
-                            stmt3.setString(2, test[5]);
-                            stmt3.setString(3, test[6]);
-                            stmt3.setString(4, test[7]);
-                            stmt3.setString(5, test[8]);
-                            stmt3.setString(6, test[9]);
-                            stmt3.setString(7, test[10]);
-                            stmt3.setString(8, test[11]);
-                            stmt3.setString(9, test[12]);
-                            //stmt.setString(11, test2[13]);
-                            stmt3.execute();
-                            ResultSet keys = stmt3.getGeneratedKeys();
-                            System.out.println(keys);
-                            if (keys.next()) rv = keys.getInt(1);
+                        String sql = "update employees set first_name = ?, last_name = ?, date_of_birth = ?, status = ?, gender = ?, adress_id = ?, communication_type = ?, hire_date = ? where socialsecurity_id = ?;";
+                        System.out.println("update gedaan");
+                        try (PreparedStatement stmt3 = getConnection().prepareStatement(sql)) {
+                            stmt3.setString(1, test[5]);
+                            stmt3.setString(2, test[6]);
+                            stmt3.setString(3, test[7]);
+                            stmt3.setString(4, test[8]);
+                            stmt3.setString(5, test[9]);
+                            stmt3.setString(6, test[10]);
+                            stmt3.setString(7, test[11]);
+                            stmt3.setString(8, test[12]);
+                            stmt3.setString(9, test[0]);
+                            tellerupdate = stmt3.executeUpdate();
                         }
+                    }
+                }
+            }
 
-                    } else {
+            String sql4 = "select employer_id from employees where socialsecurity_id like '"+test[0]+"';";
+            try (PreparedStatement stmt = getConnection().prepareStatement(sql4, Statement.RETURN_GENERATED_KEYS)) {
+                ResultSet res = stmt.executeQuery();
+                if (res.next() == false) {
                         bestaat_al = true;
                         String sql = "insert into employees values (?,?,?,?,?,?,?,?,?,?);";
+                        System.out.println("insert gedaan");
                         try (PreparedStatement stmt2 = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                             stmt2.setString(1, test[0]);
                             stmt2.setString(2, test[1]);
@@ -200,26 +196,34 @@ public class Database {
                             stmt2.setString(8, test[10]);
                             stmt2.setString(9, test[11]);
                             stmt2.setString(10, test[12]);
-                            //stmt.setString(11, test2[13]);
-                            stmt2.execute();
-                            ResultSet keys = stmt2.getGeneratedKeys();
-                            System.out.println(keys);
-                            if (keys.next()) rv = keys.getInt(1);
-                        }
-
+                            tellerinsert = stmt2.executeUpdate();
                     }
+
                 }
             }
-
             try (PreparedStatement stmt = getConnection().prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS)) {
                 ResultSet res = stmt.executeQuery();
                 while (res.next()) {
                     L = res.getInt(1);
                 }
             }
+            String sql5 = "insert into salary values (?,?,?,?);";
+            try (PreparedStatement stmt = getConnection().prepareStatement(sql5, Statement.RETURN_GENERATED_KEYS)) {
+                stmt.setString(1, test[0]);
+                stmt.setString(2, test[2]);
+                stmt.setString(3, test[3]);
+                stmt.setString(4, test[4]);
+                stmt.execute();
+            }
             int M = L - K;
             System.out.println(L + " ; " + K);
-            return M;
+            System.out.println(tellerinsert + " en " + tellerupdate);
+            if(bestaat_al == false) {
+                return tellerupdate + tellerinsert;
+            }else {
+                return M;
+            }
+
         }
         return 0;
     }
