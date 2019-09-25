@@ -71,7 +71,6 @@ public class Filereader {
      */
 
         public void Updatecheckdata(List lines) {
-            System.out.println("aantal regels file " + lines.size());
             String test[];
             Iterator it = lines.iterator();
             if (Firststap == true) {
@@ -95,7 +94,6 @@ public class Filereader {
      */
 
                             public ArrayList dataToSwith(String test[], int j) {
-                                System.out.println("werk dit nog" + test.length);
                             responsfile test2 = new responsfile();
                             switch(j) {
                                 case 0: //double
@@ -306,35 +304,19 @@ public class Filereader {
      */
             public ArrayList salarismutatiecheckcontrole(List lines, int scheidingsteken){
             karakter_scheidingsteken = karakers.get(scheidingsteken);
-            //  Firststap = false;
             this.senddata = new ArrayList<>();
             update = true;
-                System.out.println(update + " is dit update");
             String[] test;
-
-            // allocating memory for 5 objects of type Student.
-            test = new String[8];
-            System.out.println("testlengt " + test.length);
-            //String[] test = new String[7];
-            //test[] = new String[20];
             Iterator it = lines.iterator();
-            //if (Firststap == true) {
-            //     it.next();
-            // }
             while (it.hasNext()) {
                 String line = (String) it.next();
                 test = line.split(karakter_scheidingsteken);
-                //  if (test.length == 10) {
-                // for (int j = 0; j < test.length; j++) {
                 dataToSwith(test, 0);
                 dataToSwith(test, 1);
                 dataToSwith(test, 2);
                 dataToSwith(test, 3);
                 dataToSwith(test, 4);
-                // }
-                //  }
             }
-
             return senddata;
         }
 
