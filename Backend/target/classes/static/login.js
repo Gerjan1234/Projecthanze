@@ -1,5 +1,15 @@
 var attempt = 3;
 var resultaat;
+var melding = "<I>Om te registreren stuur dan een mail naar info@hetspaarvarken.fonds</br></br>" +
+               "Volgende gegevens zijn nodig: </br>" +
+               "Bedrijfsnaam</br>" +
+               "Adres</br>" +
+               "Postcode</br>" +
+               "Woonplaats</br>" +
+               "Naam contactpersoon</br>" +
+               "Telefoonnummer contactpersoon</br>" +
+               "Uittreksel van de KvK</br></br>" +
+               "Na verificatie ontvangt u per post uw inlogcode en wachtwoord.</I>";
 
 function start(){
 chkPSW();
@@ -14,9 +24,11 @@ return false;
 }
 else{
 attempt --;// poging met 1 verlagen
-alert(resultaat + "U heeft nog "+attempt+" pogingen over;");
+if(attempt < 0 ) {attempt = 0};
+pop(resultaat + "</br>U heeft nog "+attempt+" pogingen over");
 // velden uitschakelen na het aantal pogingen
 if( attempt == 0){
+pop("Te veel pogingen !!</br></br>Deze site is voor u geblokkeerd</br>probeer het na 15 minuten nogmaals");
 document.getElementById("usr").disabled = true;
 document.getElementById("psw").disabled = true;
 document.getElementById("btn").disabled = true;
@@ -62,3 +74,14 @@ $.ajax({
 
 };
 
+function pop(varmelding) {
+document.getElementById("Poptxt").innerHTML = varmelding;
+           $('.pop_scherm').show();
+
+    $('.pop_scherm').click(function(){
+        $('.pop_scherm').hide();
+    });
+    $('.popupCloseButton').click(function(){
+        $('.pop_scherm').hide();
+    });
+};

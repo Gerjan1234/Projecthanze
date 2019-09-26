@@ -15,9 +15,6 @@ import java.util.List;
  */
 public class Database {
 
-    private static String IngelogdNaam = "nietingelogd";
-    private static Double IngelogdID = 9999.99;
-
     private static Connection conn = null;
 
     private static Connection getConnection() throws SQLException {
@@ -264,7 +261,7 @@ public class Database {
 
     protected static String chkInlog(double usr, String psw) throws SQLException {
         ArrayList<security> results = new ArrayList<>();
-        String oke = "init";
+        String oke = "Combinatie gebruiker en wachtwoord is fout !!";
         String sql = "SELECT * FROM security WHERE security.security_id = ?";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setDouble(1, usr);
@@ -293,7 +290,7 @@ public class Database {
             setNameIngelogdAls(results.get(0).security_id); //vul de variabele met de naam van de gebruiker die is ingelogd
             return oke = "Combinatie gebruiker en wachtwoord is correct";
         } else {
-            return oke = "Combinatie gebruiker en wachtwoord is fout!";
+            return oke = "Combinatie gebruiker en wachtwoord is fout !!";
         }
     }
         return oke;
@@ -301,6 +298,7 @@ public class Database {
 
     // hiermee worden 2 variabelen gevuld met de naam en id van de gebruiker die is ingelogd
     // deze naam og id kan bij alle html pagina's gebruikt worden of de gebruiker wel is ingelogd en wie dat dan is
+
     protected static void setNameIngelogdAls(Double gebruiker) throws SQLException  {
 
         String sql = "SELECT employers.company_name FROM security INNER JOIN employers ON security.security_id = employers.employer_id WHERE security.security_id = ?";
@@ -309,12 +307,12 @@ public class Database {
             ResultSet res = stmt.executeQuery();
 
             while (res.next()) {
-                IngelogdNaam = res.getString(1);
-                IngelogdID = gebruiker;
+                security.IngelogdNaam = res.getString(1);
+                security.IngelogdID = gebruiker;
                 }
         }
-        System.out.println("naam van ingelogde persoon : " + IngelogdNaam);
-        System.out.println("ID code van ingelogde persoon : " + IngelogdID);
+        System.out.println("naam van ingelogde persoon : " + security.IngelogdNaam);
+        System.out.println("ID code van ingelogde persoon : " + security.IngelogdID);
     }
 }
 
