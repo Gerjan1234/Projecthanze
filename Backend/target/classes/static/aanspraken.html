@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-            <head>
-                        <title>Pensioenfabriek Het Spaarvarken</title>
+           
+<head>
+                            <title>Pensioenfabriek Het Spaarvarken</title>
 
-			<meta charset="utf-8">		
-			<style type="text/css">
-		
+    <meta charset="utf-8">
+    <style type="text/css">
 
 			body 	{
 				font-family: Arial, Verdana, sans-serif;
@@ -98,33 +98,55 @@
 			#footer	{
 				text-align:center;
 				padding: 400px 0px 0px 0px;}	
-		</style>
 
-            </head>
-		
+    </style>
 
-            <body>
-				
-                    	  
-			<div id="header">
-				<h1>Pensioenfabriek&nbsp;&nbsp;&nbsp<I><sup>'Het Spaarvarken'</sup></I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<img src="untitled.png" width="105" height="75"  /></h1>
-			</div>
 
-			<div id="nav">					
-					<ul>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-						<li><a href="homepage.html">Startpagina</a></li>							
-						<li><a href="upload.html">Uploaden</a></li>
-						<lii><b>Aanspraken</b></lii>
-						<li><a href="premies.html">Premies</a></li>	
-					</ul>				
-			</div>
-			<div id="content">
-					<div id="feature">
-						<p></p>
-					
-			<div id="footer">
-				<small>&copy; Copyright 2019</small>  
-			</div>                        
-            </body>
+    <script src="aanspraken.js"></script>
+</head>
+
+
+           
+<body>
+
+                    
+<div id="header">
+    <h1>Pensioenfabriek&nbsp;&nbsp;&nbsp<I><sup>'Het Spaarvarken'</sup></I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<img
+            src="untitled.png" width="105" height="75"/></h1>
+</div>
+
+<div id="nav">
+    <ul>
+
+        <li><a href="homepage.html">Startpagina</a></li>
+        <li><a href="upload.html">Uploaden</a></li>
+        <lii><b>Aanspraken</b></lii>
+        <li><a href="premies.html">Premies</a></li>
+    </ul>
+</div>
+
+<div id="content">
+    <div id="feature">
+
+
+        <!-- hierzo -->
+        <input type="button" value="Aanspraken" onclick="getAanspraken()">
+		<textarea id="aansprakenOutput"  rows="30" cols="120"></textarea>
+
+
+
+
+    </div>
+
+    <p></p>
+
+
+    <div id="footer">
+        <small>&copy; Copyright 2019</small>  
+    </div>
+                            
+               
+</body>
 </html>
