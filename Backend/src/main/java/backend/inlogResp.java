@@ -1,6 +1,6 @@
 package backend;
 
-public class inlogresp {
+public class inlogResp {
 
 
     public String user;

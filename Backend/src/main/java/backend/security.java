@@ -13,9 +13,14 @@ package backend;
  */
 
 public class security {
+        // voor sql
         public double security_id;
         public String password;
         public String mailadress;
+
+        //voor chk wie is ingelogd
+        public static String IngelogdNaam = "nietingelogd";
+        public static Double IngelogdID = 9999.99;
 }
 
 

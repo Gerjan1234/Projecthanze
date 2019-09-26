@@ -25,7 +25,7 @@ public class ControllerLogin {
             @RequestParam(name="psw") String psw) throws SQLException {
         System.out.println("Ontvangen User: " + usr);
         System.out.println("Ontvangen Wachtwoord: " + psw);
-        inlogresp returndata = new inlogresp();
+        inlogResp returndata = new inlogResp();
         if (usr == null) {
            returndata.answer = "Gebruiker komt niet voor in database !!";
         } else {
