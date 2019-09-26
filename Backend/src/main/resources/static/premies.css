@@ -1,19 +1,11 @@
-<!DOCTYPE html>
-<html>
-           
-<head>
-                            <title>Pensioenfabriek Het Spaarvarken</title>
-
-    <meta charset="utf-8">
-    <style type="text/css">
 
 			body 	{
 				font-family: Arial, Verdana, sans-serif;
-				background-color: rgb(200,200,200);				
+				background-color: rgb(200,200,200);
 				width: 96%;
 				margin: 0px 20px 0px 22px;
 				line-height: 2.0em;
-				padding: 0px 0px 0px 2px;}		
+				padding: 0px 0px 0px 2px;}
 			#nav 	{
 				padding: 2px 0px 8px 12px;
 				background-color: rgb(180,179,175);
@@ -46,8 +38,8 @@
 			p1	{
 				text-decoration: underline;
 				font-weight: bold;
-				font-size: 18px;}									
-			ul      {	
+				font-size: 18px;}
+			ul      {
 				margin: 5px 0px 00px 0px;}
 			li      {
 				display: inline;
@@ -57,7 +49,7 @@
 				border-style: dashed;
 				border-color: #665544;
 				border-radius: 10px
-				-moz-border-radius: 10px;	
+				-moz-border-radius: 10px;
 				-webkit-border-radius: 10px;}
 			lii     {
 				display: inline;
@@ -67,11 +59,11 @@
 				border-style: solid;
 				border-color: #665544;
 				border-radius: 10px
-				-moz-border-radius: 10px;	
+				-moz-border-radius: 10px;
 				-webkit-border-radius: 10px;
 				}
 			img.right{
-				float:right; margin: 5.5em 10em 10em 10em; 
+				float:right; margin: 5.5em 10em 10em 10em;
 				boarder: 1px solid #999; clear: right;}
 			i	{
 				color: red;}
@@ -94,59 +86,24 @@
 				color: #888;}
 			div 	{
 				overflow: auto;
-				width: 100%;}	
+				width: 100%;}
 			#footer	{
 				text-align:center;
-				padding: 400px 0px 0px 0px;}	
+				padding: 400px 0px 0px 0px;}
 
-    </style>
+			tr.oddRow { background-color: #f6f6f6;}
+            tr.evenRow { background-color: #dddddd;}
 
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+  align: center;
+  background: white;
+}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <script src="aanspraken.js"></script>
-</head>
-
-
-           
-<body>
-
-                    
-<div id="header">
-    <h1>Pensioenfabriek&nbsp;&nbsp;&nbsp<I><sup>'Het Spaarvarken'</sup></I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<img
-            src="untitled.png" width="105" height="75"/></h1>
-</div>
-
-<div id="nav">
-    <ul>
-
-        <li><a href="homepage.html">Startpagina</a></li>
-        <li><a href="upload.html">Uploaden</a></li>
-        <lii><b>Aanspraken</b></lii>
-        <li><a href="premies.html">Premies</a></li>
-    </ul>
-</div>
-
-<div id="content">
-    <div id="feature">
-
-
-        <!-- hierzo -->
-        <input type="button" value="Aanspraken" onclick="getAanspraken()">
-		<textarea id="aansprakenOutput"  rows="30" cols="120"></textarea>
-
-
-
-
-    </div>
-
-    <p></p>
-
-
-    <div id="footer">
-        <small>&copy; Copyright 2019</small>  
-    </div>
-                            
-               
-</body>
-</html>
+td, th {
+  border: 1px solid black;
+  text-align: left;
+  padding: 2px;
+}
