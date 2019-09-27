@@ -4,13 +4,8 @@
 <head>
                             <title>Pensioenfabriek Het Spaarvarken</title>
 
-<<<<<<< HEAD
     <meta charset="utf-8">
     <style type="text/css">
-=======
-			<meta charset="utf-8">		
-			<style type="text/css">
->>>>>>> 825e26e3d88a75288a5cf55717ac864f8820ab14
 
 			body 	{
 				font-family: Arial, Verdana, sans-serif;
@@ -102,8 +97,13 @@
 				width: 100%;}	
 			#footer	{
 				text-align:center;
-				padding: 400px 0px 0px 0px;}	
-<<<<<<< HEAD
+				padding: 400px 0px 0px 0px;}
+            #textarea {
+                border-style: inset;
+                border: 2px;
+                  }
+            div { text-align: center; }
+
 
     </style>
 
@@ -133,20 +133,29 @@
     </ul>
 </div>
 
-<div id="content">
+
     <div id="feature">
 
 
-        <!-- hierzo -->
-        <input type="button" value="Aanspraken" onclick="getAanspraken()">
-		<textarea id="aansprakenOutput"  rows="30" cols="120"></textarea>
+        <form action="http://www.example.org/subscribe.php">
+            <p><b>Geef hier jaar en maand op en de premie wordt berekend:</b></p>
+            <input type="button" value="Aanspraken" onclick="getAanspraken()" style="width: 200px; height: 200px;">
+            <input type="button" value="Maand" onclick=" " style="width: 200px; height: 200px;">
 
-
-
-
+        </form>
+    </div>
+        <br/>
+    <div id="textarea">
+        <textarea id="aansprakenOutput"  rows="25" cols="150"></textarea>
     </div>
 
-    <p></p>
+
+
+
+
+
+
+
 
 
     <div id="footer">
@@ -155,52 +164,4 @@
                             
                
 </body>
-=======
-		</style>
-
-
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-	<script> src="aanspraken.js"</script>
-
-
-
-
-
-
-
-
-            </head>
-		
-
-            <body>
-				
-                    	  
-			<div id="header">
-				<h1>Pensioenfabriek&nbsp;&nbsp;&nbsp<I><sup>'Het Spaarvarken'</sup></I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<img src="untitled.png" width="105" height="75"  /></h1>
-			</div>
-
-			<div id="nav">					
-					<ul>
-
-						<li><a href="homepage.html">Startpagina</a></li>							
-						<li><a href="upload.html">Uploaden</a></li>
-						<lii><b>Aanspraken</b></lii>
-						<li><a href="premies.html">Premies</a></li>	
-					</ul>				
-			</div>
-			<div id="content">
-					<div id="feature">
-
-						<!-- hierzo -->
-
-						<p></p>
-
-					
-			<div id="footer">
-				<small>&copy; Copyright 2019</small>  
-			</div>                        
-            </body>
->>>>>>> 825e26e3d88a75288a5cf55717ac864f8820ab14
 </html>

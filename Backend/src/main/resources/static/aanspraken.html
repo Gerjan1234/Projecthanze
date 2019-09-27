@@ -97,7 +97,13 @@
 				width: 100%;}	
 			#footer	{
 				text-align:center;
-				padding: 400px 0px 0px 0px;}	
+				padding: 400px 0px 0px 0px;}
+            #textarea {
+                border-style: inset;
+                border: 2px;
+                  }
+            div { text-align: center; }
+
 
     </style>
 
@@ -127,20 +133,29 @@
     </ul>
 </div>
 
-<div id="content">
+
     <div id="feature">
 
 
-        <!-- hierzo -->
-        <input type="button" value="Aanspraken" onclick="getAanspraken()">
-		<textarea id="aansprakenOutput"  rows="30" cols="120"></textarea>
+        <form action="http://www.example.org/subscribe.php">
+            <p><b>Geef hier jaar en maand op en de premie wordt berekend:</b></p>
+            <input type="button" value="Aanspraken" onclick="getAanspraken()" style="width: 200px; height: 200px;">
+            <input type="button" value="Maand" onclick=" " style="width: 200px; height: 200px;">
 
-
-
-
+        </form>
+    </div>
+        <br/>
+    <div id="textarea">
+        <textarea id="aansprakenOutput"  rows="25" cols="150"></textarea>
     </div>
 
-    <p></p>
+
+
+
+
+
+
+
 
 
     <div id="footer">

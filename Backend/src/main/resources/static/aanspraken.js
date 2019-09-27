@@ -33,3 +33,18 @@ function getAanspraken() {
           }
     });
 }
+
+
+function MakeTabel() {
+
+}
+    var $newListItem = $('<tr>' + tabel + '<tr>'); $('tr:last').after($newListItem);   //zet de regels in tabel..
+      $newListItem.show();
+//retour data op scherm in tabel zetten
+  var q = 0 //begin bij 0
+if(max == true){
+  var r = 13 //r = aantal kolomen
+}else {
+  var r = 5
+}
+

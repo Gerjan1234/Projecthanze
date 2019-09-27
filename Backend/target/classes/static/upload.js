@@ -112,9 +112,7 @@ if(max == true){
 }else {
   var r = 5
 }
-  var aantalregels = (data2.length / r);  //delen door aantal kolomen
-	console.log(data2.length)
-  console.log(aantalregels)
+
   //loop door een  regel
     for (b = 0; b < aantalregels; b++) {
       var tabel = "";
