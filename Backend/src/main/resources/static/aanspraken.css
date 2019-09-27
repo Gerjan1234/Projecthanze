@@ -96,6 +96,7 @@
 
 table {
   font-family: arial, sans-serif;
+  font-size: 12px;
   border-collapse: collapse;
   width: 90%;
   align: center;
@@ -104,6 +105,11 @@ table {
 
 td, th {
   border: 1px solid black;
+  border-bottom: 2px solid #ddd;
   text-align: left;
-  padding: 2px;
+  padding: 1px;
 }
+
+td {
+  height: 10px;
+  }
