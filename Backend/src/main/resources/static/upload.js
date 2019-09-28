@@ -58,7 +58,7 @@ gekozenvalue = x;
       var z = "geen keuze gemaakt"
 }
 //alert op scherm tonen
-$('#ScheidingstekenGekozen').html('<div class="alert alert-success alert-dismissible"><a href="#"class="close" data-dismiss="alert" aria-label="close">&times;</a>Type gekozen keuze is: ' + z + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"></div>');
+$('#ScheidingstekenGekozen').html('<div class="alert alert-success alert-dismissible><a href=""class="close" data-dismiss="alert" aria-label="close">&times;</a>Type gekozen keuze is: ' + z + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></div>');
 //});
 // });
 }
@@ -223,7 +223,7 @@ final = datarows
 				 console.log(aantal_wijzigingen + " aantal_wijzigingen");
     if (eerstedata == "202"){
       console.log(" door if statument")
-      $('#uploadCompleteAlert').html('<div class="alert alert-success alert-dismissible"><a href="#"class="close" data-dismiss="alert" aria-label="close">&times;</a>Upload gelukt aantal ingevoerde regels = ' + aantal_wijzigingen + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"></div>');
+      $('#uploadCompleteAlert').html('<div class="alert alert-success alert-dismissible"><a href=""class="close" data-dismiss="alert" aria-label="close">&times;</a>Upload gelukt aantal ingevoerde regels = ' + aantal_wijzigingen + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></div>');
     }else{
 MakeTabel()
 }
