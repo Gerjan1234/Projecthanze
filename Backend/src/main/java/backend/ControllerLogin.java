@@ -60,4 +60,24 @@ public class ControllerLogin {
                 .body(returndata);
     }
 
+    /**
+     * Methode reset de ingelogde gebruiker
+     *  @author (Teo)
+     *  @version (28-09-2019)
+     */
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/resetlogin", method = RequestMethod.GET)
+
+    public ResponseEntity resetNameIngelogdAls(){
+
+                System.out.println("doormiddel van uitlogknop voor:" + security.IngelogdID + " " + security.IngelogdNaam);
+                security.IngelogdNaam = "nietingelogd";
+                security.IngelogdID = 9999.99;
+                System.out.println("doormiddel van uitlogknop na:" + security.IngelogdID + " " + security.IngelogdNaam);
+        return  ResponseEntity.ok()
+
+                .body("uitgevoerd");
+            }
+
+
 }

@@ -39,6 +39,17 @@
 				text-decoration: underline;
 				font-weight: bold;
 				font-size: 18px;}
+			p3	{
+				font-weight: bold;
+				font-size: 14px;
+				color: #e0d080;
+				font-style: italic;}
+			p4	{
+				font-weight: bold;
+				font-size: 12px;
+				color: blue;
+				font-style: italic;
+				text-indent: 20px;}
 			ul      {
 				margin: 5px 0px 00px 0px;}
 			li      {
@@ -91,19 +102,42 @@
 				text-align:center;
 				padding: 400px 0px 0px 0px;}
 
-			tr.oddRow { background-color: #f6f6f6;}
-            tr.evenRow { background-color: #dddddd;}
-
 table {
   font-family: arial, sans-serif;
+  font-size: 12px;
   border-collapse: collapse;
   width: 90%;
   align: center;
   background: white;
+  text-align: left;
 }
 
-td, th {
+th {
   border: 1px solid black;
+  border-bottom: 1px solid black;
+  height: 40px;
   text-align: left;
-  padding: 2px;
+  text-indent: 3px;
+  font-style: italic;
+  }
+
+td {
+    border: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 1px;
+    text-align: left;
+    text-indent: 3px;
+    }
+
+        #R1 {
+            background: white;
+        }
+        #R2 {
+            background: #e3e3e3;
+        }
+        #kop {
+            background: #5F9EA0;
+            font-size: 18px;
+        }
+
 }

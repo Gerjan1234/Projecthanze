@@ -1,95 +1,93 @@
+$(document).ready(function() {
 
-function getPremies() {
-    $.ajax({
-        type: 'GET',
-        url: 'http://localhost:8080/premies',
-        dataType: "json",
-        async:false,
-        success: function(data) {
+var gebrID = 9191919.19;
+var GebrNaam = "";
+
+// opvragen wie is ingelogd
+$.ajax({
+        url: 'http://localhost:8080/getlogin',
+            type: 'GET',
+            success: function(data){
 
             console.log(data);
 
-            document.getElementById("premiesOutput").value = JSON.stringify(data);
-
-        },
-        error: function (jqXHR, exception) {
-                     console.log("fout:" + exception)
-          }
-    });
-}
+            data2 = JSON.stringify(data);
+                		console.log(data2);
+                		var obj = JSON.parse(data2);
+            gebrID = obj.user;
+            GebrNaam = obj.username;
 
 
-    function chkPSW() {
+            console.log("gebrID = "+gebrID);
+            console.log("obj.user = "+obj.usr);
+            console.log("GebrNaam = "+obj.username);
 
-    document.getElementById('id01');
-    var resultaat;
+            if(GebrNaam == "nietingelogd"){
+            location.replace("http://localhost:8080/login.html");
+            }else{
+            makeList();
+            }; //als inlog is oke dan uitvoeren anders naar inlogscherm
 
-    var User = new Object();
-        User.usr = '2369017.0';
-        User.psw = 'X2369017';
+         		},//einde function(data)
+         		error: function (jqXHR, exception) {
+                console.log("fout:" + exception)}
+         });
 
-    var InlogGeg = JSON.parse(JSON.stringify(User));
+function makeList() {
 
-    console.log('gebruikersnaam is: ' + User.usr);
-    console.log("Gebruiker: " + InlogGeg.usr + " en wachtwoord :" + User.psw);
-    console.log("InlogGeg usr : " + InlogGeg.usr);
-    console.log("InlogGeg psw : " + InlogGeg.psw);
-    console.log("User usr : " + User.usr);
-    console.log("User psw : " + User.psw);
+document.getElementById("LoggedAs").innerHTML = "Ingelogd als: "+gebrID+ " - "+ GebrNaam;
+
+var User = new Object();
+    User.usr = gebrID;
+
+var HuidigeGebruiker = JSON.parse(JSON.stringify(User));
 
     $.ajax({
-        url: 'http://localhost:8080/login',
-        data: InlogGeg,
-        dataType: 'json',
-        processData: true,
-        contentType: 'text',
-        type: 'GET',
-        success: function(data){
-//        data2 = JSON.stringify(data);
-//        		console.log("dit is data : " + data);
-//        		console.log("dit is data2 : " + data2);
-//        		var obj = JSON.parse(data2);
-//        		console.log("dit is obj : " + obj);
-//        		resultaat = obj.answer;
-//        		console.log("resultaat = " + resultaat);
-        		var txt = [data];
-var premie_data = '';
-    $.each(txt, function(key, value){
-      premie_data += '<tr>';
-      premie_data += '<td>'+value.answer+'</td>';
-      premie_data += '<td>'+value.username+'</td>';
-      premie_data += '<td>'+value.user+'</td>';
-      premie_data += '<tr>';
-    });
-    $('#premie_table').append(premie_data);
-        		}
-        });
-    }
+        url: 'http://localhost:8080/premies',
+            data: HuidigeGebruiker,
+            dataType: 'json',
+            processData: true,
+            type: 'GET',
+            success: function(data){
 
-    function hideTBL() {
-    $('#premie_table').hide();
-    }
+            console.log(data);
 
-    function showTBL() {
-    $('#premie_table').show();
-    }
+   	            var premies_data;
+                var rij = "R1"; //nodig voor rijen om en om een andere backgroundcolor te geven
 
-//$(document).ready(function(){
-//  $.getJSON("http://localhost:8080/login", function(data){
-//    var premie_data = '';
-//    $.each(data, function(key, value){
-//      premie_data += '<tr>';
-//      premie_data += '<td>'+value.name+'</td>';
-//      premie_data += '<td>'+value.username+'</td>';
-//      premie_data += '<td>'+value.email+'</td>';
-//      premie_data += '<td>'+value.address+'</td>';
-//      premie_data += '<td>'+value.geo+'</td>';
-//      premie_data += '<td>'+value.phone+'</td>';
-//      premie_data += '<td>'+value.website+'</td>';
-//      premie_data += '<td>'+value.company+'</td>';
-//      premie_data += '<tr>';
-//    });
-//    $('#premie_table').append(premie_data);
-//  });
+                $.each(data, function(key, value){
+                  premies_data += '<tr id="'+rij+'">';
+                  premies_data += '<td> '+' '+value.socialsecurity_id+'</td>';
+                  premies_data += '<td> '+' '+value.calculating_date+'</td>';
+                  premies_data += '<td> '+' '+value.first_name+'</td>';
+                  premies_data += '<td> '+' '+value.last_name+'</td>';
+                  premies_data += '<td> '+' '+value.date_of_birth+'</td>';
+                  premies_data += '<td> '+' '+value.street_name+'</td>';
+                  premies_data += '<td> '+' '+value.street_number+'</td>';
+                  premies_data += '<td> '+' '+value.postal_code+'</td>';
+                  premies_data += '<td> '+' '+value.city+'</td>';
+                  premies_data += '<td> '+' '+value.salary+'</td>';
+                  premies_data += '<td> '+' '+value.parttime_factor+'</td>';
+                  premies_data += '<td> '+' '+value.franchise+'</td>';
+                  if(value.jaarpremie <0) {premies_data += '<td> '+' '+0+'</td>'}else{premies_data += '<td> '+' '+value.jaarpremie+'</td>'};
+                  if(value.maandpremie <0) {premies_data += '<td> '+' '+0+'</td>'}else{premies_data += '<td> '+' '+value.maandpremie+'</td>'};
+                  premies_data += '<tr>';
 
-//});
+                if(rij == "R1") {rij = "R2"} else {rij = "R1"};
+
+
+                });
+                $('#premies_table').append(premies_data);
+         		},
+         		error: function (jqXHR, exception) {
+                console.log("fout:" + exception)}
+         });
+     }
+
+
+})
+
+function logout(){
+       $.ajax({url: 'http://localhost:8080/resetlogin'});
+       location.replace("http://localhost:8080/login.html");
+       }

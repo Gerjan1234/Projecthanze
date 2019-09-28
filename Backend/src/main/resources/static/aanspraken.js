@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
-var gebrID = 99999999.9999;
+var gebrID = 9191919.19;
+var GebrNaam = "";
 
 // opvragen wie is ingelogd
 $.ajax({
@@ -14,7 +15,7 @@ $.ajax({
                 		console.log(data2);
                 		var obj = JSON.parse(data2);
             gebrID = obj.user;
-            var GebrNaam = obj.username;
+            GebrNaam = obj.username;
 
 
             console.log("gebrID = "+gebrID);
@@ -33,6 +34,9 @@ $.ajax({
          });
 
 function makeList() {
+
+document.getElementById("LoggedAs").innerHTML = "Ingelogd als: "+gebrID+ " - "+ GebrNaam;
+
 var User = new Object();
     User.usr = gebrID;
 
@@ -65,7 +69,7 @@ var HuidigeGebruiker = JSON.parse(JSON.stringify(User));
                   aanspraken_data += '<td> '+' '+value.salary+'</td>';
                   aanspraken_data += '<td> '+' '+value.parttime_factor+'</td>';
                   aanspraken_data += '<td> '+' '+value.franchise+'</td>';
-                  aanspraken_data += '<td> '+' '+value.grondslag+'</td>';
+                  if(value.grondslag <0) {aanspraken_data += '<td> '+' '+0+'</td>'}else{aanspraken_data += '<td> '+' '+value.grondslag+'</td>'};
                   if(value.aanspraak <0) {aanspraken_data += '<td> '+' '+0+'</td>'}else{aanspraken_data += '<td> '+' '+value.aanspraak+'</td>'};
                   aanspraken_data += '<tr>';
 
@@ -80,3 +84,8 @@ var HuidigeGebruiker = JSON.parse(JSON.stringify(User));
          });
      }
 })
+
+function logout(){
+       $.ajax({url: 'http://localhost:8080/resetlogin'});
+       location.replace("http://localhost:8080/login.html");
+       }
