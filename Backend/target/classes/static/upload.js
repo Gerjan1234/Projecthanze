@@ -109,11 +109,13 @@ function MakeTabel() {
 //retour data op scherm in tabel zetten
   var q = 0 //begin bij 0
 if(max == true){
-  var r = 13 //r = aantal kolomen.
+  var r = 13 //r = aantal kolomen
 }else {
   var r = 5
 }
-
+  var aantalregels = (data2.length / r);  //delen door aantal kolomen
+	console.log(data2.length)
+  console.log(aantalregels)
   //loop door een  regel
     for (b = 0; b < aantalregels; b++) {
       var tabel = "";

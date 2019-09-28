@@ -1,4 +1,4 @@
-
+/*
 body {background-color: rgb(200,200,200)}
 
 .grid-container5 {
@@ -24,7 +24,7 @@ background-color: rgb(200,200,200)
   padding: 1px;
   font-size: 0.3rem;
   font-family: Sans-serif;
-  font-size: 50%;
+  font-size: 50%; */
 }
 
 input, select, textarea {
@@ -51,7 +51,7 @@ font-size: 10%;
   margin: 20px 20px 20px 24px;
   line-height: 2.0em;
   padding: 20px 20px 20px 2px;
-  position: fixed;
+  /* position: fixed; */
   }
 
 /* .form-data {
