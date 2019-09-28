@@ -91,9 +91,6 @@
 				text-align:center;
 				padding: 400px 0px 0px 0px;}
 
-			tr.oddRow { background-color: #f6f6f6;}
-            tr.evenRow { background-color: #dddddd;}
-
 table {
   font-family: arial, sans-serif;
   font-size: 12px;
@@ -101,15 +98,35 @@ table {
   width: 90%;
   align: center;
   background: white;
+  text-align: left;
 }
 
-td, th {
+th {
   border: 1px solid black;
-  border-bottom: 2px solid #ddd;
+  border-bottom: 1px solid black;
+  height: 40px;
   text-align: left;
-  padding: 1px;
-}
+  text-indent: 3px;
+  font-style: italic;
+  }
 
 td {
-  height: 10px;
-  }
+    border: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 1px;
+    text-align: left;
+    text-indent: 3px;
+    }
+
+        #R1 {
+            background: white;
+        }
+        #R2 {
+            background: #F3F3F3;
+        }
+        #kop {
+            background: #5F9EA0;
+            font-size: 18px;
+        }
+
+}

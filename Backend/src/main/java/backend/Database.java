@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+
+
 /**
  * class Database
  *
@@ -23,6 +25,16 @@ public class Database {
         }
         return conn;
     }
+
+    /**
+     * Methode afronden van een double
+     *  @author (Teo)
+     *  @version (28-09-2019)
+     */
+
+    public static double roundDBL(double value, int decimals) {
+        double factor = Math.pow(10, decimals);
+        return Math.round(value * factor) / factor;}
 
     /**
      *  methode voor een insert naar database vanuit de salaris uploader.
@@ -272,8 +284,13 @@ public class Database {
         return oke;
     }
 
-    // hiermee worden 2 variabelen gevuld met de naam en id van de gebruiker die is ingelogd
-    // deze naam og id kan bij alle html pagina's gebruikt worden of de gebruiker wel is ingelogd en wie dat dan is
+    /**
+     * Methode set ingelogde gebruiker
+     *  @author (Teo)
+     *  @version (28-09-2019)
+     *  hiermee worden 2 variabelen gevuld met de naam en id van de gebruiker die is ingelogd
+     *  deze naam of id kan bij alle html pagina's gebruikt worden of de gebruiker wel is ingelogd en wie dat dan is
+     */
 
     protected static void setNameIngelogdAls(Double gebruiker) throws SQLException  {
 
@@ -292,7 +309,11 @@ public class Database {
     }
 
 
-    //aanspraken lijst maken
+     /**
+     * Methode aanspraken lijst maken
+     *  @author (Teo)
+     *  @version (28-09-2019)
+     */
 
     protected static ArrayList<aanspraak> getAanspraken(double usr) throws SQLException {
         ArrayList<aanspraak> results = new ArrayList<>();
@@ -326,8 +347,8 @@ public class Database {
                 r.salary = res.getDouble(10);
                 r.parttime_factor = res.getDouble(11);
                 r.franchise = res.getDouble(12);
-                r.grondslag = res.getDouble(13);
-                r.aanspraak = res.getDouble(14);
+                r.grondslag = roundDBL(res.getDouble(13),2);
+                r.aanspraak = roundDBL(res.getDouble(14),2);
 
 
                 results.add(r);
