@@ -24,12 +24,12 @@ public class ControllerAanspraken {
     public ResponseEntity AanspraakGegevens(
             @RequestParam(name ="usr") Double usr) throws SQLException {
 
-        System.out.println("Ontvangen User: " + usr);
+        System.out.println("ControllerAanspraken Ontvangen User: " + usr);
         ArrayList<aanspraak> returndata = new ArrayList();
 
         returndata = Database.getAanspraken(usr);
 
-        System.out.println("Ontvangen returndata: " + returndata);
+        System.out.println("ControllerAanspraken Ontvangen returndata: " + returndata);
 
         HttpHeaders head = new HttpHeaders();
         head.set("status-code", "200 Ok");
