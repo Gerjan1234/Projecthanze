@@ -38,4 +38,26 @@ public class ControllerLogin {
                 .body(returndata);
         }
 
+    /**
+     * Methode geef de ingelogde gebruiker retour
+     *  @author (Teo)
+     *  @version (28-09-2019)
+     */
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/getlogin", method = RequestMethod.GET)
+
+    public ResponseEntity IngelogdeGebruiker() throws SQLException {
+
+        inlogResp returndata = new inlogResp();
+
+        returndata.user = security.IngelogdID;
+        returndata.username = security.IngelogdNaam;
+
+        HttpHeaders head = new HttpHeaders();
+        head.set("status-code", "200 Ok");
+        return  ResponseEntity.ok()
+                .headers(head)
+                .body(returndata);
+    }
+
 }

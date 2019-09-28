@@ -1,37 +1,55 @@
 $(document).ready(function() {
 
-var User = new Object();
-    User.usr = 2777536;
+var gebrID = 99999999.9999;
 
-var HuidigeGebruiker = JSON.parse(JSON.stringify(User));
-
-
-<<<<<<< HEAD
-      $.ajax({ 
-      url: 'http://localhost:8080/werkgevers', 
-      data: aanspraken, 
-      dataType: 'text', 
-      processData: false, 
-      contentType: false, 
-      type: 'GET', 
-      success: function(data){ 
-      console.log(data)}
-})
-=======
-    $.ajax({
-        url: 'http://localhost:8080/aanspraken',
-            data: HuidigeGebruiker,
-            dataType: 'json',
-            processData: true,
-//            contentType: 'text',
+// opvragen wie is ingelogd
+$.ajax({
+        url: 'http://localhost:8080/getlogin',
             type: 'GET',
             success: function(data){
 
             console.log(data);
 
-   	//var txt = [data]; //zet data in een array
-            var aanspraken_data;
-                var rij = "R1";
+            data2 = JSON.stringify(data);
+                		console.log(data2);
+                		var obj = JSON.parse(data2);
+            gebrID = obj.user;
+            var GebrNaam = obj.username;
+
+
+            console.log("gebrID = "+gebrID);
+            console.log("obj.user = "+obj.usr);
+            console.log("GebrNaam = "+obj.username);
+
+            if(GebrNaam == "nietingelogd"){
+            location.replace("http://localhost:8080/login.html");
+            }else{
+            makeList();
+            }; //als inlog is oke dan uitvoeren anders naar inlogscherm
+
+         		},//einde function(data)
+         		error: function (jqXHR, exception) {
+                console.log("fout:" + exception)}
+         });
+
+function makeList() {
+var User = new Object();
+    User.usr = gebrID;
+
+var HuidigeGebruiker = JSON.parse(JSON.stringify(User));
+
+    $.ajax({
+        url: 'http://localhost:8080/aanspraken',
+            data: HuidigeGebruiker,
+            dataType: 'json',
+            processData: true,
+            type: 'GET',
+            success: function(data){
+
+            console.log(data);
+
+   	            var aanspraken_data;
+                var rij = "R1"; //nodig voor rijen om en om een andere backgroundcolor te geven
 
                 $.each(data, function(key, value){
                   aanspraken_data += '<tr id="'+rij+'">';
@@ -48,18 +66,17 @@ var HuidigeGebruiker = JSON.parse(JSON.stringify(User));
                   aanspraken_data += '<td> '+' '+value.parttime_factor+'</td>';
                   aanspraken_data += '<td> '+' '+value.franchise+'</td>';
                   aanspraken_data += '<td> '+' '+value.grondslag+'</td>';
-                  aanspraken_data += '<td> '+' '+value.aanspraak+'</td>';
+                  if(value.aanspraak <0) {aanspraken_data += '<td> '+' '+0+'</td>'}else{aanspraken_data += '<td> '+' '+value.aanspraak+'</td>'};
                   aanspraken_data += '<tr>';
-                  
+
                 if(rij == "R1") {rij = "R2"} else {rij = "R1"};
-                  
-                  
+
+
                 });
                 $('#aanspraken_table').append(aanspraken_data);
          		},
          		error: function (jqXHR, exception) {
                 console.log("fout:" + exception)}
          });
-     })
-
->>>>>>> 479f4ccf27168594defee4866c20f580acdde01f
+     }
+})
