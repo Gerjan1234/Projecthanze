@@ -6,6 +6,18 @@ var User = new Object();
 var HuidigeGebruiker = JSON.parse(JSON.stringify(User));
 
 
+<<<<<<< HEAD
+      $.ajax({ 
+      url: 'http://localhost:8080/werkgevers', 
+      data: aanspraken, 
+      dataType: 'text', 
+      processData: false, 
+      contentType: false, 
+      type: 'GET', 
+      success: function(data){ 
+      console.log(data)}
+})
+=======
     $.ajax({
         url: 'http://localhost:8080/aanspraken',
             data: HuidigeGebruiker,
@@ -50,3 +62,4 @@ var HuidigeGebruiker = JSON.parse(JSON.stringify(User));
          });
      })
 
+>>>>>>> 479f4ccf27168594defee4866c20f580acdde01f

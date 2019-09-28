@@ -90,7 +90,8 @@ console.log("wat is max " + max)
     contentType: false,
     type: 'POST',
     success: function(data){
-
+    data2 = JSON.parse(data);
+		console.log(data2)
 //gooi oude tabel weg
     var x = document.getElementsByTagName("tr");
     for (var i = tabellengte; i < x.length ;i++) {
@@ -112,7 +113,9 @@ if(max == true){
 }else {
   var r = 5
 }
-
+  var aantalregels = (data2.length / r);  //delen door aantal kolomen
+	console.log(data2.length)
+  console.log(aantalregels)
   //loop door een  regel
     for (b = 0; b < aantalregels; b++) {
       var tabel = "";

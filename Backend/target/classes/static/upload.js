@@ -90,7 +90,8 @@ console.log("wat is max " + max)
     contentType: false,
     type: 'POST',
     success: function(data){
-
+    data2 = JSON.parse(data);
+		console.log(data2)
 //gooi oude tabel weg
     var x = document.getElementsByTagName("tr");
     for (var i = tabellengte; i < x.length ;i++) {
@@ -108,7 +109,7 @@ function MakeTabel() {
 //retour data op scherm in tabel zetten
   var q = 0 //begin bij 0
 if(max == true){
-  var r = 13 //r = aantal kolomen
+  var r = 13 //r = aantal kolomen.
 }else {
   var r = 5
 }
