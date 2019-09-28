@@ -58,7 +58,7 @@ gekozenvalue = x;
       var z = "geen keuze gemaakt"
 }
 //alert op scherm tonen
-$('#ScheidingstekenGekozen').html('<div class="alert alert-success alert-dismissible"><a href="#"class="close" data-dismiss="alert" aria-label="close">&times;</a>Type gekozen keuze is: ' + z + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"></div>');
+$('#ScheidingstekenGekozen').html('<div class="alert alert-success alert-dismissible><a href=""class="close" data-dismiss="alert" aria-label="close">&times;</a>Type gekozen keuze is: ' + z + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></div>');
 //});
 // });
 }
@@ -223,7 +223,7 @@ final = datarows
 				 console.log(aantal_wijzigingen + " aantal_wijzigingen");
     if (eerstedata == "202"){
       console.log(" door if statument")
-      $('#uploadCompleteAlert').html('<div class="alert alert-success alert-dismissible"><a href="#"class="close" data-dismiss="alert" aria-label="close">&times;</a>Upload gelukt aantal ingevoerde regels = ' + aantal_wijzigingen + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"></div>');
+      $('#uploadCompleteAlert').html('<div class="alert alert-success alert-dismissible"><a href=""class="close" data-dismiss="alert" aria-label="close">&times;</a>Upload gelukt aantal ingevoerde regels = ' + aantal_wijzigingen + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></div>');
     }else{
 MakeTabel()
 }
@@ -249,6 +249,47 @@ console.log(allestrue)
   console.log(allesOk)
 }
 }
+
+$(document).ready(function() {
+
+var gebrID = 9191919.19;
+var GebrNaam = "";
+
+// opvragen wie is ingelogd
+$.ajax({
+        url: 'http://localhost:8080/getlogin',
+            type: 'GET',
+            success: function(data){
+
+            console.log(data);
+
+            data2 = JSON.stringify(data);
+                		console.log(data2);
+                		var obj = JSON.parse(data2);
+            gebrID = obj.user;
+            GebrNaam = obj.username;
+
+
+            console.log("gebrID = "+gebrID);
+            console.log("obj.user = "+obj.usr);
+            console.log("GebrNaam = "+obj.username);
+
+            if(GebrNaam == "nietingelogd"){
+            location.replace("http://localhost:8080/login.html");
+            }else{
+            document.getElementById("LoggedAs").innerHTML = "Ingelogd als: "+gebrID+ " - "+ GebrNaam;
+            }; //als inlog is oke dan uitvoeren anders naar inlogscherm
+
+         		},//einde function(data)
+         		error: function (jqXHR, exception) {
+                console.log("fout:" + exception)}
+         });
+         })
+
+function logout(){
+       $.ajax({url: 'http://localhost:8080/resetlogin'});
+       location.replace("http://localhost:8080/login.html");
+       }
 ///Sv-loon en parttimefactor.
 
 
