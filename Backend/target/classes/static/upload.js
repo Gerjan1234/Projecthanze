@@ -124,7 +124,7 @@ if(max == true){
   var colom = '<td id="test"><input id="' + data2[l].type + b + '" type="text" name="' + data2[l].goedfout + '"value="' + data2[l].waarde + '"span title="' + data2[l].format + '"></td>'
           var tabel = tabel + colom  //maak van cellen een regel
         }
-      var $newListItem = $('<tr id="tr"><class="grid-container6">' + tabel + '</tr>'); $('tr:last').after($newListItem);   //zet de regels in tabel..
+      var $newListItem = $('<tr>' + tabel + '<tr>'); $('tr:last').after($newListItem);   //zet de regels in tabel..
       $newListItem.show();
     var q = l;  //waarde voor de volgende regel
 		if(max == true){

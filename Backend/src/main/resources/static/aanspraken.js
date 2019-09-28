@@ -13,4 +13,3 @@ var aanspraken = JSON.parse(JSON.stringify(User));
       success: function(data){ 
       console.log(data)}
 })
-
