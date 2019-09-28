@@ -15,9 +15,6 @@ import java.util.List;
  */
 public class Database {
 
-    private static String IngelogdNaam = "nietingelogd";
-    private static Double IngelogdID = 9999.99;
-
     private static Connection conn = null;
 
     private static Connection getConnection() throws SQLException {
@@ -233,30 +230,6 @@ public class Database {
 
 
     /**
-     * Voorbeeld methode voor een select van database
-     *  * @author (Gerjan)
-     *  * @version (09-08-2019)
-     */
-
-//    protected static ArrayList getdata(int limit) throws SQLException {
-//        ArrayList<salary> results = new ArrayList<>();
-//        String sql = "select * from tabel order by date desc limit ?;";  //vul hier tabelnaam in
-//        try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-//            stmt.setInt(1, limit);
-//            ResultSet res = stmt.executeQuery();
-//            while (res.next()) {
-//                salary r = new salary();
-//                r.socialsecurity_id = res.getDouble(1); //tabel kolom1 invullen
-//                r.Franchise = res.getDouble(5); //tabel kolom2 invullen
-//                r.max_pension_salary = res.getBigDecimal("max_pension_salary"); //tabel kolom3 invullen
-//                results.add(r);
-//            }
-//        }
-//        return results;
-//
-//    }
-
-    /**
      * Methode check inlognaam
      * * @author (Teo)
      * * @version (02-09-2019)
@@ -264,7 +237,7 @@ public class Database {
 
     protected static String chkInlog(double usr, String psw) throws SQLException {
         ArrayList<security> results = new ArrayList<>();
-        String oke = "init";
+        String oke = "Combinatie gebruiker en wachtwoord is fout !!";
         String sql = "SELECT * FROM security WHERE security.security_id = ?";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setDouble(1, usr);
@@ -293,7 +266,7 @@ public class Database {
             setNameIngelogdAls(results.get(0).security_id); //vul de variabele met de naam van de gebruiker die is ingelogd
             return oke = "Combinatie gebruiker en wachtwoord is correct";
         } else {
-            return oke = "Combinatie gebruiker en wachtwoord is fout!";
+            return oke = "Combinatie gebruiker en wachtwoord is fout !!";
         }
     }
         return oke;
@@ -301,6 +274,7 @@ public class Database {
 
     // hiermee worden 2 variabelen gevuld met de naam en id van de gebruiker die is ingelogd
     // deze naam og id kan bij alle html pagina's gebruikt worden of de gebruiker wel is ingelogd en wie dat dan is
+
     protected static void setNameIngelogdAls(Double gebruiker) throws SQLException  {
 
         String sql = "SELECT employers.company_name FROM security INNER JOIN employers ON security.security_id = employers.employer_id WHERE security.security_id = ?";
@@ -309,12 +283,69 @@ public class Database {
             ResultSet res = stmt.executeQuery();
 
             while (res.next()) {
-                IngelogdNaam = res.getString(1);
-                IngelogdID = gebruiker;
+                security.IngelogdNaam = res.getString(1);
+                security.IngelogdID = gebruiker;
                 }
         }
-        System.out.println("naam van ingelogde persoon : " + IngelogdNaam);
-        System.out.println("ID code van ingelogde persoon : " + IngelogdID);
+        System.out.println("naam van ingelogde persoon : " + security.IngelogdNaam);
+        System.out.println("ID code van ingelogde persoon : " + security.IngelogdID);
     }
+
+
+    //aanspraken lijst maken
+
+    protected static ArrayList<aanspraak> getAanspraken(double usr) throws SQLException {
+        ArrayList<aanspraak> results = new ArrayList<>();
+        String oke = "inittekst";
+        System.out.println("Controlleruser = " + usr);
+
+        String sql = "SELECT employees.socialsecurity_id, invoice.calculating_date, employees.first_name, employees.last_name, employees.date_of_birth, adress.street_name, adress.street_number, adress.postal_code, \n" +
+                "        adress.city, salary.salary, salary.parttime_factor, invoice.franchise, (salary.salary/salary.parttime_factor-invoice.franchise)*salary.parttime_factor AS grondslag, \n" +
+                "        ((salary.salary/salary.parttime_factor-invoice.franchise)*salary.parttime_factor)*invoice.claim_percentage AS aanspraak\n" +
+                "        FROM adress INNER JOIN employers INNER JOIN employees ON employers.employer_id = employees.employer_id INNER JOIN invoice ON employers.employer_id = invoice.employer_id \n" +
+                "        INNER JOIN salary ON (invoice.invoice_id = salary.invoice_id) AND (employees.socialsecurity_id = salary.socialsecurity_id) ON adress.adress_id = employees.adress_id\n" +
+                "        WHERE (((employers.employer_id)=?))\n" +
+                "        ORDER BY employees.socialsecurity_id, invoice.calculating_date;";
+
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setDouble(1, usr);
+            ResultSet res = stmt.executeQuery();
+
+            while (res.next()) {
+                aanspraak r = new aanspraak();
+
+                r.socialsecurity_id = (int) res.getDouble(1);
+                r.calculating_date = res.getDate(2);
+                r.first_name = res.getString(3);
+                r.last_name = res.getString(4);
+                r.date_of_birth = res.getDate(5);
+                r.street_name = res.getString(6);
+                r.street_number = res.getInt(7);
+                r.postal_code = res.getString(8);
+                r.city = res.getString(9);
+                r.salary = res.getDouble(10);
+                r.parttime_factor = res.getDouble(11);
+                r.franchise = res.getDouble(12);
+                r.grondslag = res.getDouble(13);
+                r.aanspraak = res.getDouble(14);
+
+
+                results.add(r);
+            }
+
+        }
+        int tst = results.size();
+        System.out.println("Lengte van de retour array: " + tst);
+
+        if (tst > 0) {
+            System.out.println("sql resultaat Id: " + results.get(0).socialsecurity_id);
+            System.out.println("sql resultaat achternaam: " + results.get(0).last_name);
+            }
+
+        return results;
+    }
+
+
+
 }
 
