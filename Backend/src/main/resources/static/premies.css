@@ -50,6 +50,13 @@
 				color: blue;
 				font-style: italic;
 				text-indent: 20px;}
+            #Totalen	{
+				font-weight: bold;
+				font-size: 18px;
+				color: #4a8af0;
+				font-style: italic;
+				text-indent: 20px;
+				align: center;}
 			ul      {
 				margin: 5px 0px 00px 0px;}
 			li      {
