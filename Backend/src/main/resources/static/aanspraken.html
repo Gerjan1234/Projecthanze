@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html>
-           
+
+
+<!--2369388	BSM Nerland	            185-->
+<!--2369398	Elsevier	            529-->
+<!--2369392	Klutsche Bank  Bary	    24-->
+<!--2754976	Financieele Dagblad	    4-->
+<!--2777536	Atradius De Groeve	    24-->
+<!--2369302	Raet 	                14-->
+<!--2793963	Houten Jachtbouw vof	10-->
+
+
 <head>
                             <title>Pensioenfabriek Het Spaarvarken</title>
 
@@ -8,9 +18,12 @@
     <style type="text/css"></style>
 
 
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="aanspraken.css" >
     <script src="aanspraken.js"></script>
+
+
 </head>
 
 
@@ -21,6 +34,7 @@
 <div id="header">
     <h1>Pensioenfabriek&nbsp;&nbsp;&nbsp<I><sup>'Het Spaarvarken'</sup></I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<img
             src="untitled.png" width="105" height="75"/></h1>
+
 </div>
 
 <div id="nav">
@@ -30,34 +44,36 @@
         <li><a href="upload.html">Uploaden</a></li>
         <lii><b>Aanspraken</b></lii>
         <li><a href="premies.html">Premies</a></li>
+
+
+        <p3 id="LoggedAs"></p3>
+        <p4 id="demo" onclick="logout()">&nbsp&nbsp&nbsp<u>Uitloggen</u></p4>
     </ul>
 </div>
 
-
     <div id="feature">
 
-
-<!--        <form action="http://www.example.org/subscribe.php">-->
-<!--            <p><b>Geef hier jaar en maand op en de premie wordt berekend:</b></p>-->
-<!--            <input type="button" value="Aanspraken" onclick="getAanspraken()" style="width: 20px; height: 20px;">-->
-<!--            <input type="button" value="Maand" onclick=" " style="width: 20px; height: 20px;">-->
-
-<!--        </form>-->
-<!--    </div>-->
-<!--        <br/>-->
-<!--    <div id="textarea">-->
-<!--        <textarea id="aansprakenOutput"  rows="25" cols="150"></textarea>-->
-<!--    </div>-->
-
-
 <div class="container">
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped" id="aanspraken_table" align="center">
-            <tr>
-                <th>employerId</th>
-                <th>companyName</th>
 
+    <div class="table-responsive">
+        <table class="table table-bordered" id="aanspraken_table" align="center">
+            <tr id="kop">
+                <th> BSN nummer</th>
+                <th> Bereken datum</th>
+                <th> Voornaam</th>
+                <th> Achternaam</th>
+                <th> Geboorte datum</th>
+                <th> Straat</th>
+                <th> Nummer</th>
+                <th> Postcode</th>
+                <th> Plaats</th>
+                <th> Salaris</th>
+                <th> Parttime factor</th>
+                <th> Franchise</th>
+                <th> Grondslag</th>
+                <th> Aanspraak</th>
             </tr>
+
         </table>
 
     </div>
@@ -66,7 +82,7 @@
     <div id="footer">
         <small>&copy; Copyright 2019</small>  
     </div>
-                            
+    </div>                            
                
 </body>
 </html>

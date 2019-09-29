@@ -1,35 +1,134 @@
 <!DOCTYPE html>
-<html lang="nl">
-  <head>
-    <meta charset="utf-8">
-        <title>File Uploader</title>
-<link rel="stylesheet" type="text/css" href="css.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+<html>
+            <head>
+                        <title>Pensioenfabriek Het Spaarvarken</title>
+
+			<meta charset="utf-8">
 
 
-<!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="css.css">
+      <link rel="stylesheet" type="text/css" href="css.css">
+              <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+              <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+              <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+      <script src="upload.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+			<style type="text/css">
 
 
-<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+			body 	{
+				font-family: Arial, Verdana, sans-serif;
+				background-color: rgb(200,200,200);
+				width: 96%;
+				margin: 0px 20px 0px 22px;
+				line-height: 2.0em;
+				padding: 0px 0px 0px 2px;}
+			#nav 	{
+				padding: 2px 0px 8px 12px;
+				background-color: rgb(180,179,175);
+				margin: 2%;
+				text-align: center;
+				line-height: 2.0em;
+				font-size: 125%;
+				border-top: 2px solid #665544;
+				border-bottom: 2px solid #665544;
+				width: 94%;
+				height: 60%;
+				border-align: center;}
+			#content {
+				overflow: auto;}
+			#feature {
+				background-color: rgb(200,200,200);
+				padding: 10px
+				margin: 10px;}
+			.column1, .column2, .column3, column4	{
+				float: left;
+				width: 23.0%;
+				margin: 1%;
+				text-align: center;}
+			h1      {
+				text-transform: uppercase;
+				background-color: white;
+				color: #ffffff;
+				font-size: 57px;
+				text-shadow: 11px -14px 12px #775544;}
+			p1	{
+				text-decoration: underline;
+				font-weight: bold;
+				font-size: 18px;}
+			ul      {
+				margin: 5px 0px 00px 0px;}
+			li      {
+				display: inline;
+				padding: 0.5em;
+				background-color: white;
+				margin:0px 50px 0px 0px;
+				border-style: dashed;
+				border-color: #665544;
+				border-radius: 10px
+				-moz-border-radius: 10px;
+				-webkit-border-radius: 10px;}
+			lii     {
+				display: inline;
+				padding: 0.5em;
+				background-color: green;
+				margin:0px 50px 0px 0px;
+				border-style: solid;
+				border-color: #665544;
+				border-radius: 10px
+				-moz-border-radius: 10px;
+				-webkit-border-radius: 10px;
+				}
+			img.right{
+				float:right; margin: 5.5em 10em 10em 10em;
+				boarder: 1px solid #999; clear: right;}
+			i	{
+				color: red;}
+			em	{
+				color: green;}
+			a       {
+				font-family: Verdana;
+				font-weight: bold;
+				padding: 2px 5px 0px 5px;
+				color: black;}
+			a:link, a: visited {
+				background: transparant url(Images/Hor_rood.gif)no-repeat top center;
+				border-top: 4px solid #CD5C5C;
+				border-bottom: 4px solid #CD5C5C;
+				color: #555;}
+			a:hover, a:active {
+				background:transparant url(Images/Hor_groen.gif)no-repeat top center;
+				border-top: 4px solid #CD5C5C;
+				border-bottom: 4px solid #CD5C5C;
+				color: #888;}
+			div 	{
+				overflow: auto;
+				width: 95%;}
+			#footer	{
+				text-align:center;
+				padding: 400px 0px 0px 0px;}
+		</style>
+            </head>
+
+    <img src="kop.jpg" >
+
+     <body>
+			<div id="nav">
+					<ul>
+
+						<li><a href="homepage.html">Startpagina</a></li>
+						<lii><b>Uploaden</b></lii>
+						<li><a href="aanspraken.html">Aanspraken</a></li>
+                        <li><a href="premies.html">Premies</a></li>
 
 
-<!--script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script-->
+                        <p3 id="LoggedAs"></p3>
+                        <p4 id="demo" onclick="logout()">&nbsp&nbsp&nbsp<u>Uitloggen</u></p4>
 
-<script src="upload.js"></script>
+					</ul>
+			</div>
 
-<body>
-
-<div class="grid-container5">
-  <div></div>
-  <div><div class="inner"><i>Klik hier voor de file upload</i><br>
+ <div class="inner"><i>Klik hier voor de file upload</i><br>
     <select id="Selectedsoortupload" onchange="Selectedsoortupload()">
       <option value="0;">-- Select --</option>
       <option value="true">Personeelmutatie</option>
@@ -45,24 +144,15 @@
             <option value="6">spatie: " </option>
     </select>
         </div>
-      </div>
-<div></div>
 
-<div></div>
-<div><div>
-</div>
-</div>
-<div></div>
-<div></div>
 
-<div>
+
   <div class="alertbox">
     <i id="ScheidingstekenGekozen" ></i>
   </div>
-</div>
-<div></div>
 
-  <div></div>
+
+
       <div class="input-group">
         <div class="input-group-prepend">
           <button class="btn btn-outline-secondary" type="button" onclick="uploadFormData()" id="inputGroupFileAddon01">Upload</button>
@@ -70,79 +160,28 @@
           <div class="custom-file">
             <input type="file" class="custom-file-input" id="inputGroupFile01"aria-describedby="inputGroupFileAddon01">
               <label class="custom-file-label" for="inputGroupFile01"></label>
-    </div>
   </div>
-  <div></div>
-</div>
-<div></div>
-<div></div>
-</div>
-<br><br>
-  </div>
-
-<div class="grid-container6">
-
-<div id="tabel"></div>
-<!--div>
-  <form id="updatetabel" class= "" action="isdfndex.html" method="post">
-        <table id="datatabel">
-          <tr id="tr">
-            <div class="grid-container2">
-              <div>
-           <input class="form-data" type="text" value="socialsecurity_id" readonly="readonly"> </div><div>
-           <input class="form-data" type="text" value="employer_id" readonly="readonly"></div><div>
-              <input class="form-data" type="text" value="invoice_id" readonly="readonly"> </div><div>
-                 <input class="form-data" type="text" value="salary" readonly="readonly"> </div><div>
-                   <input class="form-data" type="text" value="parttime_factor" readonly="readonly"> </div><div>
-
-           <input class="form-data" type="text" value="first_name" readonly="readonly"> </div><div>
-           <input class="form-data" type="text" value="last_name" readonly="readonly"> </div><div>
-           <input class="form-data" type="text" value="date_of_birth" readonly="readonly"> </div><div>
-           <input class="form-data" type="text" value="status" readonly="readonly"> </div><div>
-           <input class="form-data" type="text" value="gender" readonly="readonly"> </div><div>
-           <input class="form-data"  type="text" value="adress_id" readonly="readonly"> </div><div>
-           <input class="form-data" type="text" value="communication_type" readonly="readonly"> </div><div>
-           <input class="form-data" type="text" value="hire_date" readonly="readonly"> </div><div>
-                </div>
-                 </tr>
-               </table>
-            </form>
-      </div-->
-<div></div>
-</div>
 
 <div class="grid-container5">
-<div></div>
 <div>
+	<div></div>
+	<div><div id="tabel"></div><div>
+	</div>
+	</div>
+	<div></div>
+	<div></div>
+</div>
+</div>
+
   <div class="alertbox">
     <i id="uploadCompleteAlert" ></i>
   </div>
-</div>
-<div></div>
-</div>
 
-<!--div class="grid-container6">
-<div></div>
-<div>
-<form id="updatetabel" class= "" action="isdfndex.html" method="post">
-  <table id="datatabel"><tr id="tr">
-    <input class="form-data" type="text" value="socialsecurity_id" readonly="readonly">
-  <input class="form-data" type="text" value="employer_id" readonly="readonly">
-  <input class="form-data" type="text" value="invoice_id" readonly="readonly">
-    <input class="form-data" type="text" value="salary" readonly="readonly">
-    <input class="form-data" type="text" value="parttime_factor" readonly="readonly">
-    </tr>
-<tr>
-<td id="test"><input id="' + data2[l].type + b + '" type="text" name="' + data2[l].goedfout + '"value="' + data2[l].waarde + '"span title="' + data2[l].format + '"></td>
-<td id="test"><input id="' + data2[l].type + b + '" type="text" name="' + data2[l].goedfout + '"value="' + data2[l].waarde + '"span title="' + data2[l].format + '"></td>
-<td id="test"><input id="' + data2[l].type + b + '" type="text" name="' + data2[l].goedfout + '"value="' + data2[l].waarde + '"span title="' + data2[l].format + '"></td>
-<td id="test"><input id="' + data2[l].type + b + '" type="text" name="' + data2[l].goedfout + '"value="' + data2[l].waarde + '"span title="' + data2[l].format + '"></td>
-</tr>
-  </table>
-</form>
+
+
+<div id="footer">
+<small>&copy; Copyright 2019</small>  
 </div>
-</div>
-<div></div>
-<--/div-->
-</body>
+      </div>                       
+            </body>
 </html>

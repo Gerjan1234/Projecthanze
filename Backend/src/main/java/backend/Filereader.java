@@ -244,7 +244,7 @@ public class Filereader {
                                     break;
                                 case 12: //date
                                     try {
-                                        new SimpleDateFormat("yyy-MM-dd").parse(test[j]);
+                                        new SimpleDateFormat("yyyy-MM-dd").parse(test[j]);
                                         test2.regel = regel;
                                         test2.type = "hire_date";
                                         test2.goedfout = true;
@@ -254,7 +254,7 @@ public class Filereader {
                                         test2.type = "hire_date";
                                         test2.goedfout = false;
                                         test2.waarde = test[j];
-                                        test2.format = "formaat_yyy-MM-dd";
+                                        test2.format = "formaat_yyyy-MM-dd";
                                     }
                                     break;
                                 default:

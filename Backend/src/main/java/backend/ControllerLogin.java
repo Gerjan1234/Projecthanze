@@ -38,4 +38,46 @@ public class ControllerLogin {
                 .body(returndata);
         }
 
+    /**
+     * Methode geef de ingelogde gebruiker retour
+     *  @author (Teo)
+     *  @version (28-09-2019)
+     */
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/getlogin", method = RequestMethod.GET)
+
+    public ResponseEntity IngelogdeGebruiker() throws SQLException {
+
+        inlogResp returndata = new inlogResp();
+
+        returndata.user = security.IngelogdID;
+        returndata.username = security.IngelogdNaam;
+
+        HttpHeaders head = new HttpHeaders();
+        head.set("status-code", "200 Ok");
+        return  ResponseEntity.ok()
+                .headers(head)
+                .body(returndata);
+    }
+
+    /**
+     * Methode reset de ingelogde gebruiker
+     *  @author (Teo)
+     *  @version (28-09-2019)
+     */
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/resetlogin", method = RequestMethod.GET)
+
+    public ResponseEntity resetNameIngelogdAls(){
+
+                System.out.println("doormiddel van uitlogknop voor:" + security.IngelogdID + " " + security.IngelogdNaam);
+                security.IngelogdNaam = "nietingelogd";
+                security.IngelogdID = 9999.99;
+                System.out.println("doormiddel van uitlogknop na:" + security.IngelogdID + " " + security.IngelogdNaam);
+        return  ResponseEntity.ok()
+
+                .body("uitgevoerd");
+            }
+
+
 }
