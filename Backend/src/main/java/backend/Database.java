@@ -366,7 +366,59 @@ public class Database {
         return results;
     }
 
+    protected static ArrayList<premie> getPremies(double usr) throws SQLException {
+        ArrayList<premie> results = new ArrayList<>();
+        String oke = "inittekst";
+        System.out.println("Controlleruser = " + usr);
 
+        String sql = "SELECT employees.socialsecurity_id, invoice.calculating_date, employees.first_name, employees.last_name, employees.date_of_birth, adress.street_name, adress.street_number, adress.postal_code, \n" +
+                "adress.city, salary.salary, salary.parttime_factor, invoice.franchise, ((salary.salary/salary.parttime_factor-invoice.franchise)*salary.parttime_factor)/4 AS jaarpremie, \n" +
+                "((salary.salary/salary.parttime_factor-invoice.franchise)*salary.parttime_factor)/4/12 AS maandpremie\n" +
+                "FROM adress \n" +
+                "INNER JOIN employers \n" +
+                "INNER JOIN employees ON employers.employer_id = employees.employer_id\n" +
+                "INNER JOIN invoice ON employers.employer_id = invoice.employer_id\n" +
+                "INNER JOIN salary ON (invoice.invoice_id = salary.invoice_id) AND (employees.socialsecurity_id = salary.socialsecurity_id) ON adress.adress_id = employees.adress_id\n" +
+                "WHERE (((employers.employer_id)=?))\n" +
+                "ORDER BY employees.socialsecurity_id, invoice.calculating_date;";
+
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setDouble(1, usr);
+            ResultSet res = stmt.executeQuery();
+
+            while (res.next()) {
+                premie r = new premie();
+
+                r.socialsecurity_id = (int) res.getDouble(1);
+                r.calculating_date = res.getDate(2);
+                r.first_name = res.getString(3);
+                r.last_name = res.getString(4);
+                r.date_of_birth = res.getDate(5);
+                r.street_name = res.getString(6);
+                r.street_number = res.getInt(7);
+                r.postal_code = res.getString(8);
+                r.city = res.getString(9);
+                r.salary = res.getDouble(10);
+                r.parttime_factor = res.getDouble(11);
+                r.franchise = res.getDouble(12);
+                r.jaarpremie = roundDBL(res.getDouble(13),2);
+                r.maandpremie = roundDBL(res.getDouble(14),2);
+
+
+                results.add(r);
+            }
+
+        }
+        int tst = results.size();
+        System.out.println("Lengte van de retour array: " + tst);
+
+        if (tst > 0) {
+            System.out.println("sql resultaat Id: " + results.get(0).socialsecurity_id);
+            System.out.println("sql resultaat achternaam: " + results.get(0).last_name);
+        }
+
+        return results;
+    }
 
 }
 

@@ -46,6 +46,8 @@ HAVING (((Count(employers.employer_id))=0));
 -- verwijderen regel uit invoice -- 
 DELETE FROM `pensioenaanspraken`.`invoice` WHERE (`invoice_id` = '1385');
 
+SELECT * FROM security WHERE security.security_id = '2369017';
+
 -- werknemers op invoice nr -- 
 SELECT employers.employer_id, employers.company_name, salary.invoice_id, employees.employer_id, employees.first_name, employees.last_name, employees.date_of_birth, salary.salary, salary.parttime_factor, salary.max_pension_salary, salary.Franchise
 FROM (salary INNER JOIN (employers INNER JOIN invoice ON employers.employer_id = invoice.employer_id) ON salary.invoice_id = invoice.invoice_id) INNER JOIN employees ON salary.socialsecurity_id = employees.socialsecurity_id
@@ -85,4 +87,28 @@ SELECT employees.socialsecurity_id, employees.first_name, employees.last_name, e
 FROM employees, contribution
 WHERE (((employees.socialsecurity_id) Like "%113%") AND ((contribution.contribution_age)=(truncate((datediff(Now(),date_of_birth)/'365,25'),0))))
 ORDER BY employees.last_name;
+
+-- Aanspraken per werknemer alle jaren --
+SELECT employees.socialsecurity_id, invoice.calculating_date, employees.first_name, employees.last_name, employees.date_of_birth, adress.street_name, adress.street_number, adress.postal_code, 
+adress.city, salary.salary, salary.parttime_factor, invoice.franchise, (salary.salary/salary.parttime_factor-invoice.franchise)*salary.parttime_factor AS 'grondslag', 
+((salary.salary/salary.parttime_factor-invoice.franchise)*salary.parttime_factor)*invoice.claim_percentage AS 'aanspraak'
+FROM adress 
+INNER JOIN employers 
+INNER JOIN employees ON employers.employer_id = employees.employer_id 
+INNER JOIN invoice ON employers.employer_id = invoice.employer_id 
+INNER JOIN salary ON (invoice.invoice_id = salary.invoice_id) AND (employees.socialsecurity_id = salary.socialsecurity_id) ON adress.adress_id = employees.adress_id
+WHERE (((employers.employer_id) = 2777536))
+ORDER BY employees.socialsecurity_id, invoice.calculating_date;
+
+-- Premies per werknemer alle jaren --        
+SELECT employees.socialsecurity_id, invoice.calculating_date, employees.first_name, employees.last_name, employees.date_of_birth, adress.street_name, adress.street_number, adress.postal_code, 
+adress.city, salary.salary, salary.parttime_factor, invoice.franchise, ((salary.salary/salary.parttime_factor-invoice.franchise)*salary.parttime_factor)/4 AS 'jaarpremie', 
+((salary.salary/salary.parttime_factor-invoice.franchise)*salary.parttime_factor)/4/12 AS 'maandpremie'
+FROM adress 
+INNER JOIN employers 
+INNER JOIN employees ON employers.employer_id = employees.employer_id
+INNER JOIN invoice ON employers.employer_id = invoice.employer_id
+INNER JOIN salary ON (invoice.invoice_id = salary.invoice_id) AND (employees.socialsecurity_id = salary.socialsecurity_id) ON adress.adress_id = employees.adress_id
+WHERE (((employers.employer_id) Like '%2777536%'))
+ORDER BY employees.socialsecurity_id, invoice.calculating_date;
 

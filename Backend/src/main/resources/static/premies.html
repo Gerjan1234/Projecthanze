@@ -1,56 +1,92 @@
 <!DOCTYPE html>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="premies.css" >
-<script src="premies.js"></script>
-            <head>
-                        <title>Pensioenfabriek Het Spaarvarken</title>
+<html>
 
-			<meta charset="utf-8">
+
+<!--2369388	BSM Nerland	            185-->
+<!--2369398	Elsevier	            529-->
+<!--2369392	Klutsche Bank  Bary	    24-->
+<!--2754976	Financieele Dagblad	    4-->
+<!--2777536	Atradius De Groeve	    24-->
+<!--2369302	Raet 	                14-->
+<!--2793963	Houten Jachtbouw vof	10-->
+
+
+<head>
+	                        <title>Pensioenfabriek Het Spaarvarken</title>
+
+	<meta charset="utf-8">
 	<style type="text/css"></style>
 
-            </head>
-		
 
-            <body>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="premies.css" >
+	<script src="premies.js"></script>
+
+
+</head>
+
+
+           
+<body>
 				
-                    	  
-			<div id="header">
-				<h1>Pensioenfabriek&nbsp;&nbsp;&nbsp<I><sup>'Het Spaarvarken'</sup></I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<img src="untitled.png" width="105" height="75"  /></h1>
-			</div>
+                    
+<div id="header">
+	<h1>Pensioenfabriek&nbsp;&nbsp;&nbsp<I><sup>'Het Spaarvarken'</sup></I>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<img
+			src="untitled.png" width="105" height="75"/></h1>
 
-			<div id="nav">					
-					<ul>
+</div>
+
+<div id="nav">
+	<ul>
 
 						<li><a href="homepage.html">Startpagina</a></li>								
 						<li><a href="upload.html">Uploaden</a></li>
 						<li><a href="aanspraken.html">Aanspraken</a></li>
 						<lii><b>Premies</b></lii>
-					</ul>				
+
+						<p3 id="LoggedAs"></p3>
+						<p4 id="demo" onclick="logout()">&nbsp&nbsp&nbsp<u>Uitloggen</u></p4>
+	</ul>
+
 			</div>
 
 			<div id="content"></div>
 
 			<div id="feature"></div>
 
-	<input type="button" value="Premies" onclick="chkPSW()">
-<input type="button" value="hide" onclick="hideTBL()">
-<input type="button" value="show" onclick="showTBL()">
-
 <div class="container">
+
+	<div><p id="Totalen" align="center"></p></div>
+
 	<div class="table-responsive">
-		<table class="table table-bordered table-striped" id="premie_table" align="center">
-			<tr>
-				<th>Answer</th>
-				<th>Username</th>
-				<th>User</th>
+		<table class="table table-bordered" id="premies_table" align="center">
+			<tr id="kop">
+				<th> BSN nummer</th>
+				<th> Bereken datum</th>
+				<th> Voornaam</th>
+				<th> Achternaam</th>
+				<th> Geboorte datum</th>
+				<th> Straat</th>
+				<th> Nummer</th>
+				<th> Postcode</th>
+				<th> Plaats</th>
+				<th> Salaris</th>
+				<th> Parttime factor</th>
+				<th> Franchise</th>
+				<th> Jaarpremie</th>
+				<th> Maandpremie</th>
 			</tr>
+
 		</table>
 
 	</div>
 </div>
-				
-			<div id="footer">
-				<small>&copy; Copyright 2019</small>  
-			</div>                        
-            </body>
+
+<div id="footer">
+	<small>&copy; Copyright 2019</small>  
+</div>
+</div>                            
+           
+</body>
 </html>

@@ -1,10 +1,6 @@
 
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
  <link rel='stylesheet' type='text/css' href="login.css">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
- <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
- <script src="login.js"></script>
-
 <body>
 <form>
 
@@ -16,32 +12,39 @@
     <div class="box">
         <b>Security</b>
 
-        <input type="number" id="usr" name="usr" class="email" />
+        <input type="number" id="usr" name="usr" value="email" onFocus="field_focus(this, 'email');" onblur="field_blur(this, 'email');" class="email" />
 
-        <input type="password" id="psw" name="psw" value="leeg" class="email" />
+        <input type="password" id="psw" name="psw" value="email" onFocus="field_focus(this, 'email');" onblur="field_blur(this, 'email');" class="email" />
 
-        <a href="#"><div class="btn" onclick="start()">Log in</div> </a> <!-- End Btn -->
+        <a href="#"><div class="btn">Log in</div></a> <!-- End Btn -->
 
-        <a href="#"><div id="btn2" onclick="pop(melding)">Registreren</div></a> <!-- End Btn2 -->
-
+        <a href="#"><div id="btn2">Registreren</div></a> <!-- End Btn2 -->
 
 
     </div> <!-- End Box -->
-    <p>Wachtwoord vergeten? <u style="color:red;">Click hier!</u></p>
+    <p>Wachtwoord vergeten? <u style="color:red;">&nbsp&nbsp&nbspClick hier!</u></p>
+
 
     <footer><small>&copy; Copyright 2019</small></footer>
 
+<<<<<<< HEAD
 
     <div class="pop_scherm">
         <span class="helper"></span>
         <div>
             <div class="popupCloseButton">X</div>
             <p1 id="Poptxt"></p1>
+            <span><img id="varken" src="untitled.png"></span>
         </div>
     </div>
 
 
+=======
+    <div id="Antw"><h2></h2></div>
+>>>>>>> b4ae9a824be0ed75a7251f9a4fc5696e93ee6680
 
 
 </form>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="login.js"></script>
