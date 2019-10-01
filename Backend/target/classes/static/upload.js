@@ -37,7 +37,7 @@ gekozenvalue = x;
 
   switch(x) {
     case "1":
-      var z = "tap"
+      var z = "tab"
       break;
     case "2":
       var z = "komma"
@@ -290,21 +290,4 @@ function logout(){
        $.ajax({url: 'http://localhost:8080/resetlogin'});
        location.replace("http://localhost:8080/login.html");
        }
-///Sv-loon en parttimefactor.
 
-
-//socialsecurity_id 	double
-//employer_id					double
-	//invoice_id    		double
-
-//salary							floot
-//parttime_factor 	 floot
-
-//first_name     			String
-//last_name					 String
-//date_of_birth  			Date
-//status							String
-//gender							String
-//adress_id						int
-//communication_type	String
-//hire_date  						 Date

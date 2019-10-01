@@ -366,6 +366,13 @@ public class Database {
         return results;
     }
 
+
+    /**
+     * Methode premie lijst maken
+     *  @author (Teo)
+     *  @version (28-09-2019)
+     */
+
     protected static ArrayList<premie> getPremies(double usr) throws SQLException {
         ArrayList<premie> results = new ArrayList<>();
         String oke = "inittekst";
@@ -404,6 +411,58 @@ public class Database {
                 r.jaarpremie = roundDBL(res.getDouble(13),2);
                 r.maandpremie = roundDBL(res.getDouble(14),2);
 
+
+                results.add(r);
+            }
+
+        }
+        int tst = results.size();
+        System.out.println("Lengte van de retour array: " + tst);
+
+        if (tst > 0) {
+            System.out.println("sql resultaat Id: " + results.get(0).socialsecurity_id);
+            System.out.println("sql resultaat achternaam: " + results.get(0).last_name);
+        }
+
+        return results;
+    }
+
+    /**
+     * Methode werknemers lijst maken
+     *  @author (Teo)
+     *  @version (28-09-2019)
+     */
+
+    protected static ArrayList<werknemer> getWerknemers(double usr) throws SQLException {
+        ArrayList<werknemer> results = new ArrayList<>();
+        String oke = "inittekst";
+        System.out.println("ControllerWerknemers = " + usr);
+
+        String sql = "SELECT socialsecurity_id, first_name, last_name, date_of_birth, status, gender, communication_type, hire_date, street_name, street_number, postal_code, city\n" +
+                "FROM employees\n" +
+                "JOIN adress\n" +
+                "WHERE employees.employer_id = ? and employees.adress_id = adress.adress_id\n" +
+                "ORDER BY employees.last_name, employees.first_name;";
+
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setDouble(1, usr);
+            ResultSet res = stmt.executeQuery();
+
+            while (res.next()) {
+                werknemer r = new werknemer();
+
+                r.socialsecurity_id = res.getDouble(1);
+                r.first_name = res.getString(2);
+                r.last_name = res.getString(3);
+                r.date_of_birth = res.getDate(4);
+                r.status = res.getString(5);
+                r.gender = res.getString(6);
+                r.communication_type = res.getString(7);
+                r.hire_date = res.getDate(8);
+                r.street_name = res.getString(9);
+                r.street_number = res.getInt(10);
+                r.postal_code = res.getString(11);
+                r.city = res.getString(12);
 
                 results.add(r);
             }
