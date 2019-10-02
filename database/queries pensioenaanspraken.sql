@@ -12,8 +12,10 @@ select socialsecurity_id,employer_id,first_name,last_name,street_name,street_num
 from employees join adress where employees.socialsecurity_id = '510640555' and employees.adress_id = adress.adress_id;
 
 -- zoek adres gegevens alle werknemers op ID werkgever--
-select employer_id,first_name,last_name,street_name,street_number,postal_code,city
-from employees join adress where employees.employer_id = '2369302' and employees.adress_id = adress.adress_id;
+SELECT socialsecurity_id, first_name, last_name, date_of_birth, status, gender, communication_type, hire_date, street_name, street_number, postal_code, city
+FROM employees 
+JOIN adress 
+WHERE employees.employer_id = '2369302' and employees.adress_id = adress.adress_id;
 
 -- aantal werknemers per werkgever --
 SELECT employer_id , count(employer_id) as `count`
@@ -112,3 +114,17 @@ INNER JOIN salary ON (invoice.invoice_id = salary.invoice_id) AND (employees.soc
 WHERE (((employers.employer_id) Like '%2777536%'))
 ORDER BY employees.socialsecurity_id, invoice.calculating_date;
 
+INSERT INTO `invoice` (`employer_id`, `invoice_id`, `invoice_period`, `start_date`, `calculating_date`, `max_pension_salary`, `franchise`, `claim_percentage`) 
+VALUES (2707730,11111,'JAAR', '2016-12-31', '2017-12-31', 103317,19191,'0.016');
+
+INSERT INTO `invoice` (`employer_id`, `invoice_period`, `start_date`, `calculating_date`, `max_pension_salary`, `franchise`, `claim_percentage`) 
+VALUES (2707730,'JAAR', '2016-12-31', '2017-12-31', 103317,22222,'0.016');
+
+INSERT INTO `salary` (`socialsecurity_id`,`invoice_id`,`salary`, `parttime_factor`) 
+VALUES (310284133,11112, '16386.84', '1');
+
+SELECT socialsecurity_id, first_name, last_name, date_of_birth, status, gender, communication_type, hire_date, street_name, street_number, postal_code, city
+FROM employees
+JOIN adress
+WHERE employees.employer_id = '2369302' and employees.adress_id = adress.adress_id
+ORDER BY employees.last_name, employees.first_name;

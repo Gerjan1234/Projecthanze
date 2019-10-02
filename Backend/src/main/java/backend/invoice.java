@@ -1,7 +1,5 @@
 package backend;
 
-import java.util.Date;
-
 /**
  pojo class invoice
 
@@ -20,6 +18,9 @@ public class invoice {
         public double employer_id;
         public double invoice_id;
         public String invoice_period;
-        public Date start_date;
-        public Date calculating_date;
+        public String start_date;
+        public String calculating_date;
+        public double max_pension_salary;
+        public double franchise;
+        public double claim_percentage;
 }

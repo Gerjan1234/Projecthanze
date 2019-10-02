@@ -129,6 +129,7 @@ public class ControllerInputs {
         ArrayList<responsfile> returndata = new ArrayList<>();
         try {
             resultaantal = Database.addsalarismutatie(line);
+            Database.setMaxInvoiceId();
         } catch (Exception e) {
             System.out.println(e);
         }
