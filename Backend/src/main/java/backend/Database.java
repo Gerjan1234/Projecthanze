@@ -3,6 +3,7 @@ package backend;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,6 +19,10 @@ import java.util.List;
 public class Database {
 
     private static Connection conn = null;
+    private static double MaxInvId = 0;
+    private static invoice inv = new invoice();
+
+
 
     private static Connection getConnection() throws SQLException {
         if (conn == null) {
@@ -25,6 +30,19 @@ public class Database {
         }
         return conn;
     }
+
+    private static void setInv(){
+
+        inv.employer_id = security.IngelogdID;
+        inv.invoice_id = MaxInvId;
+        inv.invoice_period = "JAAR";
+        inv.start_date = "2019-01-01";
+        inv.calculating_date = "2019-12-31";
+        inv.max_pension_salary = 107953.00;
+        inv.franchise = 20209.00;
+        inv.claim_percentage = 0.015;
+
+        }
 
     /**
      * Methode afronden van een double
@@ -83,6 +101,9 @@ public class Database {
             }
 
         }
+        setMaxInvoiceId();
+        String StrInvID = Double.toString(MaxInvId);
+        addInvoice();
         if (allelinenoke == true) {
             Iterator it2 = lines.iterator();
             while (it2.hasNext()) {
@@ -91,7 +112,7 @@ public class Database {
                 String sql = "insert into salary values (?,?,?,?);";
                 try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                     stmt.setString(1, test2[0]);
-                    stmt.setString(2, test2[2]);
+                    stmt.setString(2, StrInvID);
                     stmt.setString(3, test2[3]);
                     stmt.setString(4, test2[4]);
                     stmt.execute();
@@ -219,10 +240,14 @@ public class Database {
                     L = res.getInt(1);
                 }
             }
+            setMaxInvoiceId();
+            String StrInvID = Double.toString(MaxInvId);
+            addInvoice();
+
             String sql5 = "insert into salary values (?,?,?,?);";
             try (PreparedStatement stmt = getConnection().prepareStatement(sql5, Statement.RETURN_GENERATED_KEYS)) {
                 stmt.setString(1, test[0]);
-                stmt.setString(2, test[2]);
+                stmt.setString(2, StrInvID);
                 stmt.setString(3, test[3]);
                 stmt.setString(4, test[4]);
                 stmt.execute();
@@ -366,6 +391,13 @@ public class Database {
         return results;
     }
 
+
+    /**
+     * Methode premie lijst maken
+     *  @author (Teo)
+     *  @version (28-09-2019)
+     */
+
     protected static ArrayList<premie> getPremies(double usr) throws SQLException {
         ArrayList<premie> results = new ArrayList<>();
         String oke = "inittekst";
@@ -420,5 +452,94 @@ public class Database {
         return results;
     }
 
+    /**
+     * Methode werknemers lijst maken
+     *  @author (Teo)
+     *  @version (28-09-2019)
+     */
+
+    protected static ArrayList<werknemer> getWerknemers(double usr) throws SQLException {
+        ArrayList<werknemer> results = new ArrayList<>();
+        String oke = "inittekst";
+        System.out.println("ControllerWerknemers = " + usr);
+
+        String sql = "SELECT socialsecurity_id, first_name, last_name, date_of_birth, status, gender, communication_type, hire_date, street_name, street_number, postal_code, city\n" +
+                "FROM employees\n" +
+                "JOIN adress\n" +
+                "WHERE employees.employer_id = ? and employees.adress_id = adress.adress_id\n" +
+                "ORDER BY employees.last_name, employees.first_name;";
+
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            stmt.setDouble(1, usr);
+            ResultSet res = stmt.executeQuery();
+
+            while (res.next()) {
+                werknemer r = new werknemer();
+
+                r.socialsecurity_id = res.getDouble(1);
+                r.first_name = res.getString(2);
+                r.last_name = res.getString(3);
+                r.date_of_birth = res.getDate(4);
+                r.status = res.getString(5);
+                r.gender = res.getString(6);
+                r.communication_type = res.getString(7);
+                r.hire_date = res.getDate(8);
+                r.street_name = res.getString(9);
+                r.street_number = res.getInt(10);
+                r.postal_code = res.getString(11);
+                r.city = res.getString(12);
+
+                results.add(r);
+            }
+
+        }
+        int tst = results.size();
+        System.out.println("Lengte van de retour array: " + tst);
+
+        if (tst > 0) {
+            System.out.println("sql resultaat Id: " + results.get(0).socialsecurity_id);
+            System.out.println("sql resultaat achternaam: " + results.get(0).last_name);
+        }
+
+        return results;
+    }
+
+    protected static void setMaxInvoiceId() throws SQLException  {
+
+        String sql = "SELECT max(invoice_id) from invoice;";
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            ResultSet res = stmt.executeQuery();
+
+            while (res.next()) {
+                MaxInvId = res.getDouble(1);
+                MaxInvId += 1;
+                setInv();
+
+            }
+        }
+        System.out.println("MaxInvId : " + MaxInvId);
+        System.out.println("Inv : " + inv.invoice_id);
+
+
+    }
+
+    protected static void addInvoice() throws SQLException  {
+
+            String sqlInv = "insert into invoice values (?,?,?,?,?,?,?,?);";
+            try (PreparedStatement stmt2 = getConnection().prepareStatement(sqlInv, Statement.RETURN_GENERATED_KEYS)) {
+                
+                stmt2.setDouble(1,inv.employer_id);
+                stmt2.setDouble(2,inv.invoice_id);
+                stmt2.setString(3,inv.invoice_period);
+                stmt2.setString(4,inv.start_date);
+                stmt2.setString(5,inv.calculating_date);
+                stmt2.setDouble(6,inv.max_pension_salary);
+                stmt2.setDouble(7,inv.franchise);
+                stmt2.setDouble(8,inv.claim_percentage);
+                stmt2.execute();
+            }
+
+        }
 }
 

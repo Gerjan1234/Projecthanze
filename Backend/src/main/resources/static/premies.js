@@ -2,6 +2,11 @@ $(document).ready(function() {
 
 var gebrID = 9191919.19;
 var GebrNaam = "";
+var WGjaarpremie = 0.00;
+var vandaag = new Date();
+var HuidigJaar = vandaag.getFullYear();
+var PremieList = new Array();
+
 
 // opvragen wie is ingelogd
 $.ajax({
@@ -75,19 +80,35 @@ var HuidigeGebruiker = JSON.parse(JSON.stringify(User));
 
                 if(rij == "R1") {rij = "R2"} else {rij = "R1"};
 
+                //hier totalen lijst maken voor optellen jaarpremie werkgever
+
+                if(getJaar(value.calculating_date) == HuidigJaar){
+                    if(value.jaarpremie <0) {WGjaarpremie += 0;
+                    }else{
+
+                    WGjaarpremie += value.jaarpremie;
+//                    console.log(WGjaarpremie)
+                    };
+                };
 
                 });
+
                 $('#premies_table').append(premies_data);
+                document.getElementById("Totalen").innerHTML = "Werkgever totalen " + HuidigJaar + " : &nbsp&nbsp&nbsp Jaarpremie - € " + WGjaarpremie.toFixed(2) + "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"  + "Maandpremie - € " + (WGjaarpremie/12).toFixed(2);
          		},
          		error: function (jqXHR, exception) {
                 console.log("fout:" + exception)}
          });
      }
-
-
 })
 
 function logout(){
        $.ajax({url: 'http://localhost:8080/resetlogin'});
        location.replace("http://localhost:8080/login.html");
        }
+
+function getJaar(date)    {
+var vandaag = new Date(date);
+var Rjaar = vandaag.getFullYear();
+return Rjaar;
+}
