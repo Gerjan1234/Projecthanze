@@ -3,6 +3,17 @@ $(document).ready(function() {
 var gebrID = 9191919.19;
 var GebrNaam = "";
 
+var melding2 =
+                      "<p4>Directie leden:</p4></br></br>"  +
+
+                      "<p5>Piet Geldverkwisting</p5></br>" +
+
+                      "<p5>Rene Oplichting</br></p5>" +
+
+                      "<p5>Hans Gat in de Hand</p5>";
+
+
+
 // opvragen wie is ingelogd
 $.ajax({
         url: 'http://localhost:8080/getlogin',
@@ -41,14 +52,7 @@ function logout(){
 
        }
 
-       var melding =
-                      "<p4>Directie leden:</p4></br></br>"  +
 
-                      "<p5>Piet Geldverkwisting</p5></br>" +
-
-                      "<p5>Rene Oplichting</br></p5>" +
-
-                      "<p5>Hans Gat in de Hand</p5>";
 
 
 
