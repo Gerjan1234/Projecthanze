@@ -37,4 +37,29 @@ $.ajax({
 function logout(){
        $.ajax({url: 'http://localhost:8080/resetlogin'});
        location.replace("http://localhost:8080/login.html");
+
+
        }
+
+       var melding =
+                      "<p4>Directie leden:</p4></br></br>"  +
+
+                      "<p5>Piet Geldverkwisting</p5></br>" +
+
+                      "<p5>Rene Oplichting</br></p5>" +
+
+                      "<p5>Hans Gat in de Hand</p5>";
+
+
+
+       function pop(varmelding) {
+                  document.getElementById("Poptxt").innerHTML = varmelding;
+                             $('.pop_scherm').show();
+
+                      $('.pop_scherm').click(function(){
+                          $('.pop_scherm').hide();
+                      });
+                      $('.popupCloseButton').click(function(){
+                          $('.pop_scherm').hide();
+                      });
+                  };
