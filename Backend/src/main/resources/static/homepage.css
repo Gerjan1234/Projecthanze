@@ -51,6 +51,13 @@
 				color: blue;
 				font-style: italic;
 				text-indent: 20px;}
+            p6	{
+				font-weight: bold;
+				font-size: 20px;
+				color: blue;
+				font-style: italic;
+				text-indent: 20px;}
+
 			ul      {
 				margin: 5px 0px 00px 0px;}
 			li      {
@@ -75,7 +82,7 @@
 				-webkit-border-radius: 10px;
 				}
 			img.right{
-				float:right; margin: 5.5em 10em 10em 10em;
+
 				boarder: 1px solid #999; clear: right;}
 			i	{
 				color: red;}
@@ -102,3 +109,73 @@
 			#footer	{
 				text-align:center;
 				padding: 100px 0px 0px 0px;}
+
+
+
+
+    /* Popup box BEGIN */
+.pop_scherm{
+    background:rgba(0,0,0,.4);
+    cursor:pointer;
+    display:none;
+    height:100%;
+    position:fixed;
+    text-align:center;
+    top:0;
+    width:100%;
+    z-index:10000;
+}
+.pop_scherm .helper{
+    display:inline-block;
+    height:100%;
+    vertical-align:middle;
+    text-align: left;
+}
+.pop_scherm > div {
+    background-color: #fff;
+    box-shadow: 10px 10px 60px #555;
+    display: inline-block;
+    height: auto;
+    max-width: 350px;
+    min-height: 150px;
+    vertical-align: middle;
+    width: 100%;
+    position: relative;
+    border-radius: 4px;
+    padding: 10px 10% 10px 10px;
+    text-align: left;
+}
+.popupCloseButton {
+    background-color: #fff;
+    border: 3px solid #999;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-block;
+    font-family: arial;
+    font-weight: bold;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 25px;
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+.popupCloseButton:hover {
+    background-color: #ccc;
+}
+.trigger_popup_fricc {
+    cursor: pointer;
+    font-size: 20px;
+    margin: 20px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+p5{
+  font-size:16px;
+  color:green;
+  }
+
+/* Popup box EINDE */

@@ -1,16 +1,11 @@
-$(document).ready(function() {
+       var melding = "Directie leden:</br></br>Piet Geldverkwisting</br>Rene Oplichting</br>Hans Gat in de Hand";
+
+       $(document).ready(function() {
 
 var gebrID = 9191919.19;
 var GebrNaam = "";
 
-var melding2 =
-                      "<p4>Directie leden:</p4></br></br>"  +
 
-                      "<p5>Piet Geldverkwisting</p5></br>" +
-
-                      "<p5>Rene Oplichting</br></p5>" +
-
-                      "<p5>Hans Gat in de Hand</p5>";
 
 
 
@@ -57,6 +52,7 @@ function logout(){
 
 
        function pop(varmelding) {
+
                   document.getElementById("Poptxt").innerHTML = varmelding;
                              $('.pop_scherm').show();
 

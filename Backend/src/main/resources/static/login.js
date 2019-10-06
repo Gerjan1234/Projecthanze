@@ -11,6 +11,8 @@ var melding = "<I>Om te registreren stuur dan een mail naar info@hetspaarvarken.
                "Uittreksel van de KvK</br></br>" +
                "Na verificatie ontvangt u per post uw inlogcode en wachtwoord.</I>";
 
+var WWmelding = "<I>Er is een mail met nieuwe nieuwe inlogcode aan U verzonden.</I>";
+
 function start(){
 chkPSW();
 
